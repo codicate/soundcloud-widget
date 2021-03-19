@@ -1,0 +1,9 @@
+import React, { useState, useEffect } from 'react'
+
+export default function card() {
+  return (
+    <div className='card'>
+      
+    </div>
+  )
+}
