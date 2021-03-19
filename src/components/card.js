@@ -12,7 +12,7 @@ export default function Card(props) {
       </p>
       <button>
         <span className='material-icons'>
-          add
+          add_box
         </span>
         <span>Add to Playlist</span>
       </button>

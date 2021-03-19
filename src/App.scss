@@ -1,70 +1,104 @@
 html,
 body {
-  height: 100%;
-  width: 100%;
-  min-height: 100%;
+  height: 100vh;
+  width: 100vw;
+
+  overflow-x: hidden;
+
+  font-family: 'Montserrat';
+  color: white;
+
+  background-color: hsl(0, 0%, 1%);
 }
 
-#tpl {
-  display: none !important;
+input,
+button {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
 }
 
-#soundcloud-player .col {
-  position: fixed;
-  height: 100%;
-  width: 100%;
-  top: 0;
-  left: 0;
+$emp: hsl(0, 0%, 13%);
+$faded: hsl(0, 0%, 67%);
+$border: hsl(0, 0%, 20%);
+
+button {
+  display: flex;
+  align-items: center;
+
+  padding: 0.5em 1em;
+
+  font-weight: 500;
+  line-height: 1rem;
+  text-transform: uppercase;
+  white-space: nowrap;
+
+  background-color: transparent;
+  border: 1px solid white;
+
+  .material-icons{
+    font-size: 1.5rem;
+
+    &+*{
+      margin-left: 0.5em;
+    }
+  }
 }
 
-#soundcloud-player .col-left {
-  width: 20%;
-  height: 100%;
-  background-color: #292929;
-  overflow: auto;
-
-  position: fixed;
-  left: 0;
-  top: 0;
-
-  min-width: 200px;
-  z-index: 1;
-}
-
-#soundcloud-player .col-right {
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-
-  position: fixed;
-  left: 0;
-  top: 0;
-
-  box-sizing: border-box;
-  padding-left: 20%;
-}
-
-#soundcloud-player .main {
-  box-sizing: border-box;
-  padding: 30px;
-  margin: 30px;
-}
-
-#soundcloud-player .input {
-  width: 100%;
-}
-
-#soundcloud-player .input-search {
-  width: 100%;
-  display: block;
-}
-
-#soundcloud-player .search.icon {
-  pointer-events: initial;
-  cursor: pointer;
-}
-
-#soundcloud-player .search-results {
+#searchBar {
+  display: flex;
   justify-content: center;
-  margin-top: 30px;
+
+  padding: 1em;
+
+  input {
+    outline: none;
+
+    padding: 0.75em 1em;
+
+    font-size: 1rem;
+    font-weight: 500;
+
+    border-radius: 0.25em;
+    border: 1px solid $border;
+    background-color: $emp;
+  }
+}
+
+#searchResults {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.card {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+
+  width: 20em;
+
+  overflow: hidden;
+  margin: 1em;
+
+
+  border-radius: 0.5em;
+  border: 2px solid $border;
+  background-color: $emp;
+
+  img {
+    height: 20em;
+  }
+
+  p {
+    text-align: center;
+  }
+
+  .title {
+    font-weight: 500;
+  }
+
+  .artist {
+    color: $faded;
+    font-size: 0.875rem;
+  }
 }
