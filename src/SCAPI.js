@@ -1,4 +1,4 @@
-import SC from 'soundcloud'
+import SC from 'soundcloud';
 
 const SoundCloudAPI = {
   init(ID) {
@@ -10,20 +10,18 @@ const SoundCloudAPI = {
   getTrack(input, func) {
     SC.get('/tracks', {
       q: input
-    }).then((data) => {
-      data.forEach(
-        track => func(track)
-      );
-    });
+    }).then(
+      data => func(data)
+    );
   },
 
   displayTrack(trackURL, func) {
     SC.oEmbed(trackURL, {
       auto_play: true
-    }).then((embed) => {
-      func(embed);
-    });
+    }).then(
+      embed => func(embed)
+    );
   }
-}
+};
 
 export default SoundCloudAPI;
