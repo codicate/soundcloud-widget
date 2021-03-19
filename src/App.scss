@@ -11,6 +11,12 @@ body {
   background-color: hsl(0, 0%, 1%);
 }
 
+#root {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+
 input,
 button {
   font-family: inherit;
@@ -34,6 +40,7 @@ button {
   white-space: nowrap;
 
   background-color: transparent;
+  border-radius: 0.125em;
   border: 1px solid white;
 
   .material-icons{
@@ -68,18 +75,16 @@ button {
 #searchResults {
   display: flex;
   flex-flow: row wrap;
+
+  margin: 1em 3em;
 }
 
 .card {
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-
-  width: 20em;
+  display: grid;
+  grid-template: 20em / 20em;
 
   overflow: hidden;
   margin: 1em;
-
 
   border-radius: 0.5em;
   border: 2px solid $border;
@@ -90,15 +95,25 @@ button {
   }
 
   p {
+    margin: 0;
     text-align: center;
   }
 
+  p:first-child {
+    margin-bottom: 0.75em;
+  }
+
   .title {
+    margin: 1em 0;
     font-weight: 500;
   }
 
   .artist {
     color: $faded;
     font-size: 0.875rem;
+  }
+
+  button {
+    margin: 1em auto 1.5em auto;
   }
 }

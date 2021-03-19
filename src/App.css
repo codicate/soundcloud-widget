@@ -8,6 +8,19 @@ body {
   background-color: #030303;
 }
 
+#root {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column;
+          flex-flow: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
 input,
 button {
   font-family: inherit;
@@ -28,6 +41,7 @@ button {
   text-transform: uppercase;
   white-space: nowrap;
   background-color: transparent;
+  border-radius: 0.125em;
   border: 1px solid white;
 }
 
@@ -67,20 +81,15 @@ button .material-icons + * {
   -webkit-box-direction: normal;
       -ms-flex-flow: row wrap;
           flex-flow: row wrap;
+  margin: 1em 3em;
 }
 
 .card {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-flow: column;
-          flex-flow: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  width: 20em;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 20em;
+  -ms-grid-columns: 20em;
+      grid-template: 20em / 20em;
   overflow: hidden;
   margin: 1em;
   border-radius: 0.5em;
@@ -93,15 +102,25 @@ button .material-icons + * {
 }
 
 .card p {
+  margin: 0;
   text-align: center;
 }
 
+.card p:first-child {
+  margin-bottom: 0.75em;
+}
+
 .card .title {
+  margin: 1em 0;
   font-weight: 500;
 }
 
 .card .artist {
   color: #ababab;
   font-size: 0.875rem;
+}
+
+.card button {
+  margin: 1em auto 1.5em auto;
 }
 /*# sourceMappingURL=App.css.map */
