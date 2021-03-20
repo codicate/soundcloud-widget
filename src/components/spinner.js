@@ -2,8 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const SpinnerDiv = styled.div`
-  display: flex;
-  justify-content: center;
+  margin: auto;
 
   @keyframes sk-stretchdelay {
     0%, 40%, 100% { 
@@ -15,6 +14,7 @@ const SpinnerDiv = styled.div`
 `;
 
 const Rect = styled.div`
+  display: inline-block;
   background-color: ${props => props.color || 'white'};
   height: ${props => props.height || 50}px;
   width: ${props => props.width || 6}px;

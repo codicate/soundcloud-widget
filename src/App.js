@@ -85,8 +85,7 @@ function App() {
   return <>
     <Searchbar returnInput={fetchTracks} />
     <div id='searchResults'>
-      {/* {renderResult()} */}
-      <Spinner />
+      {renderResult()}
     </div>
   </>;
 };

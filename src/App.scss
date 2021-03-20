@@ -71,6 +71,11 @@ $border: hsl(0, 0%, 20%);
 }
 
 #root {
+  height: 100%;
+
+  display: grid;
+  grid-template: auto 1fr / 100%;
+
   padding: 0 2em;
 }
 
@@ -108,8 +113,6 @@ $border: hsl(0, 0%, 20%);
 }
 
 #searchResults {
-  width: 100%;
-
   display: flex;
   flex-flow: column;
 }
