@@ -26,6 +26,8 @@ button {
 
 $emp: hsl(0, 0%, 13%);
 $faded: hsl(0, 0%, 67%);
+$alternative: hsl(0, 0%, 56%);
+$clicked: hsl(0, 0%, 87%);
 $border: hsl(0, 0%, 20%);
 
 // button {
@@ -52,19 +54,36 @@ $border: hsl(0, 0%, 20%);
 //   }
 // }
 
+.btn {
+  cursor: pointer;
+  user-select: none;
+
+  color: $alternative;
+
+  &:hover,
+  &:focus {
+    color: white;
+  }
+
+  &:active {
+    color: $clicked;
+  }
+}
+
 #root {
   padding: 0 2em;
 }
 
 #searchBar {
-  padding: 1em 0;
+  position: relative;
+
+  width: 100%;
+  max-width: 32em;
+
+  margin: 1em auto;
 
   input {
-    display: block;
-    margin: 0 auto;
-
     width: 100%;
-    max-width: 32em;
     padding: 0.75em 1.5em;
 
     font-size: 1rem;
@@ -74,6 +93,17 @@ $border: hsl(0, 0%, 20%);
     border-radius: 0.25em;
     border: 1px solid $border;
     background-color: $emp;
+  }
+
+  div {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    padding: 0 1em;
+
+    display: flex;
+    align-items: center;
   }
 }
 
@@ -86,7 +116,7 @@ $border: hsl(0, 0%, 20%);
 
 .track {
   display: flex;
-  align-items: stretch;
+  align-items: center;
 
   padding: 1.25em 0;
 
@@ -108,7 +138,7 @@ $border: hsl(0, 0%, 20%);
 
   p {
     margin: 0;
-    line-height: 1em;
+    line-height: 1.2em;
 
     white-space: nowrap;
     overflow: hidden;
@@ -135,8 +165,6 @@ $border: hsl(0, 0%, 20%);
     display: block;
     margin: auto 0;
 
-    cursor: pointer;
     font-size: 24px;
-    color: $faded
   }
 }

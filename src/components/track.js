@@ -20,7 +20,7 @@ export default function Card(props) {
       </div>
       {hover && (
         <div className='control'>
-          <span className='material-icons'>
+          <span id='add' className='material-icons btn'>
             add_box
           </span>
         </div>

@@ -29,6 +29,11 @@ function App() {
           e => e.key === 'Enter' && fetchTracks(e.target.value)
         }
       />
+      <div>
+        <span id='clear' className='material-icons btn'>
+          clear
+        </span>
+      </div>
     </div>
     <div id='searchResults'>
       {tracks.map((track, index) => (
