@@ -3,6 +3,7 @@ import './App.css';
 
 import SoundCloudAPI from './SCAPI';
 import Track from './components/track';
+import Spinner from './components/spinner';
 
 function Searchbar(props) {
   const [input, setInput] = useState('');
@@ -62,7 +63,7 @@ function App() {
   const renderResult = () => {
     switch (status) {
       case 'fetching':
-        return <div id='loading'>Loading</div>;
+        return <Spinner />;
       case 'fetched':
         return tracks.length === 0
           ? <div id='noResult'>No Result :(</div>
@@ -84,7 +85,8 @@ function App() {
   return <>
     <Searchbar returnInput={fetchTracks} />
     <div id='searchResults'>
-      {renderResult()}
+      {/* {renderResult()} */}
+      <Spinner />
     </div>
   </>;
 };
