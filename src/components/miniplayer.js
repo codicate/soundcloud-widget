@@ -7,8 +7,8 @@ export default function MiniPlayer(props) {
   const [hover, setHover] = useState(false);
 
   useEffect(() => {
-    SoundCloudAPI.playTrack(props.trackId)
-  }, [props.trackId])
+    SoundCloudAPI.playTrack(props.trackId);
+  }, [props.trackId]);
 
   return (
     <div
@@ -20,23 +20,25 @@ export default function MiniPlayer(props) {
         alt={props.title + ' cover'}
         src={props.imgURL || imgPlaceholder}
       />
-      <div className='info'>
-        <p className='title'>
-          {props.title}
-        </p>
-        <p className='artist'>
-          {props.artist}
-        </p>
-      </div>
       {hover && (
-        <div className='control'>
-          <span
-            id='add'
-            className='material-icons btn'
-            onClick={() => props.play()}
-          >
-            add_box
+        <div id='overlay'>
+          <div className='info'>
+            <p className='title'>
+              {props.title}
+            </p>
+            <p className='artist'>
+              {props.artist}
+            </p>
+          </div>
+          <div className='control'>
+            <span
+              id='add'
+              className='material-icons btn'
+              onClick={() => props.play()}
+            >
+              add_box
           </span>
+          </div>
         </div>
       )}
     </div>
