@@ -2,42 +2,10 @@ import React, { useState, useEffect, createRef } from 'react';
 import './App.css';
 
 import SoundCloudAPI from './SCAPI';
-import Track from './components/track';
+import Searchbar from './components/searchbar';
 import Spinner from './components/spinner';
-
-function Searchbar(props) {
-  const [input, setInput] = useState('');
-  const searchbar = createRef();
-
-  return (
-    <div id='searchBar'>
-      <input
-        autoFocus
-        type='text'
-        placeholder='Search'
-        ref={searchbar}
-        value={input}
-        onChange={
-          e => setInput(e.target.value)
-        }
-        onKeyUp={
-          e => e.key === 'Enter' && props.returnInput(e.target.value)
-        }
-      />
-      <div id='clearDiv'>
-        <span
-          id='clear'
-          className='material-icons btn'
-          onClick={
-            () => setInput('') || searchbar.current.focus()
-          }
-        >
-          clear
-        </span>
-      </div>
-    </div>
-  );
-}
+import MiniPlayer from './components/miniplayer';
+import Track from './components/track';
 
 function App() {
   const API_ID = 'cd9be64eeb32d1741c17cb39e41d254d';
@@ -60,9 +28,7 @@ function App() {
     });
   };
 
-  const playTrack = (track) => {
-    SoundCloudAPI.playTrack(track.id)
-  };
+  const [currentTrack, setCurrentTrack] = useState({});
 
   const renderResult = () => {
     switch (status) {
@@ -79,7 +45,7 @@ function App() {
               imgURL={
                 track.artwork_url?.replace(/large(?=.jpg)/i, 'small')
               }
-              play={() => playTrack(tracks[index])}
+              play={() => setCurrentTrack(tracks[index])}
             ></Track>
           ));
       default:
@@ -92,6 +58,16 @@ function App() {
     <div id='searchResults'>
       {renderResult()}
     </div>
+    {!(currentTrack && Object.keys(currentTrack).length === 0) && (
+      <MiniPlayer
+        trackId={currentTrack.id}
+        title={currentTrack.title}
+        artist={currentTrack.user.username}
+        imgURL={
+          currentTrack.artwork_url?.replace(/large(?=.jpg)/i, 't500x500')
+        }
+      />
+    )}
   </>;
 };
 

@@ -112,7 +112,7 @@ button {
   background-image: linear-gradient(135deg, #70929c, #846170);
 }
 
-.info {
+.track .info {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -126,7 +126,7 @@ button {
   min-width: 0;
 }
 
-p {
+.track p {
   margin: 0;
   line-height: 1.2em;
   white-space: nowrap;
@@ -134,23 +134,23 @@ p {
   text-overflow: ellipsis;
 }
 
-.title {
+.track .title {
   font-size: 0.875rem;
   font-weight: 500;
 }
 
-.artist {
+.track .artist {
   color: #ababab;
   font-size: 0.75rem;
 }
 
-.control {
+.track .control {
   margin: auto 0;
   margin-left: auto;
   padding: 0 0.75em;
 }
 
-.material-icons {
+.track .material-icons {
   display: block;
   margin: auto 0;
   font-size: 24px;
