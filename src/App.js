@@ -4,6 +4,35 @@ import './App.css';
 import SoundCloudAPI from './SCAPI';
 import Track from './components/track';
 
+function Searchbar(props) {
+  const [input, setInput] = useState('');
+  const [focus, setFocus] = useState(true);
+
+  return (
+    <div id='searchBar'>
+      <input
+        autoFocus={focus}
+        type='text'
+        placeholder='Search'
+        value={input}
+        onFocus={console.log('in focus')}
+        onBlur={console.log('lost focus')}
+        onChange={e => setInput(e.target.value)}
+        onKeyUp={
+          e => e.key === 'Enter' && props.returnInput(e.target.value)
+        }
+      />
+      <div>
+        <span id='clear' className='material-icons btn'
+          onClick={() => { setInput('')}}
+        >
+          clear
+        </span>
+      </div>
+    </div>
+  );
+}
+
 function App() {
   const API_ID = 'cd9be64eeb32d1741c17cb39e41d254d';
 
@@ -16,25 +45,12 @@ function App() {
     console.log(tracks);
   }, [tracks]);
 
-  const fetchTracks = input => SoundCloudAPI.getTrack(input,
-    data => setTracks(data)
-  );
+  const fetchTracks = (input) => {
+    SoundCloudAPI.getTracks(input, data => setTracks(data));
+  };
 
   return <>
-    <div id='searchBar'>
-      <input
-        type='text'
-        placeholder='Search'
-        onKeyUp={
-          e => e.key === 'Enter' && fetchTracks(e.target.value)
-        }
-      />
-      <div>
-        <span id='clear' className='material-icons btn'>
-          clear
-        </span>
-      </div>
-    </div>
+    <Searchbar returnInput={fetchTracks} />
     <div id='searchResults'>
       {tracks.map((track, index) => (
         <Track
@@ -46,7 +62,6 @@ function App() {
           }
         ></Track>
       ))}
-
     </div>
   </>;
 };

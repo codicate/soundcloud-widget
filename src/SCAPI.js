@@ -7,7 +7,7 @@ const SoundCloudAPI = {
     });
   },
 
-  getTrack(input, func) {
+  getTracks(input, func) {
     SC.get('/tracks', {
       q: input
     }).then(
@@ -15,7 +15,7 @@ const SoundCloudAPI = {
     );
   },
 
-  displayTrack(trackURL, func) {
+  displayTracks(trackURL, func) {
     SC.oEmbed(trackURL, {
       auto_play: true
     }).then(
