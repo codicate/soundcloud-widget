@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 
 import SoundCloudAPI from './SCAPI';
-import Card from './components/card';
+import Track from './components/track';
 
 function App() {
   const API_ID = 'cd9be64eeb32d1741c17cb39e41d254d';
@@ -32,14 +32,14 @@ function App() {
     </div>
     <div id='searchResults'>
       {tracks.map((track, index) => (
-        <Card
+        <Track
           key={index}
           title={track.title}
           artist={track.user.username}
           imgURL={
             track.artwork_url?.replace(/large(?=.jpg)/i, 'small')
           }
-        ></Card>
+        ></Track>
       ))}
 
     </div>

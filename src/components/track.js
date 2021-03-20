@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from 'react';
 
 export default function Card(props) {
+  const [hover, setHover] = useState(false);
+
   return (
-    <div className='card'>
+    <div
+      className='track'
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
+    >
       <img src={props.imgURL} alt={props.title + ' cover'} />
       <div className='info'>
         <p className='title'>
@@ -12,12 +18,13 @@ export default function Card(props) {
           {props.artist}
         </p>
       </div>
-      {/* <button>
-        <span className='material-icons'>
-          add_box
-        </span>
-        <span>Add to Playlist</span>
-      </button> */}
+      {hover && (
+        <div className='control'>
+          <span className='material-icons'>
+            add_box
+          </span>
+        </div>
+      )}
     </div>
   );
 }

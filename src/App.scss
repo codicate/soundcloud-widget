@@ -28,44 +28,49 @@ $emp: hsl(0, 0%, 13%);
 $faded: hsl(0, 0%, 67%);
 $border: hsl(0, 0%, 20%);
 
-button {
-  display: flex;
-  align-items: center;
+// button {
+//   display: flex;
+//   align-items: center;
 
-  padding: 0.5em 1em;
+//   padding: 0.5em 1em;
 
-  font-weight: 500;
-  line-height: 1rem;
-  text-transform: uppercase;
-  white-space: nowrap;
+//   font-weight: 500;
+//   line-height: 1rem;
+//   text-transform: uppercase;
+//   white-space: nowrap;
 
-  background-color: transparent;
-  border-radius: 0.125em;
-  border: 1px solid white;
+//   background-color: transparent;
+//   border-radius: 0.125em;
+//   border: 1px solid white;
 
-  .material-icons {
-    font-size: 1.5rem;
+//   .material-icons {
+//     font-size: 1.5rem;
 
-    &+* {
-      margin-left: 0.5em;
-    }
-  }
+//     &+* {
+//       margin-left: 0.5em;
+//     }
+//   }
+// }
+
+#root {
+  padding: 0 2em;
 }
 
 #searchBar {
-  display: flex;
-  justify-content: center;
-
-  padding: 1em;
+  padding: 1em 0;
 
   input {
-    outline: none;
+    display: block;
+    margin: 0 auto;
 
-    padding: 0.75em 1em;
+    width: 100%;
+    max-width: 32em;
+    padding: 0.75em 1.5em;
 
     font-size: 1rem;
     font-weight: 500;
 
+    outline: none;
     border-radius: 0.25em;
     border: 1px solid $border;
     background-color: $emp;
@@ -77,16 +82,17 @@ button {
 
   display: flex;
   flex-flow: column;
-
-  padding: 1em 3em;
 }
 
-.card {
+.track {
   display: flex;
   align-items: stretch;
 
   padding: 1.25em 0;
-  border-bottom: 2px solid $border;
+
+  &:not(:last-child) {
+    border-bottom: 2px solid $border;
+  }
 
   img {
     margin-right: 1em;
@@ -97,23 +103,21 @@ button {
     flex-flow: column;
     justify-content: space-between;
 
-    flex: 1;
     min-width: 0;
+  }
 
-    p {
-      margin: 0;
-      line-height: 1em;
+  p {
+    margin: 0;
+    line-height: 1em;
 
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .title {
     font-size: 0.875rem;
     font-weight: 500;
-    margin: 0;
   }
 
   .artist {
@@ -121,7 +125,18 @@ button {
     font-size: 0.75rem;
   }
 
-  button {
-    margin: 1em auto 1.5em auto;
+  .control {
+    margin: auto 0;
+    margin-left: auto;
+    padding: 0 0.75em;
+  }
+
+  .material-icons {
+    display: block;
+    margin: auto 0;
+
+    cursor: pointer;
+    font-size: 24px;
+    color: $faded
   }
 }
