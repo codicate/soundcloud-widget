@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
+const imgPlaceholder = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+
 export default function Card(props) {
   const [hover, setHover] = useState(false);
 
@@ -11,7 +13,7 @@ export default function Card(props) {
     >
       <img
         alt={props.title + ' cover'}
-        src={props.imgURL || 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'}
+        src={props.imgURL || imgPlaceholder}
       />
       <div className='info'>
         <p className='title'>
@@ -23,7 +25,11 @@ export default function Card(props) {
       </div>
       {hover && (
         <div className='control'>
-          <span id='add' className='material-icons btn'>
+          <span 
+          id='add' 
+          className='material-icons btn'
+          onClick={() => props.play()}
+          >
             add_box
           </span>
         </div>

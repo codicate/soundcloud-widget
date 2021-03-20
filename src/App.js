@@ -60,6 +60,10 @@ function App() {
     });
   };
 
+  const playTrack = (track) => {
+    SoundCloudAPI.playTrack(track.id)
+  };
+
   const renderResult = () => {
     switch (status) {
       case 'fetching':
@@ -75,6 +79,7 @@ function App() {
               imgURL={
                 track.artwork_url?.replace(/large(?=.jpg)/i, 'small')
               }
+              play={() => playTrack(tracks[index])}
             ></Track>
           ));
       default:

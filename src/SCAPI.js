@@ -15,13 +15,11 @@ const SoundCloudAPI = {
     );
   },
 
-  displayTracks(trackURL, func) {
-    SC.oEmbed(trackURL, {
-      auto_play: true
-    }).then(
-      embed => func(embed)
+  playTrack(trackId) {
+    SC.stream('/tracks/' + trackId).then(
+      (player) => player.play()
     );
-  }
+  },
 };
 
 export default SoundCloudAPI;
