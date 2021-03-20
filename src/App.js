@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, createRef } from 'react';
 import './App.css';
 
 import SoundCloudAPI from './SCAPI';
@@ -6,25 +6,25 @@ import Track from './components/track';
 
 function Searchbar(props) {
   const [input, setInput] = useState('');
-  const [focus, setFocus] = useState(true);
+  const searchbar = createRef();
 
   return (
     <div id='searchBar'>
       <input
-        autoFocus={focus}
         type='text'
         placeholder='Search'
+        ref={searchbar}
         value={input}
-        onFocus={console.log('in focus')}
-        onBlur={console.log('lost focus')}
         onChange={e => setInput(e.target.value)}
         onKeyUp={
           e => e.key === 'Enter' && props.returnInput(e.target.value)
         }
       />
-      <div>
-        <span id='clear' className='material-icons btn'
-          onClick={() => { setInput('')}}
+      <div id='clearDiv'>
+        <span
+          id='clear'
+          className='material-icons btn'
+          onClick={() => setInput('') || searchbar.current.focus()}
         >
           clear
         </span>
