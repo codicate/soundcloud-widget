@@ -1,3 +1,9 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 html,
 body {
   height: 100vh;
@@ -9,12 +15,6 @@ body {
   color: white;
 
   background-color: hsl(0, 0%, 1%);
-}
-
-#root {
-  display: flex;
-  flex-flow: column;
-  align-items: center;
 }
 
 input,
@@ -43,10 +43,10 @@ button {
   border-radius: 0.125em;
   border: 1px solid white;
 
-  .material-icons{
+  .material-icons {
     font-size: 1.5rem;
 
-    &+*{
+    &+* {
       margin-left: 0.5em;
     }
   }
@@ -73,44 +73,52 @@ button {
 }
 
 #searchResults {
-  display: flex;
-  flex-flow: row wrap;
+  width: 100%;
 
-  margin: 1em 3em;
+  display: flex;
+  flex-flow: column;
+
+  padding: 1em 3em;
 }
 
 .card {
-  display: grid;
-  grid-template: 20em / 20em;
+  display: flex;
+  align-items: stretch;
 
-  overflow: hidden;
-  margin: 1em;
-
-  border-radius: 0.5em;
-  border: 2px solid $border;
-  background-color: $emp;
+  padding: 1.25em 0;
+  border-bottom: 2px solid $border;
 
   img {
-    height: 20em;
+    margin-right: 1em;
   }
 
-  p {
-    margin: 0;
-    text-align: center;
-  }
+  .info {
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
 
-  p:first-child {
-    margin-bottom: 0.75em;
+    flex: 1;
+    min-width: 0;
+
+    p {
+      margin: 0;
+      line-height: 1em;
+
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   }
 
   .title {
-    margin: 1em 0;
+    font-size: 0.875rem;
     font-weight: 500;
+    margin: 0;
   }
 
   .artist {
     color: $faded;
-    font-size: 0.875rem;
+    font-size: 0.75rem;
   }
 
   button {

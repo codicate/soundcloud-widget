@@ -37,7 +37,7 @@ function App() {
           title={track.title}
           artist={track.user.username}
           imgURL={
-            track.artwork_url?.replace(/large(?=.jpg)/i, 't500x500')
+            track.artwork_url?.replace(/large(?=.jpg)/i, 'small')
           }
         ></Card>
       ))}
