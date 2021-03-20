@@ -9,7 +9,10 @@ export default function Card(props) {
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
-      <img src={props.imgURL} alt={props.title + ' cover'} />
+      <img
+        alt={props.title + ' cover'}
+        src={props.imgURL || 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'}
+      />
       <div className='info'>
         <p className='title'>
           {props.title}

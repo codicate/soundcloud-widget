@@ -106,10 +106,13 @@ button {
 }
 
 .track img {
+  height: 32px;
+  width: 32px;
   margin-right: 1em;
+  background-image: linear-gradient(135deg, #70929c, #846170);
 }
 
-.track .info {
+.info {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -123,7 +126,7 @@ button {
   min-width: 0;
 }
 
-.track p {
+p {
   margin: 0;
   line-height: 1.2em;
   white-space: nowrap;
@@ -131,23 +134,23 @@ button {
   text-overflow: ellipsis;
 }
 
-.track .title {
+.title {
   font-size: 0.875rem;
   font-weight: 500;
 }
 
-.track .artist {
+.artist {
   color: #ababab;
   font-size: 0.75rem;
 }
 
-.track .control {
+.control {
   margin: auto 0;
   margin-left: auto;
   padding: 0 0.75em;
 }
 
-.track .material-icons {
+.material-icons {
   display: block;
   margin: auto 0;
   font-size: 24px;
