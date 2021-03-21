@@ -221,4 +221,22 @@ button {
   color: #ababab;
   font-size: 0.625rem;
 }
+
+#overlay .control {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#overlay .material-icons {
+  font-size: 20px;
+}
+
+#overlay #play {
+  font-size: 28px;
+  margin: 0 0.125em;
+}
 /*# sourceMappingURL=App.css.map */

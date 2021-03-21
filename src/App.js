@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './App.css';
 
 import SoundCloudAPI from './SCAPI';
@@ -28,7 +28,23 @@ function App() {
     });
   };
 
-  const [currentTrack, setCurrentTrack] = useState({});
+  const [currentTrack, setCurrentTrack] = useState(undefined);
+  const player = useRef();
+  useEffect(() => {
+    currentTrack !== undefined && (async () => {
+      console.log(currentTrack);
+      player.current = await SoundCloudAPI.getPlayer(tracks[currentTrack].id);
+      console.log(player.current);
+      player.current.play();
+    })();
+  }, [tracks, currentTrack]);
+
+  const [pause, setPause] = useState(false);
+  useEffect(() => {
+    player.current && (
+      pause ? player.current.pause() : player.current.play()
+    );
+  }, [pause]);
 
   const renderResult = () => {
     switch (status) {
@@ -45,7 +61,7 @@ function App() {
               imgURL={
                 track.artwork_url?.replace(/large(?=.jpg)/i, 'small')
               }
-              play={() => setCurrentTrack(tracks[index])}
+              play={() => setCurrentTrack(index)}
             ></Track>
           ));
       default:
@@ -58,14 +74,22 @@ function App() {
     <div id='searchResults'>
       {renderResult()}
     </div>
-    {!(currentTrack && Object.keys(currentTrack).length === 0) && (
+    {currentTrack !== undefined && (
       <MiniPlayer
-        trackId={currentTrack.id}
-        title={currentTrack.title}
-        artist={currentTrack.user.username}
+        trackId={tracks[currentTrack].id}
+        title={tracks[currentTrack].title}
+        artist={tracks[currentTrack].user.username}
         imgURL={
-          currentTrack.artwork_url?.replace(/large(?=.jpg)/i, 't500x500')
+          tracks[currentTrack].artwork_url?.replace(/large(?=.jpg)/i, 't500x500')
         }
+        pause={pause}
+        onPause={() => setPause(pause => !pause)}
+        skip={next => setCurrentTrack(
+          prevTrack => {
+            const nextTrack = next ? prevTrack + 1 : prevTrack - 1;
+            return tracks[nextTrack] ? nextTrack : prevTrack;
+          }
+        )}
       />
     )}
   </>;

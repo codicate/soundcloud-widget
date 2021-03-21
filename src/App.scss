@@ -229,4 +229,18 @@ $border: hsl(0, 0%, 20%);
     color: $faded;
     font-size: 0.625rem;
   }
+
+  .control {
+    display: flex;
+    align-items: center;
+  }
+
+  .material-icons {
+    font-size: 20px;
+  }
+
+  #play {
+    font-size: 28px;
+    margin: 0 0.125em;
+  }
 }
