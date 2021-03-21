@@ -127,6 +127,7 @@ $border: hsl(0, 0%, 20%);
   p {
     margin: 0;
     line-height: 1.2em;
+    color: $faded;
 
     white-space: nowrap;
     overflow: hidden;
@@ -134,11 +135,8 @@ $border: hsl(0, 0%, 20%);
   }
 
   .title {
+    color: white;
     font-weight: 500;
-  }
-
-  .artist {
-    color: $faded;
   }
 }
 
@@ -185,7 +183,7 @@ $border: hsl(0, 0%, 20%);
     display: none;
   }
 
-  &:hover > .control {
+  &:hover>.control {
     display: block;
   }
 }
@@ -232,7 +230,7 @@ $border: hsl(0, 0%, 20%);
     align-items: center;
 
     p {
-      margin-bottom: 0.25em;
+      margin-bottom: 0.5em;
     }
   }
 
@@ -242,6 +240,10 @@ $border: hsl(0, 0%, 20%);
 
   .artist {
     font-size: 0.625rem;
+  }
+
+  .timestamp {
+    font-size: 0.75rem;
   }
 
   .control {

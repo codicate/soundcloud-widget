@@ -29,22 +29,20 @@ function App() {
   };
 
   const player = useRef();
-
-
   const [currentTrack, setCurrentTrack] = useState();
+
   const [duration, setDuration] = useState(0);
   useEffect(() => currentTrack && (
     async () => {
+      setPause(false);
       player.current = await SoundCloudAPI.getPlayer(currentTrack.id);
       console.log(player);
       player.current.play();
       player.current.on('play-start',
         () => setDuration(player.current.getDuration())
       );
-      setPause(false);
     }
   )(), [currentTrack]);
-
 
   const [timestamp, setTimestamp] = useState(0);
   useEffect(() => {

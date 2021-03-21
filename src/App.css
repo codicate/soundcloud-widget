@@ -108,17 +108,15 @@ button {
 .info p {
   margin: 0;
   line-height: 1.2em;
+  color: #ababab;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .info .title {
+  color: white;
   font-weight: 500;
-}
-
-.info .artist {
-  color: #ababab;
 }
 
 .cover {
@@ -223,7 +221,7 @@ button {
 }
 
 #overlay .info p {
-  margin-bottom: 0.25em;
+  margin-bottom: 0.5em;
 }
 
 #overlay .title {
@@ -232,6 +230,10 @@ button {
 
 #overlay .artist {
   font-size: 0.625rem;
+}
+
+#overlay .timestamp {
+  font-size: 0.75rem;
 }
 
 #overlay .control {
