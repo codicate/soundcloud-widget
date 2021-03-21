@@ -7,7 +7,7 @@ export default function MiniPlayer(props) {
   const player = useRef();
   useEffect(() => {
     (async () => {
-      player.current = await SoundCloudAPI.playTrack(props.trackId);
+      player.current = await SoundCloudAPI.getPlayer(props.trackId);
       player.current.play()
     })();
   }, [props.trackId]);
@@ -26,7 +26,7 @@ export default function MiniPlayer(props) {
     <div
       id='miniplayer'
       onMouseEnter={() => setHover(true)}
-      onMouseLeave={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
     >
       <img
         className='cover'

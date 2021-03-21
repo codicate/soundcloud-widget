@@ -206,6 +206,13 @@ $border: hsl(0, 0%, 20%);
 
   background: linear-gradient(0deg, hsla(0, 0%, 0%, 0.5) 30%, hsla(0, 0%, 100%, 0.25) 100%);
 
+  opacity: 0;
+  transition: opacity 0.2s ease-out;
+
+  &:hover {
+    opacity: 1;
+  }
+
   .info {
     align-items: center;
     p {

@@ -193,6 +193,13 @@ button {
   padding: 0.5em;
   background: -webkit-gradient(linear, left bottom, left top, color-stop(30%, rgba(0, 0, 0, 0.5)), to(rgba(255, 255, 255, 0.25)));
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.5) 30%, rgba(255, 255, 255, 0.25) 100%);
+  opacity: 0;
+  -webkit-transition: opacity 0.2s ease-out;
+  transition: opacity 0.2s ease-out;
+}
+
+#overlay:hover {
+  opacity: 1;
 }
 
 #overlay .info {
