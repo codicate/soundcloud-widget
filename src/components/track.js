@@ -12,6 +12,7 @@ export default function Card(props) {
       onMouseLeave={() => setHover(false)}
     >
       <img
+        className='cover'
         alt={props.title + ' cover'}
         src={props.imgURL || imgPlaceholder}
       />

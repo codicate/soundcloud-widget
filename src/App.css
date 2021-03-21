@@ -91,6 +91,28 @@ button {
           flex-flow: column;
 }
 
+.info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column;
+          flex-flow: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  min-width: 0;
+}
+
+.info p {
+  margin: 0;
+  line-height: 1.2em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .track {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -110,28 +132,6 @@ button {
   width: 32px;
   margin-right: 1em;
   background-image: linear-gradient(135deg, #70929c, #846170);
-}
-
-.track .info {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-flow: column;
-          flex-flow: column;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  min-width: 0;
-}
-
-.track p {
-  margin: 0;
-  line-height: 1.2em;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .track .title {
@@ -157,14 +157,20 @@ button {
 }
 
 #miniplayer {
-  position: relative;
-  height: 20em;
-  width: 20em;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  height: 15rem;
+  width: 15rem;
 }
 
 #miniplayer > * {
   height: 100%;
   width: 100%;
+}
+
+#miniplayer * {
+  max-width: 100%;
 }
 
 #overlay {
@@ -184,7 +190,28 @@ button {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  padding: 0.5em;
   background: -webkit-gradient(linear, left bottom, left top, color-stop(30%, rgba(0, 0, 0, 0.5)), to(rgba(255, 255, 255, 0.25)));
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.5) 30%, rgba(255, 255, 255, 0.25) 100%);
+}
+
+#overlay .info {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#overlay .info p {
+  margin-bottom: 0.25em;
+}
+
+#overlay .title {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+#overlay .artist {
+  color: #ababab;
+  font-size: 0.625rem;
 }
 /*# sourceMappingURL=App.css.map */

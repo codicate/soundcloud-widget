@@ -15,10 +15,8 @@ const SoundCloudAPI = {
     );
   },
 
-  playTrack(trackId) {
-    SC.stream('/tracks/' + trackId).then(
-      (player) => player.play()
-    );
+  async playTrack(trackId) {
+    return await SC.stream('/tracks/' + trackId)
   },
 };
 

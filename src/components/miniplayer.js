@@ -1,22 +1,35 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import SoundCloudAPI from '../SCAPI';
 
 const imgPlaceholder = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
 
 export default function MiniPlayer(props) {
-  const [hover, setHover] = useState(false);
-
+  const player = useRef();
   useEffect(() => {
-    SoundCloudAPI.playTrack(props.trackId);
+    (async () => {
+      player.current = await SoundCloudAPI.playTrack(props.trackId);
+      player.current.play()
+    })();
   }, [props.trackId]);
+
+  const [pause, setPause] = useState(false);
+  useEffect(() => {
+
+    player.current && (
+      pause ? player.current.pause() : player.current.play()
+    );
+  }, [pause]);
+
+  const [hover, setHover] = useState(false);
 
   return (
     <div
       id='miniplayer'
       onMouseEnter={() => setHover(true)}
-      onMouseLeave={() => setHover(false)}
+      onMouseLeave={() => setHover(true)}
     >
       <img
+        className='cover'
         alt={props.title + ' cover'}
         src={props.imgURL || imgPlaceholder}
       />
@@ -31,13 +44,16 @@ export default function MiniPlayer(props) {
             </p>
           </div>
           <div className='control'>
+            <span>
+
+            </span>
             <span
-              id='add'
+              id='play'
               className='material-icons btn'
-              onClick={() => props.play()}
+              onClick={() => setPause(pause => !pause)}
             >
-              add_box
-          </span>
+              {pause ? 'play_arrow' : 'pause'}
+            </span>
           </div>
         </div>
       )}
