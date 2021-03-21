@@ -30,14 +30,29 @@ function App() {
 
   const player = useRef();
 
+
   const [currentTrack, setCurrentTrack] = useState();
+  const [duration, setDuration] = useState(0);
   useEffect(() => currentTrack && (
     async () => {
       player.current = await SoundCloudAPI.getPlayer(currentTrack.id);
+      console.log(player);
       player.current.play();
+      player.current.on('play-start',
+        () => setDuration(player.current.getDuration())
+      );
       setPause(false);
     }
   )(), [currentTrack]);
+
+
+  const [timestamp, setTimestamp] = useState(0);
+  useEffect(() => {
+    const timestampTimer = setInterval(() => {
+      player.current && setTimestamp(player.current.currentTime());
+    }, 1000);
+    return () => clearInterval(timestampTimer);
+  }, []);
 
   const [pause, setPause] = useState(false);
   useEffect(() => player.current && (
@@ -75,6 +90,8 @@ function App() {
         trackId={currentTrack.id}
         title={currentTrack.title}
         artist={currentTrack.user.username}
+        timestamp={timestamp}
+        duration={duration}
         imgURL={currentTrack.artwork_url?.replace(/large(?=.jpg)/i, 't500x500')}
         pause={pause}
         onPause={() => setPause(pause => !pause)}
