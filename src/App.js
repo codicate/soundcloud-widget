@@ -35,6 +35,7 @@ function App() {
     currentTrack !== undefined && (async () => {
       player.current = await SoundCloudAPI.getPlayer(currentTrack.id);
       player.current.play();
+      setPause(false)
     })();
   }, [currentTrack]);
 
