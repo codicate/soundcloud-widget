@@ -115,6 +115,8 @@ $border: hsl(0, 0%, 20%);
 #searchResults {
   display: flex;
   flex-flow: column;
+
+  padding-bottom: 15em;
 }
 
 .info {
