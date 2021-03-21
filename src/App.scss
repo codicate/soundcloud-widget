@@ -170,17 +170,23 @@ $border: hsl(0, 0%, 20%);
     font-size: 0.75rem;
   }
 
-  .control {
-    margin: auto 0;
-    margin-left: auto;
-    padding: 0 0.75em;
-  }
-
   .material-icons {
     display: block;
     margin: auto 0;
 
     font-size: 24px;
+  }
+
+  .control {
+    margin: auto 0;
+    margin-left: auto;
+    padding: 0 1em;
+
+    display: none;
+  }
+
+  &:hover > .control {
+    display: block;
   }
 }
 

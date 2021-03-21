@@ -153,16 +153,21 @@ button {
   font-size: 0.75rem;
 }
 
-.track .control {
-  margin: auto 0;
-  margin-left: auto;
-  padding: 0 0.75em;
-}
-
 .track .material-icons {
   display: block;
   margin: auto 0;
   font-size: 24px;
+}
+
+.track .control {
+  margin: auto 0;
+  margin-left: auto;
+  padding: 0 1em;
+  display: none;
+}
+
+.track:hover > .control {
+  display: block;
 }
 
 #miniplayer {

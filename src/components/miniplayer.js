@@ -1,6 +1,3 @@
-import React, { useState, useEffect, useRef } from 'react';
-import SoundCloudAPI from '../SCAPI';
-
 const imgPlaceholder = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
 
 export default function MiniPlayer(props) {
@@ -18,6 +15,9 @@ export default function MiniPlayer(props) {
           </p>
           <p className='artist'>
             {props.artist}
+          </p>
+          <p className='timestamp'>
+            {props.currentTime} / {props.totalTime}
           </p>
         </div>
         <div className='control'>

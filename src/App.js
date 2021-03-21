@@ -30,21 +30,19 @@ function App() {
 
   const player = useRef();
 
-  const [currentTrack, setCurrentTrack] = useState({});
-  useEffect(() => {
-    currentTrack !== undefined && (async () => {
+  const [currentTrack, setCurrentTrack] = useState();
+  useEffect(() => currentTrack && (
+    async () => {
       player.current = await SoundCloudAPI.getPlayer(currentTrack.id);
       player.current.play();
-      setPause(false)
-    })();
-  }, [currentTrack]);
+      setPause(false);
+    }
+  )(), [currentTrack]);
 
   const [pause, setPause] = useState(false);
-  useEffect(() => {
-    player.current && (
-      pause ? player.current.pause() : player.current.play()
-    );
-  }, [pause]);
+  useEffect(() => player.current && (
+    pause ? player.current.pause() : player.current.play()
+  ), [pause]);
 
   const renderResult = () => {
     switch (status) {
@@ -58,9 +56,7 @@ function App() {
               key={index}
               title={track.title}
               artist={track.user.username}
-              imgURL={
-                track.artwork_url?.replace(/large(?=.jpg)/i, 'small')
-              }
+              imgURL={track.artwork_url?.replace(/large(?=.jpg)/i, 'small')}
               play={() => setCurrentTrack(tracks[index])}
             ></Track>
           ));
@@ -74,14 +70,12 @@ function App() {
     <div id='searchResults'>
       {renderResult()}
     </div>
-    {(currentTrack && Object.keys(currentTrack).length) && (
+    {currentTrack && (
       <MiniPlayer
         trackId={currentTrack.id}
         title={currentTrack.title}
         artist={currentTrack.user.username}
-        imgURL={
-          currentTrack.artwork_url?.replace(/large(?=.jpg)/i, 't500x500')
-        }
+        imgURL={currentTrack.artwork_url?.replace(/large(?=.jpg)/i, 't500x500')}
         pause={pause}
         onPause={() => setPause(pause => !pause)}
         skip={next => setCurrentTrack(currentTrack => {
