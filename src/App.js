@@ -28,16 +28,15 @@ function App() {
     });
   };
 
-  const [currentTrack, setCurrentTrack] = useState(undefined);
   const player = useRef();
+
+  const [currentTrack, setCurrentTrack] = useState({});
   useEffect(() => {
     currentTrack !== undefined && (async () => {
-      console.log(currentTrack);
-      player.current = await SoundCloudAPI.getPlayer(tracks[currentTrack].id);
-      console.log(player.current);
+      player.current = await SoundCloudAPI.getPlayer(currentTrack.id);
       player.current.play();
     })();
-  }, [tracks, currentTrack]);
+  }, [currentTrack]);
 
   const [pause, setPause] = useState(false);
   useEffect(() => {
@@ -61,7 +60,7 @@ function App() {
               imgURL={
                 track.artwork_url?.replace(/large(?=.jpg)/i, 'small')
               }
-              play={() => setCurrentTrack(index)}
+              play={() => setCurrentTrack(tracks[index])}
             ></Track>
           ));
       default:
@@ -74,22 +73,21 @@ function App() {
     <div id='searchResults'>
       {renderResult()}
     </div>
-    {currentTrack !== undefined && (
+    {(currentTrack && Object.keys(currentTrack).length) && (
       <MiniPlayer
-        trackId={tracks[currentTrack].id}
-        title={tracks[currentTrack].title}
-        artist={tracks[currentTrack].user.username}
+        trackId={currentTrack.id}
+        title={currentTrack.title}
+        artist={currentTrack.user.username}
         imgURL={
-          tracks[currentTrack].artwork_url?.replace(/large(?=.jpg)/i, 't500x500')
+          currentTrack.artwork_url?.replace(/large(?=.jpg)/i, 't500x500')
         }
         pause={pause}
         onPause={() => setPause(pause => !pause)}
-        skip={next => setCurrentTrack(
-          prevTrack => {
-            const nextTrack = next ? prevTrack + 1 : prevTrack - 1;
-            return tracks[nextTrack] ? nextTrack : prevTrack;
-          }
-        )}
+        skip={next => setCurrentTrack(currentTrack => {
+          const currentTrackIndex = tracks.indexOf(currentTrack);
+          const nextTrackIndex = next ? currentTrackIndex + 1 : currentTrackIndex - 1;
+          return tracks[nextTrackIndex] || currentTrack;
+        })}
       />
     )}
   </>;

@@ -113,6 +113,18 @@ button {
   text-overflow: ellipsis;
 }
 
+.info .title {
+  font-weight: 500;
+}
+
+.info .artist {
+  color: #ababab;
+}
+
+.cover {
+  background-image: linear-gradient(135deg, #70929c, #846170);
+}
+
 .track {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -131,16 +143,13 @@ button {
   height: 32px;
   width: 32px;
   margin-right: 1em;
-  background-image: linear-gradient(135deg, #70929c, #846170);
 }
 
 .track .title {
   font-size: 0.875rem;
-  font-weight: 500;
 }
 
 .track .artist {
-  color: #ababab;
   font-size: 0.75rem;
 }
 
@@ -191,8 +200,8 @@ button {
       -ms-flex-align: center;
           align-items: center;
   padding: 0.5em;
-  background: -webkit-gradient(linear, left bottom, left top, color-stop(30%, rgba(0, 0, 0, 0.5)), to(rgba(255, 255, 255, 0.25)));
-  background: linear-gradient(0deg, rgba(0, 0, 0, 0.5) 30%, rgba(255, 255, 255, 0.25) 100%);
+  background: -webkit-gradient(linear, left bottom, left top, color-stop(30%, rgba(0, 0, 0, 0.5)), to(rgba(255, 255, 255, 0.1)));
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.5) 30%, rgba(255, 255, 255, 0.1) 100%);
   opacity: 0;
   -webkit-transition: opacity 0.2s ease-out;
   transition: opacity 0.2s ease-out;
@@ -214,11 +223,9 @@ button {
 
 #overlay .title {
   font-size: 0.875rem;
-  font-weight: 500;
 }
 
 #overlay .artist {
-  color: #ababab;
   font-size: 0.625rem;
 }
 
