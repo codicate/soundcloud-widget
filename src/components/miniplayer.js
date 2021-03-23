@@ -1,5 +1,5 @@
-import { useEffect } from "react";
-import drag from "../utils/drag";
+import { useEffect, useRef } from "react";
+import addDrag from '../utils/drag';
 
 const imgPlaceholder = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
 
@@ -10,13 +10,14 @@ function displayTime(milliseconds) {
 }
 
 export default function MiniPlayer(props) {
+  const miniplayer = useRef();
+
   useEffect(() => {
-    const miniplayer = document.getElementById('miniplayer');
-    drag(miniplayer);
-  }, []);
+    miniplayer.current && addDrag(miniplayer.current);
+  }, [miniplayer]);
 
   return (
-    <div id='miniplayer'>
+    <div id='miniplayer' ref={miniplayer}>
       <img
         className='cover'
         alt={props.title + ' cover'}

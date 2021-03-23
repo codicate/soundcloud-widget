@@ -1,8 +1,8 @@
-import React, { useState, createRef } from 'react';
+import React, { useState, useRef } from 'react';
 
 export default function Searchbar(props) {
   const [input, setInput] = useState('');
-  const searchbar = createRef();
+  const searchbar = useRef();
 
   return (
     <div id='searchBar'>

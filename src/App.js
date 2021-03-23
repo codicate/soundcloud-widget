@@ -9,17 +9,15 @@ import Track from './components/track';
 
 function App() {
   const API_ID = 'cd9be64eeb32d1741c17cb39e41d254d';
+  const player = useRef();
 
   useEffect(() => {
     SoundCloudAPI.init(API_ID);
   }, []);
 
-  const [tracks, setTracks] = useState([]);
-  useEffect(() => {
-    console.log(tracks);
-  }, [tracks]);
-
   const [status, setStatus] = useState('coldStart');
+  const [tracks, setTracks] = useState([]);
+
   const fetchTracks = (input) => {
     setStatus('fetching');
     SoundCloudAPI.getTracks(input, data => {
@@ -28,15 +26,13 @@ function App() {
     });
   };
 
-  const player = useRef();
   const [currentTrack, setCurrentTrack] = useState();
-
   const [duration, setDuration] = useState(0);
+
   useEffect(() => currentTrack && (
     async () => {
       setPause(false);
       player.current = await SoundCloudAPI.getPlayer(currentTrack.id);
-      console.log(player);
       player.current.play();
       player.current.on('play-start',
         () => setDuration(player.current.getDuration())
@@ -91,6 +87,7 @@ function App() {
         timestamp={timestamp}
         duration={duration}
         imgURL={currentTrack.artwork_url?.replace(/large(?=.jpg)/i, 't500x500')}
+
         pause={pause}
         onPause={() => setPause(pause => !pause)}
         skip={next => setCurrentTrack(currentTrack => {

@@ -1,14 +1,27 @@
-const drag = (targetElement, movingElement = targetElement) => {
+const clamp = (num, min, max) => Math.min(Math.max(num, min), max);
+
+
+const addDrag = (targetElement, movingElement = targetElement) => {
   let dragable = false;
   let offset = { x: 0, y: 0 };
   let pos = { x: 0, y: 0 };
 
+  const getDist2Edge = () => ({
+    x: window.innerWidth - movingElement.offsetWidth,
+    y: window.innerHeight - movingElement.offsetHeight,
+  });
+
+  let edge = getDist2Edge();
+
+  window.onresize = () => {
+    edge = getDist2Edge();
+    setPos();
+  };
+
   targetElement.addEventListener('mousedown', (e) => {
     dragable = true;
-    console.log('mousedown');
 
     pos = { x: e.clientX, y: e.clientY };
-
     offset.x = movingElement.offsetLeft - pos.x;
     offset.y = movingElement.offsetTop - pos.y;
   }, true);
@@ -21,13 +34,23 @@ const drag = (targetElement, movingElement = targetElement) => {
     e.preventDefault();
     if (dragable) {
 
-      pos = { x: e.clientX, y: e.clientY };
-
-      const coordinate = { x: pos.x + offset.x + 'px', y: pos.y + offset.y + 'px' };
-      movingElement.style.left = coordinate.x;
-      movingElement.style.top = coordinate.y;
+      pos = {
+        x: clamp(e.clientX, 0, edge.x - offset.x),
+        y: clamp(e.clientY, 0, edge.y - offset.y)
+      };
+      setPos();
     }
   }, true);
+
+  const setPos = () => {
+    const coordinate = {
+      x: clamp(pos.x + offset.x, 0, edge.x) + 'px',
+      y: clamp(pos.y + offset.y, 0, edge.y) + 'px'
+    };
+
+    movingElement.style.left = coordinate.x;
+    movingElement.style.top = coordinate.y;
+  };
 };
 
-export default drag;
+export default addDrag;

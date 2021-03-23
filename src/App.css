@@ -204,15 +204,26 @@ button {
       -ms-flex-align: center;
           align-items: center;
   padding: 0.5em;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
   background: -webkit-gradient(linear, left bottom, left top, color-stop(30%, rgba(0, 0, 0, 0.5)), to(rgba(255, 255, 255, 0.1)));
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.5) 30%, rgba(255, 255, 255, 0.1) 100%);
   opacity: 0;
   -webkit-transition: opacity 0.2s ease-out;
   transition: opacity 0.2s ease-out;
+  cursor: -webkit-grab;
+  cursor: grab;
 }
 
 #overlay:hover {
   opacity: 1;
+}
+
+#overlay:active {
+  cursor: -webkit-grabbing;
+  cursor: grabbing;
 }
 
 #overlay .info {
