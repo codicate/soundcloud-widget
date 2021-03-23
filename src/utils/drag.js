@@ -12,7 +12,6 @@ const addDrag = (targetElement, movingElement = targetElement) => {
   });
 
   let edge = getDist2Edge();
-
   window.onresize = () => {
     edge = getDist2Edge();
     setPos();
@@ -33,16 +32,16 @@ const addDrag = (targetElement, movingElement = targetElement) => {
   document.addEventListener('mousemove', (e) => {
     e.preventDefault();
     if (dragable) {
-
-      pos = {
-        x: clamp(e.clientX, 0, edge.x - offset.x),
-        y: clamp(e.clientY, 0, edge.y - offset.y)
-      };
-      setPos();
+      setPos(e);
     }
   }, true);
 
-  const setPos = () => {
+  const setPos = (e) => {
+    pos = {
+      x: clamp(e?.clientX || pos.x, 0, edge.x - offset.x),
+      y: clamp(e?.clientY || pos.y, 0, edge.y - offset.y)
+    };
+
     const coordinate = {
       x: clamp(pos.x + offset.x, 0, edge.x) + 'px',
       y: clamp(pos.y + offset.y, 0, edge.y) + 'px'
