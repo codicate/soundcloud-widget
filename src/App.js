@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './App.css';
 
-import SoundCloudAPI from './SCAPI';
+import SoundCloudAPI from './utils/SCAPI';
 import Searchbar from './components/searchbar';
 import Spinner from './components/spinner';
 import MiniPlayer from './components/miniplayer';

@@ -1,3 +1,6 @@
+import { useEffect } from "react";
+import drag from "../utils/drag";
+
 const imgPlaceholder = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
 
 function displayTime(milliseconds) {
@@ -7,6 +10,11 @@ function displayTime(milliseconds) {
 }
 
 export default function MiniPlayer(props) {
+  useEffect(() => {
+    const miniplayer = document.getElementById('miniplayer');
+    drag(miniplayer);
+  }, []);
+
   return (
     <div id='miniplayer'>
       <img
