@@ -31,8 +31,10 @@ function App() {
 
   useEffect(() => currentTrack && (
     async () => {
-      setPause(false);
+      setPause(true);
       player.current = await SoundCloudAPI.getPlayer(currentTrack.id);
+      setPause(false);
+      
       player.current.play();
       player.current.on('play-start',
         () => setDuration(player.current.getDuration())
@@ -62,14 +64,14 @@ function App() {
           ? <div id='noResult'>No Result :(</div>
           : tracks.map((track, index) => (
             <Track
+              key={index}
               info={{
-                key: index,
                 title: track.title,
                 artist: track.user.username,
                 imgURL: track.artwork_url?.replace(/large(?=.jpg)/i, 'small')
               }}
               play={() => setCurrentTrack(tracks[index])}
-            ></Track>
+            />
           ));
       default:
         return;

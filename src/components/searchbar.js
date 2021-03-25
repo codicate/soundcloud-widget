@@ -15,17 +15,18 @@ export default function Searchbar(props) {
         onChange={
           e => setInput(e.target.value)
         }
-        onKeyUp={
-          e => e.key === 'Enter' && props.returnInput(e.target.value)
+        onKeyUp={e => 
+          e.key === 'Enter' && props.returnInput(e.target.value)
         }
       />
       <div id='clearDiv'>
         <span
           id='clear'
           className='material-icons btn'
-          onClick={
-            () => setInput('') || searchbar.current.focus()
-          }
+          onClick={() => {
+            setInput('');
+            searchbar.current.focus();
+          }}
         >
           clear
         </span>

@@ -46,7 +46,7 @@ export default function MiniPlayer({info, ...props}) {
           <span
             id='play'
             className='material-icons btn'
-            onClick={() => props.onPause()}
+            onClick={props.onPause}
           >
             {props.pause ? 'play_arrow' : 'pause'}
           </span>

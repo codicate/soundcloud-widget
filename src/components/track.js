@@ -22,7 +22,7 @@ export default function Card({info, ...props}) {
         <span
           id='add'
           className='material-icons btn'
-          onClick={() => props.play()}
+          onClick={props.play}
         >
           add_box
           </span>
