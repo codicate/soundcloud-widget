@@ -9,7 +9,7 @@ function displayTime(milliseconds) {
   return [seconds % 3600 / 60, seconds % 60].map(format).join(':');
 }
 
-export default function MiniPlayer(props) {
+export default function MiniPlayer({info, ...props}) {
   const miniplayer = useRef();
 
   useEffect(() => {
@@ -20,19 +20,19 @@ export default function MiniPlayer(props) {
     <div id='miniplayer' ref={miniplayer}>
       <img
         className='cover'
-        alt={props.title + ' cover'}
-        src={props.imgURL || imgPlaceholder}
+        alt={info.title + ' cover'}
+        src={info.imgURL || imgPlaceholder}
       />
       <div id='overlay'>
         <div className='info'>
           <p className='title'>
-            {props.title}
+            {info.title}
           </p>
           <p className='artist'>
-            {props.artist}
+            {info.artist}
           </p>
           <p className='timestamp'>
-            {displayTime(props.timestamp)} / {displayTime(props.duration)}
+            {displayTime(info.timestamp)} / {displayTime(info.duration)}
           </p>
         </div>
         <div className='control'>
@@ -42,7 +42,7 @@ export default function MiniPlayer(props) {
             onClick={() => props.skip(false)}
           >
             skip_previous
-            </span>
+          </span>
           <span
             id='play'
             className='material-icons btn'
@@ -56,7 +56,7 @@ export default function MiniPlayer(props) {
             onClick={() => props.skip(true)}
           >
             skip_next
-            </span>
+          </span>
         </div>
       </div>
     </div>

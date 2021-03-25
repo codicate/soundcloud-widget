@@ -62,10 +62,12 @@ function App() {
           ? <div id='noResult'>No Result :(</div>
           : tracks.map((track, index) => (
             <Track
-              key={index}
-              title={track.title}
-              artist={track.user.username}
-              imgURL={track.artwork_url?.replace(/large(?=.jpg)/i, 'small')}
+              info={{
+                key: index,
+                title: track.title,
+                artist: track.user.username,
+                imgURL: track.artwork_url?.replace(/large(?=.jpg)/i, 'small')
+              }}
               play={() => setCurrentTrack(tracks[index])}
             ></Track>
           ));
@@ -81,16 +83,17 @@ function App() {
     </div>
     {currentTrack && (
       <MiniPlayer
-        trackId={currentTrack.id}
-        title={currentTrack.title}
-        artist={currentTrack.user.username}
-        timestamp={timestamp}
-        duration={duration}
-        imgURL={currentTrack.artwork_url?.replace(/large(?=.jpg)/i, 't500x500')}
-
+        info={{
+          trackId: currentTrack.id,
+          title: currentTrack.title,
+          artist: currentTrack.user.username,
+          timestamp: timestamp,
+          duration: duration,
+          imgURL: currentTrack.artwork_url?.replace(/large(?=.jpg)/i, 't500x500')
+        }}
         pause={pause}
         onPause={() => setPause(pause => !pause)}
-        skip={next => setCurrentTrack(currentTrack => {
+        skip={(next) => setCurrentTrack((currentTrack) => {
           const currentTrackIndex = tracks.indexOf(currentTrack);
           const nextTrackIndex = next ? currentTrackIndex + 1 : currentTrackIndex - 1;
           return tracks[nextTrackIndex] || currentTrack;
