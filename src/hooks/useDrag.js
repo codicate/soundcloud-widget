@@ -9,7 +9,6 @@ const useDrag = (
 
 ) => {
 
-
   const dragable = useRef(false);
   const offset = useRef({ x: 0, y: 0 });
   const pos = useRef({ x: 0, y: 0 });
