@@ -8,14 +8,14 @@ const useDrag = (
   scale = { current: 1 }
 
 ) => {
-  const movingElement = getRefCurrent(movingTarget);
+
 
   const dragable = useRef(false);
   const offset = useRef({ x: 0, y: 0 });
   const pos = useRef({ x: 0, y: 0 });
 
   useEventListener(eventTarget, 'mousedown', (e) => {
-
+    const movingElement = getRefCurrent(movingTarget);
     dragable.current = true;
 
     pos.current = {
@@ -35,7 +35,7 @@ const useDrag = (
   }, true);
 
   useEventListener(document, 'mousemove', (e) => {
-
+    const movingElement = getRefCurrent(movingTarget);
     e.preventDefault();
 
     if (dragable.current) {
