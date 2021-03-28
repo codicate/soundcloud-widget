@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import './App.css';
+import 'App.css';
 
-import SoundCloudAPI from './utils/SCAPI';
-import Searchbar from './components/searchbar';
-import Spinner from './components/spinner';
-import MiniPlayer from './components/miniplayer';
-import Track from './components/track';
+import SoundCloudAPI from 'utils/SCAPI';
+import Searchbar from 'components/searchbar';
+import Spinner from 'components/spinner';
+import MiniPlayer from 'components/miniplayer';
+import Track from 'components/track';
 
 const milliseconds2seconds = (milliseconds) => {
   return Math.floor(milliseconds / 1000);

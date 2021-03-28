@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef } from 'react';
-import useEventListener from './useEventListener';
-import getRefCurrent from '../functions/getRefCurrent';
-import clamp from '../functions/clamp';
+import useEventListener from 'hooks/useEventListener';
+import getRefCurrent from 'functions/getRefCurrent';
+import clamp from 'functions/clamp';
 
 const useDrag = (
   eventTarget,
