@@ -42,8 +42,8 @@ const useDrag = (
     };
 
     offset.current = {
-      x: movingElement.offsetLeft - pos.current.x,
-      y: movingElement.offsetTop - pos.current.y
+      x: pos.current.x - movingElement.offsetLeft,
+      y: pos.current.y - movingElement.offsetTop
     };
 
   }, true);
@@ -61,12 +61,12 @@ const useDrag = (
     const movingElement = getRefCurrent(movingTarget);
 
     pos.current = {
-      x: clamp(e?.clientX || pos.current.x, 0, edge.current.x - offset.current.x),
-      y: clamp(e?.clientY || pos.current.y, 0, edge.current.y - offset.current.y)
+      x: clamp((e?.clientX || pos.current.x) - offset.current.x, 0, edge.current.x),
+      y: clamp((e?.clientY || pos.current.y) - offset.current.y, 0, edge.current.y)
     };
 
-    movingElement.style.left = clamp(pos.current.x + offset.current.x, 0, edge.current.x) + 'px';
-    movingElement.style.top = clamp(pos.current.y + offset.current.y, 0, edge.current.y) + 'px';
+    movingElement.style.left = pos.current.x + 'px';
+    movingElement.style.top = pos.current.y + 'px';
   };
 };
 
