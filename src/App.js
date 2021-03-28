@@ -30,8 +30,8 @@ function App() {
     });
   };
 
+  const [currentTrack, setCurrentTrack] = useState(null);
   const changeTrack = useCallback((next) => {
-    console.log('new track')
     setCurrentTrack((currentTrack) => {
       const currentTrackIndex = tracks.indexOf(currentTrack);
       const nextTrackIndex = next ? currentTrackIndex + 1 : currentTrackIndex - 1;
@@ -39,23 +39,19 @@ function App() {
     });
   }, [tracks]);
 
-  const [currentTrack, setCurrentTrack] = useState(null);
   const [duration, setDuration] = useState(1);
+  useEffect(() => currentTrack && (async () => {
+    setPause(true);
+    player.current = await SoundCloudAPI.getPlayer(currentTrack.id);
+    setPause(false);
 
-  useEffect(() => currentTrack && (
-    async () => {
-      setPause(true);
-      player.current = await SoundCloudAPI.getPlayer(currentTrack.id);
-      setPause(false);
-
-      player.current.play();
-      player.current.on('play-start',
-        () => setDuration(
-          milliseconds2seconds(player.current.getDuration())
-        )
-      );
-    }
-  )(), [currentTrack]);
+    player.current.play();
+    player.current.on('play-start',
+      () => setDuration(
+        milliseconds2seconds(player.current.getDuration())
+      )
+    );
+  })(), [currentTrack]);
 
   const [timestamp, setTimestamp] = useState(0);
   useEffect(() => {
