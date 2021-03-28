@@ -3,8 +3,7 @@ import useDrag from '../hooks/useDrag';
 
 const imgPlaceholder = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
 
-function displayTime(milliseconds) {
-  const seconds = milliseconds / 1000;
+function displayTime(seconds) {
   const format = val => `0${Math.floor(val)}`.slice(-2);
   return [seconds % 3600 / 60, seconds % 60].map(format).join(':');
 }

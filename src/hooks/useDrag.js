@@ -45,7 +45,6 @@ const useDrag = (
       x: pos.current.x - movingElement.offsetLeft,
       y: pos.current.y - movingElement.offsetTop
     };
-
   }, true);
 
   useEventListener(document, 'mouseup', () => {
@@ -61,8 +60,8 @@ const useDrag = (
     const movingElement = getRefCurrent(movingTarget);
 
     pos.current = {
-      x: clamp((e?.clientX || pos.current.x) - offset.current.x, 0, edge.current.x),
-      y: clamp((e?.clientY || pos.current.y) - offset.current.y, 0, edge.current.y)
+      x: clamp((e?.clientX || pos.current.x + offset.current.x) - offset.current.x, 0, edge.current.x),
+      y: clamp((e?.clientY || pos.current.y + offset.current.y) - offset.current.y, 0, edge.current.y)
     };
 
     movingElement.style.left = pos.current.x + 'px';

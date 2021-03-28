@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import './App.css';
 
 import SoundCloudAPI from './utils/SCAPI';
@@ -6,6 +6,10 @@ import Searchbar from './components/searchbar';
 import Spinner from './components/spinner';
 import MiniPlayer from './components/miniplayer';
 import Track from './components/track';
+
+const milliseconds2seconds = (milliseconds) => {
+  return Math.floor(milliseconds / 1000);
+};
 
 function App() {
   const API_ID = 'cd9be64eeb32d1741c17cb39e41d254d';
@@ -26,29 +30,42 @@ function App() {
     });
   };
 
-  const [currentTrack, setCurrentTrack] = useState();
-  const [duration, setDuration] = useState(0);
+  const changeTrack = useCallback((next) => {
+    console.log('new track')
+    setCurrentTrack((currentTrack) => {
+      const currentTrackIndex = tracks.indexOf(currentTrack);
+      const nextTrackIndex = next ? currentTrackIndex + 1 : currentTrackIndex - 1;
+      return tracks[nextTrackIndex] || currentTrack;
+    });
+  }, [tracks]);
+
+  const [currentTrack, setCurrentTrack] = useState(null);
+  const [duration, setDuration] = useState(1);
 
   useEffect(() => currentTrack && (
     async () => {
       setPause(true);
       player.current = await SoundCloudAPI.getPlayer(currentTrack.id);
       setPause(false);
-      
+
       player.current.play();
       player.current.on('play-start',
-        () => setDuration(player.current.getDuration())
+        () => setDuration(
+          milliseconds2seconds(player.current.getDuration())
+        )
       );
     }
   )(), [currentTrack]);
 
   const [timestamp, setTimestamp] = useState(0);
   useEffect(() => {
-    const timestampTimer = setInterval(() => {
-      player.current && setTimestamp(player.current.currentTime());
+    setTimeout(() => {
+      player.current && setTimestamp(
+        milliseconds2seconds(player.current.currentTime())
+      );
+      if (timestamp === duration) changeTrack(true);
     }, 1000);
-    return () => clearInterval(timestampTimer);
-  }, []);
+  }, [changeTrack, duration, timestamp]);
 
   const [pause, setPause] = useState(false);
   useEffect(() => player.current && (
@@ -95,11 +112,7 @@ function App() {
         }}
         pause={pause}
         onPause={() => setPause(pause => !pause)}
-        skip={(next) => setCurrentTrack((currentTrack) => {
-          const currentTrackIndex = tracks.indexOf(currentTrack);
-          const nextTrackIndex = next ? currentTrackIndex + 1 : currentTrackIndex - 1;
-          return tracks[nextTrackIndex] || currentTrack;
-        })}
+        skip={changeTrack}
       />
     )}
   </>;
