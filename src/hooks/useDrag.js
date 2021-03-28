@@ -11,8 +11,8 @@ const useDrag = (
   const movingElement = getRefCurrent(movingTarget);
 
   const dragable = useRef(false);
-  let offset = useRef({ x: 0, y: 0 });
-  let pos = useRef({ x: 0, y: 0 });
+  const offset = useRef({ x: 0, y: 0 });
+  const pos = useRef({ x: 0, y: 0 });
 
   useEventListener(eventTarget, 'mousedown', (e) => {
 
