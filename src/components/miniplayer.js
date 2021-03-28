@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import addDrag from '../utils/drag';
+import useDrag from '../hooks/useDrag';
 
 const imgPlaceholder = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
 
@@ -9,12 +9,9 @@ function displayTime(milliseconds) {
   return [seconds % 3600 / 60, seconds % 60].map(format).join(':');
 }
 
-export default function MiniPlayer({info, ...props}) {
+export default function MiniPlayer({ info, ...props }) {
   const miniplayer = useRef();
-
-  useEffect(() => {
-    miniplayer.current && addDrag(miniplayer.current);
-  }, [miniplayer]);
+  useDrag(miniplayer);
 
   return (
     <div id='miniplayer' ref={miniplayer}>

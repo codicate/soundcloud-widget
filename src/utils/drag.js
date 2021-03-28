@@ -1,6 +1,5 @@
 const clamp = (num, min, max) => Math.min(Math.max(num, min), max);
 
-
 const addDrag = (targetElement, movingElement = targetElement) => {
   let dragable = false;
   let offset = { x: 0, y: 0 };
@@ -49,6 +48,10 @@ const addDrag = (targetElement, movingElement = targetElement) => {
 
     movingElement.style.left = coordinate.x;
     movingElement.style.top = coordinate.y;
+  };
+
+  return () => {
+
   };
 };
 
