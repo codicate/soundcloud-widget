@@ -4,6 +4,8 @@
 
 Made with React, styled components, and SoundCloud API
 
+<br>
+
 ## Todos
 
 ### Fixes:
