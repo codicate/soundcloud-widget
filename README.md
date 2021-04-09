@@ -4,6 +4,10 @@
 
 Made with React, styled components, and SoundCloud API
 
+---
+
+## - - - Todos - - -
+
 ### Fixes:
 - Search bar select text is disabled. Turn that on
 - Fetch more songs than just ~10, I know in SoundCloud have way more search result with the same input
