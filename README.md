@@ -4,9 +4,7 @@
 
 Made with React, styled components, and SoundCloud API
 
----
-
-## - - - Todos - - -
+## Todos
 
 ### Fixes:
 - Search bar select text is disabled. Turn that on
