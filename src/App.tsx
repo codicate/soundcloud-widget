@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import 'App.css';
 
 import SoundCloudAPI from 'utils/SCAPI';
@@ -7,13 +7,13 @@ import Spinner from 'components/spinner';
 import MiniPlayer from 'components/miniplayer';
 import Track from 'components/track';
 
-const milliseconds2seconds = (milliseconds) => {
+const milliseconds2seconds = (milliseconds: number) => {
   return Math.floor(milliseconds / 1000);
 };
 
 function App() {
   const API_ID = 'cd9be64eeb32d1741c17cb39e41d254d';
-  const player = useRef();
+
 
   useEffect(() => {
     SoundCloudAPI.init(API_ID);
@@ -31,7 +31,7 @@ function App() {
     });
   };
 
-
+  const player = useRef<null>(null);
   const [pause, setPause] = useState(false);
 
   useEffect(() => player.current && (
