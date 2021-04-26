@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import 'App.css';
+import 'App.scss';
 
 import SoundCloudAPI from 'utils/SCAPI';
 import Searchbar from 'components/searchbar';
@@ -14,37 +14,38 @@ const milliseconds2seconds = (milliseconds: number) => {
 function App() {
   const API_ID = 'cd9be64eeb32d1741c17cb39e41d254d';
 
-
   useEffect(() => {
     SoundCloudAPI.init(API_ID);
   }, []);
 
 
   const [status, setStatus] = useState('coldStart');
-  const [tracks, setTracks] = useState([]);
+  const [tracks, setTracks] = useState<{ [name: string]: any; }[]>([]);
 
-  const fetchTracks = (input) => {
+  const fetchTracks = (input: string) => {
     setStatus('fetching');
-    SoundCloudAPI.getTracks(input, data => {
+    SoundCloudAPI.getTracks(input, (data: any) => {
       setStatus('fetched');
       setTracks(data);
     });
   };
 
-  const player = useRef<null>(null);
+  const player = useRef<null | any>(null);
   const [pause, setPause] = useState(false);
 
-  useEffect(() => player.current && (
-    pause ? player.current.pause() : player.current.play()
-  ), [pause]);
+  useEffect(() => {
+    if (player.current) {
+      pause ? player.current.pause() : player.current.play();
+    }
+  }, [pause]);
 
 
-  const [currentTrack, setCurrentTrack] = useState(null);
+  const [currentTrack, setCurrentTrack] = useState<null | { [name: string]: any; }>(null);
 
-  const changeTrack = (next) => {
+  const changeTrack = (next: boolean) => {
     setPause(true);
 
-    setCurrentTrack((currentTrack) => {
+    setCurrentTrack((currentTrack: any) => {
       const currentTrackIndex = tracks.indexOf(currentTrack);
       const nextTrackIndex = next
         ? currentTrackIndex + 1
@@ -63,17 +64,19 @@ function App() {
 
   const [duration, setDuration] = useState(1);
 
-  useEffect(() => currentTrack && (async () => {
-    player.current = await SoundCloudAPI.getPlayer(currentTrack.id);
+  useEffect(() => {
+    (currentTrack) && (async () => {
+      player.current = await SoundCloudAPI.getPlayer(currentTrack.id);
 
-    player.current.play();
-    player.current.on('play-start', () => {
-      setDuration(
-        milliseconds2seconds(player.current.getDuration())
-      );
-      setPause(false);
-    });
-  })(), [currentTrack]);
+      player.current.play();
+      player.current.on('play-start', () => {
+        setDuration(
+          milliseconds2seconds(player.current.getDuration())
+        );
+        setPause(false);
+      });
+    })();
+  }, [currentTrack]);
 
 
   const [timestamp, setTimestamp] = useState(0);

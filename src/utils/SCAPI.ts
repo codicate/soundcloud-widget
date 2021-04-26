@@ -1,12 +1,26 @@
-import Soundcloud from 'soundcloud.ts';
+// @ts-ignore
+import SC from 'soundcloud';
 
-const soundcloud = new Soundcloud();
+const SoundCloudAPI = {
+  init(ID: string) {
+    SC.initialize({
+      client_id: ID
+    });
+  },
 
-export const search = async (input: string) =>
-  await soundcloud.tracks.searchV2({
-    q: input
-  });
+  async getTracks(
+    input: string,
+    func: (data: any) => void
+  ) {
+    const data = await SC.get('/tracks', {
+      q: input
+    })
+    func(data);
+  },
 
-export const getPlayer = async (trackId: string) => {
-  return await soundcloud.util.streamTrack;
+  async getPlayer(trackId: number) {
+    return await SC.stream('/tracks/' + trackId);
+  },
 };
+
+export default SoundCloudAPI;
