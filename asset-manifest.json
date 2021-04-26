@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/soundcloud-widget/static/css/main.ae7aab97.chunk.css",
-    "main.js": "/soundcloud-widget/static/js/main.baa6b915.chunk.js",
-    "main.js.map": "/soundcloud-widget/static/js/main.baa6b915.chunk.js.map",
-    "runtime-main.js": "/soundcloud-widget/static/js/runtime-main.880ed6f7.js",
-    "runtime-main.js.map": "/soundcloud-widget/static/js/runtime-main.880ed6f7.js.map",
-    "static/js/2.07ae9e20.chunk.js": "/soundcloud-widget/static/js/2.07ae9e20.chunk.js",
-    "static/js/2.07ae9e20.chunk.js.map": "/soundcloud-widget/static/js/2.07ae9e20.chunk.js.map",
-    "static/js/3.ecebef47.chunk.js": "/soundcloud-widget/static/js/3.ecebef47.chunk.js",
-    "static/js/3.ecebef47.chunk.js.map": "/soundcloud-widget/static/js/3.ecebef47.chunk.js.map",
+    "main.css": "/soundcloud-widget/static/css/main.d481a95a.chunk.css",
+    "main.js": "/soundcloud-widget/static/js/main.1963804a.chunk.js",
+    "main.js.map": "/soundcloud-widget/static/js/main.1963804a.chunk.js.map",
+    "runtime-main.js": "/soundcloud-widget/static/js/runtime-main.e02b1d85.js",
+    "runtime-main.js.map": "/soundcloud-widget/static/js/runtime-main.e02b1d85.js.map",
+    "static/js/2.3d490c77.chunk.js": "/soundcloud-widget/static/js/2.3d490c77.chunk.js",
+    "static/js/2.3d490c77.chunk.js.map": "/soundcloud-widget/static/js/2.3d490c77.chunk.js.map",
+    "static/js/3.abeab88a.chunk.js": "/soundcloud-widget/static/js/3.abeab88a.chunk.js",
+    "static/js/3.abeab88a.chunk.js.map": "/soundcloud-widget/static/js/3.abeab88a.chunk.js.map",
     "index.html": "/soundcloud-widget/index.html",
-    "static/css/main.ae7aab97.chunk.css.map": "/soundcloud-widget/static/css/main.ae7aab97.chunk.css.map",
-    "static/js/2.07ae9e20.chunk.js.LICENSE.txt": "/soundcloud-widget/static/js/2.07ae9e20.chunk.js.LICENSE.txt"
+    "static/css/main.d481a95a.chunk.css.map": "/soundcloud-widget/static/css/main.d481a95a.chunk.css.map",
+    "static/js/2.3d490c77.chunk.js.LICENSE.txt": "/soundcloud-widget/static/js/2.3d490c77.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.880ed6f7.js",
-    "static/js/2.07ae9e20.chunk.js",
-    "static/css/main.ae7aab97.chunk.css",
-    "static/js/main.baa6b915.chunk.js"
+    "static/js/runtime-main.e02b1d85.js",
+    "static/js/2.3d490c77.chunk.js",
+    "static/css/main.d481a95a.chunk.css",
+    "static/js/main.1963804a.chunk.js"
   ]
 }
