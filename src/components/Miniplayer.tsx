@@ -1,15 +1,36 @@
 import { useRef } from "react";
+import styles from 'components/Miniplayer.module.scss';
+
 import useDrag from 'hooks/useDrag';
 
 const imgPlaceholder = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
 
-function displayTime(seconds) {
-  const format = val => `0${Math.floor(val)}`.slice(-2);
-  return [seconds % 3600 / 60, seconds % 60].map(format).join(':');
-}
+const displayTime = (seconds: number) => {
+  return [seconds % 3600 / 60, seconds % 60]
+    .map((val: number) =>
+      `0${Math.floor(val)}`.slice(-2)
+    )
+    .join(':');
+};
 
-export default function MiniPlayer({ info, ...props }) {
-  const miniplayer = useRef();
+export default function MiniPlayer(
+  { info, ...props }: {
+    info: {
+      title: string,
+      artist: string,
+      imgURL: string,
+      timestamp: number,
+      duration: number
+    },
+    pause: boolean,
+    onPause: () => void,
+    skip: (next: boolean) => void
+  }
+) {
+  const miniplayer = useRef<null | HTMLDivElement>(null);
+  console.log('miniplayer', miniplayer);
+  
+  // @ts-ignore
   useDrag(miniplayer);
 
   return (

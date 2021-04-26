@@ -6,10 +6,11 @@ const useEventListener = <
   E extends HTMLElement | Document | Window,
   T extends keyof HTMLElementEventMap | keyof DocumentEventMap | keyof WindowEventMap,
   >(
-    eventTarget: React.MutableRefObject<E> | E,
+    eventTarget: React.MutableRefObject<HTMLElement> | E,
     eventType: T | string,
     listener: (
-      e: T extends keyof HTMLElementEventMap ? HTMLElementEventMap[T]
+      e:
+        T extends keyof HTMLElementEventMap ? HTMLElementEventMap[T]
         : T extends keyof DocumentEventMap ? DocumentEventMap[T]
         : T extends keyof WindowEventMap ? WindowEventMap[T]
         : Event

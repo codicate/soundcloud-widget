@@ -2,10 +2,10 @@ import { useState, useEffect, useRef } from 'react';
 import 'App.scss';
 
 import SoundCloudAPI from 'utils/SCAPI';
-import Searchbar from 'components/searchbar';
-import Spinner from 'components/spinner';
-import MiniPlayer from 'components/miniplayer';
-import Track from 'components/track';
+import Searchbar from 'components/Searchbar';
+import Spinner from 'components/Spinner';
+import MiniPlayer from 'components/Miniplayer';
+import Track from 'components/Track';
 
 const milliseconds2seconds = (milliseconds: number) => {
   return Math.floor(milliseconds / 1000);
@@ -127,7 +127,6 @@ function App() {
     {currentTrack && (
       <MiniPlayer
         info={{
-          trackId: currentTrack.id,
           title: currentTrack.title,
           artist: currentTrack.user.username,
           timestamp: timestamp,

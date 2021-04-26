@@ -1,6 +1,17 @@
+import styles from 'components/Track.module.scss';
+
 const imgPlaceholder = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
 
-export default function Card({info, ...props}) {
+export default function Card(
+  { info, play }: {
+    info: {
+      title: string,
+      artist: string,
+      imgURL: string;
+    },
+    play: () => void;
+  }
+) {
   return (
     <div
       className='track'
@@ -22,10 +33,10 @@ export default function Card({info, ...props}) {
         <span
           id='add'
           className='material-icons btn'
-          onClick={props.play}
+          onClick={play}
         >
           add_box
-          </span>
+        </span>
       </div>
     </div>
   );

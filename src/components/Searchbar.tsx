@@ -1,8 +1,13 @@
 import React, { useState, useRef } from 'react';
+import styles from 'components/Searchbar.module.scss';
 
-export default function Searchbar(props) {
+export default function Searchbar(
+  { returnInput }: {
+    returnInput: (input: string) => void;
+  }
+) {
   const [input, setInput] = useState('');
-  const searchbar = useRef();
+  const searchbar = useRef<null | HTMLInputElement>(null);
 
   return (
     <div id='searchBar'>
@@ -15,8 +20,8 @@ export default function Searchbar(props) {
         onChange={
           e => setInput(e.target.value)
         }
-        onKeyUp={e => 
-          e.key === 'Enter' && props.returnInput(e.target.value)
+        onKeyUp={e =>
+          e.key === 'Enter' && returnInput((e.target as HTMLInputElement).value)
         }
       />
       <div id='clearDiv'>
@@ -25,7 +30,7 @@ export default function Searchbar(props) {
           className='material-icons btn'
           onClick={() => {
             setInput('');
-            searchbar.current.focus();
+            searchbar.current && searchbar.current.focus();
           }}
         >
           clear

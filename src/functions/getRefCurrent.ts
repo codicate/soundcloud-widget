@@ -1,6 +1,6 @@
-const getRefCurrent = <T>(ref: React.MutableRefObject<T> | T) => {
-  return ((ref as React.MutableRefObject<T>).current)
-    ? (ref as React.MutableRefObject<T>).current
+const getRefCurrent = <T>(ref: React.MutableRefObject<HTMLElement> | T) => {
+  return ((ref as React.MutableRefObject<HTMLElement>).current)
+    ? (ref as React.MutableRefObject<HTMLElement>).current
     : ref as T;
 };
 

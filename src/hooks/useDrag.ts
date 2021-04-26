@@ -3,12 +3,11 @@ import useEventListener from 'hooks/useEventListener';
 import getRefCurrent from 'functions/getRefCurrent';
 import clamp from 'functions/clamp';
 
-const useDrag = (
-  eventTarget: HTMLElement,
-  movingTarget: HTMLElement = eventTarget,
+const useDrag = <E extends HTMLElement | Document | Window>(
+  eventTarget: React.MutableRefObject<HTMLElement> | E,
+  movingTarget: React.MutableRefObject<HTMLElement> | HTMLElement = eventTarget as HTMLElement,
 
 ) => {
-
   const dragable = useRef(false);
   const offset = useRef({ x: 0, y: 0 });
   const pos = useRef({ x: 0, y: 0 });
