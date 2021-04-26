@@ -4,8 +4,8 @@ import getRefCurrent from 'functions/getRefCurrent';
 import clamp from 'functions/clamp';
 
 const useDrag = (
-  eventTarget,
-  movingTarget = eventTarget,
+  eventTarget: HTMLElement,
+  movingTarget: HTMLElement = eventTarget,
 
 ) => {
 
@@ -56,7 +56,7 @@ const useDrag = (
     if (dragable.current) setPos(e);
   }, true);
 
-  const setPos = (e) => {
+  const setPos = (e?: MouseEvent) => {
     const movingElement = getRefCurrent(movingTarget);
 
     pos.current = {
