@@ -1,8 +1,5 @@
 import styles from 'components/Miniplayer.module.scss';
-import { useRef } from "react";
-
-import useDrag from 'hooks/useDrag';
-import getRefCurrent from 'functions/getRefCurrent';
+import Draggie from 'components/Draggie';
 
 const imgPlaceholder = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
 
@@ -21,19 +18,15 @@ export default function MiniPlayer(
       artist: string,
       imgURL: string,
       timestamp: number,
-      duration: number
+      duration: number;
     },
     pause: boolean,
     onPause: () => void,
-    skip: (next: boolean) => void
+    skip: (next: boolean) => void;
   }
 ) {
-  const miniplayer = useRef<HTMLDivElement>(null);
-
-  useDrag(miniplayer.current || window);
-
   return (
-    <div id='miniplayer' ref={miniplayer}>
+    <Draggie id='miniplayer'>
       <img
         className='cover'
         alt={info.title + ' cover'}
@@ -75,6 +68,6 @@ export default function MiniPlayer(
           </span>
         </div>
       </div>
-    </div>
+    </Draggie>
   );
 }
