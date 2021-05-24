@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useRef } from 'react';
 import useEventListener from 'hooks/useEventListener';
-import getRefCurrent from 'functions/getRefCurrent';
+
 import clamp from 'functions/clamp';
 
 const useDrag = <E extends HTMLElement | Document | Window>(
-  eventTarget: React.MutableRefObject<HTMLElement> | E,
-  movingTarget: React.MutableRefObject<HTMLElement> | HTMLElement = eventTarget as HTMLElement,
+  eventElement: E,
+  movingElement: HTMLElement = eventElement as HTMLElement,
 
 ) => {
   const dragable = useRef(false);
@@ -14,13 +14,11 @@ const useDrag = <E extends HTMLElement | Document | Window>(
   const edge = useRef({ x: 0, y: 0 });
 
   const getDist2Edge = useCallback(() => {
-    const movingElement = getRefCurrent(movingTarget);
-
     return {
       x: window.innerWidth - movingElement.offsetWidth,
       y: window.innerHeight - movingElement.offsetHeight,
     };
-  }, [movingTarget]);
+  }, [movingElement]);
 
   useEffect(() => {
     edge.current = getDist2Edge();
@@ -31,8 +29,7 @@ const useDrag = <E extends HTMLElement | Document | Window>(
     setPos();
   });
 
-  useEventListener(eventTarget, 'mousedown', (e) => {
-    const movingElement = getRefCurrent(movingTarget);
+  useEventListener(eventElement, 'mousedown', (e) => {
     dragable.current = true;
 
     pos.current = {
@@ -56,8 +53,6 @@ const useDrag = <E extends HTMLElement | Document | Window>(
   }, true);
 
   const setPos = (e?: MouseEvent) => {
-    const movingElement = getRefCurrent(movingTarget);
-
     pos.current = {
       x: clamp((e?.clientX || pos.current.x + offset.current.x) - offset.current.x, 0, edge.current.x),
       y: clamp((e?.clientY || pos.current.y + offset.current.y) - offset.current.y, 0, edge.current.y)

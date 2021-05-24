@@ -1,16 +1,14 @@
 import { useEffect, useRef } from 'react';
 
-import getRefCurrent from 'functions/getRefCurrent';
-
 const useEventListener = <
-  E extends HTMLElement | Document | Window,
-  T extends keyof HTMLElementEventMap | keyof DocumentEventMap | keyof WindowEventMap,
+  E extends  Element | Document | Window,
+  T extends keyof ElementEventMap| keyof DocumentEventMap | keyof WindowEventMap,
   >(
-    eventTarget: React.MutableRefObject<HTMLElement> | E,
+    element: E,
     eventType: T | string,
     listener: (
       e:
-        T extends keyof HTMLElementEventMap ? HTMLElementEventMap[T]
+        T extends keyof ElementEventMap ? ElementEventMap[T]
         : T extends keyof DocumentEventMap ? DocumentEventMap[T]
         : T extends keyof WindowEventMap ? WindowEventMap[T]
         : Event
@@ -25,14 +23,13 @@ const useEventListener = <
   }, [listener]);
 
   useEffect(() => {
-    const element = getRefCurrent(eventTarget);
     if (!element || !element.addEventListener) return;
 
     const wrappedListener: typeof savedListener.current = (e) => savedListener.current(e);
     element.addEventListener(eventType, wrappedListener as EventListener, options);
 
     return () => element.removeEventListener(eventType, wrappedListener as EventListener, options);
-  }, [eventTarget, eventType, options]);
+  }, [element, eventType, options]);
 };
 
 export default useEventListener;

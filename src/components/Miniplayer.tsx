@@ -1,7 +1,8 @@
-import { useRef } from "react";
 import styles from 'components/Miniplayer.module.scss';
+import { useRef } from "react";
 
 import useDrag from 'hooks/useDrag';
+import getRefCurrent from 'functions/getRefCurrent';
 
 const imgPlaceholder = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
 
@@ -27,11 +28,9 @@ export default function MiniPlayer(
     skip: (next: boolean) => void
   }
 ) {
-  const miniplayer = useRef<null | HTMLDivElement>(null);
-  console.log('miniplayer', miniplayer);
-  
-  // @ts-ignore
-  useDrag(miniplayer);
+  const miniplayer = useRef<HTMLDivElement>(null);
+
+  useDrag(miniplayer.current || window);
 
   return (
     <div id='miniplayer' ref={miniplayer}>
