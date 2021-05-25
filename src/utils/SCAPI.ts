@@ -1,9 +1,10 @@
 // @ts-ignore
-import SC from 'soundcloud';
+// import SC from 'soundcloud';
+import Soundcloud from 'soundcloud';
 
 const SoundCloudAPI = {
   init(ID: string) {
-    SC.initialize({
+    Soundcloud.initialize({
       client_id: ID
     });
   },
@@ -12,14 +13,14 @@ const SoundCloudAPI = {
     input: string,
     func: (data: any) => void
   ) {
-    const data = await SC.get('/tracks', {
+    const data = await Soundcloud.get('/tracks', {
       q: input
-    })
+    });
     func(data);
   },
 
   async getPlayer(trackId: number) {
-    return await SC.stream('/tracks/' + trackId);
+    return await Soundcloud.stream('/tracks/' + trackId);
   },
 };
 
