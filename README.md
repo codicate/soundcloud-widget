@@ -2,7 +2,7 @@
 
 [Live](https://codicate.github.io/soundcloud-widget/)
 
-Made with React, styled components, and SoundCloud API
+Made with React, Redux, Typescript, and SoundCloud API
 
 <br>
 
