@@ -1,7 +1,6 @@
 import { createSlice, createDraftSafeSelector, createAsyncThunk } from '@reduxjs/toolkit';
 import { RootState } from 'app/store';
 
-import {} from 'soundcloud.ts'
 
 const initialState: {
   status: 'idle' | 'loading' | 'succeed' | 'failed';

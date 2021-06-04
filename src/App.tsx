@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import 'App.scss';
 
-import SoundCloudAPI from 'utils/SCAPI';
+import soundcloud from 'utils/SoundCloud';
 import Searchbar from 'components/Searchbar';
 import Spinner from 'components/Spinner';
 import MiniPlayer from 'components/Miniplayer';
@@ -12,19 +12,12 @@ const milliseconds2seconds = (milliseconds: number) => {
 };
 
 function App() {
-  const API_ID = 'cd9be64eeb32d1741c17cb39e41d254d';
-
-  useEffect(() => {
-    SoundCloudAPI.init(API_ID);
-  }, []);
-
-
   const [status, setStatus] = useState('coldStart');
   const [tracks, setTracks] = useState<{ [name: string]: any; }[]>([]);
 
   const fetchTracks = (input: string) => {
     setStatus('fetching');
-    SoundCloudAPI.getTracks(input, (data: any) => {
+    soundcloud.getTracks(input, (data: any) => {
       setStatus('fetched');
       setTracks(data);
     });
@@ -66,7 +59,7 @@ function App() {
 
   useEffect(() => {
     (currentTrack) && (async () => {
-      player.current = await SoundCloudAPI.getPlayer(currentTrack.id);
+      player.current = await soundcloud.getPlayer(currentTrack.id);
 
       player.current.play();
       player.current.on('play-start', () => {
