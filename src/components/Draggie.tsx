@@ -16,9 +16,10 @@ function Draggie({
   const pos = useRef({ x: 0, y: 0 });
   const edge = useRef({ x: 0, y: 0 });
 
+  // Bug: When draggie touch the bottom of the page, scrollbar expand to full height in Firefox only. Page still scroll normally tho
   const getDist2Edge = useCallback(() => ({
-    x: window.innerWidth - (draggie.current?.offsetWidth || 0),
-    y: window.innerHeight - (draggie.current?.offsetHeight || 0),
+    x: document.body.clientWidth - (draggie.current?.offsetWidth || 0),
+    y: document.body.clientHeight - (draggie.current?.offsetHeight || 0),
   }), []);
 
   const setPos = useCallback((e?: MouseEvent) => {
