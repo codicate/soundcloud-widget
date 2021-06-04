@@ -1,11 +1,11 @@
-import React, { useState, useRef } from 'react';
+import { useState, useRef } from 'react';
 import styles from 'components/Searchbar.module.scss';
 
-export default function Searchbar(
-  { returnInput }: {
-    returnInput: (input: string) => void;
-  }
-) {
+export default function Searchbar({
+  returnInput
+}: {
+  returnInput: (input: string) => void;
+}) {
   const [input, setInput] = useState('');
   const searchbar = useRef<null | HTMLInputElement>(null);
 

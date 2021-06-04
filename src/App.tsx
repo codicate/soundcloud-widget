@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import 'App.scss';
 
-import soundcloud from 'utils/SoundCloud';
+import SoundCloud from 'utils/SoundCloud';
 import Searchbar from 'components/Searchbar';
 import Spinner from 'components/Spinner';
 import MiniPlayer from 'components/Miniplayer';
@@ -17,7 +17,7 @@ function App() {
 
   const fetchTracks = (input: string) => {
     setStatus('fetching');
-    soundcloud.getTracks(input, (data: any) => {
+    SoundCloud.getTracks(input, (data: any) => {
       setStatus('fetched');
       setTracks(data);
     });
@@ -59,7 +59,7 @@ function App() {
 
   useEffect(() => {
     (currentTrack) && (async () => {
-      player.current = await soundcloud.getPlayer(currentTrack.id);
+      player.current = await SoundCloud.getPlayer(currentTrack.id);
 
       player.current.play();
       player.current.on('play-start', () => {
