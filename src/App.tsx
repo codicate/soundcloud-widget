@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { SoundcloudTrack, SoundcloudStreamPlayer } from 'types/soundcloud';
 import 'App.scss';
 
 import SoundCloud from 'utils/SoundCloud';
@@ -13,7 +14,7 @@ const milliseconds2seconds = (milliseconds: number) => {
 
 function App() {
   const [status, setStatus] = useState('coldStart');
-  const [tracks, setTracks] = useState<{ [name: string]: any; }[]>([]);
+  const [tracks, setTracks] = useState<SoundcloudTrack[]>([]);
 
   const fetchTracks = (input: string) => {
     setStatus('fetching');
@@ -23,7 +24,7 @@ function App() {
     });
   };
 
-  const player = useRef<null | any>(null);
+  const player = useRef<null | SoundcloudStreamPlayer>(null);
   const [pause, setPause] = useState(false);
 
   useEffect(() => {
@@ -33,12 +34,15 @@ function App() {
   }, [pause]);
 
 
-  const [currentTrack, setCurrentTrack] = useState<null | { [name: string]: any; }>(null);
+  const [currentTrack, setCurrentTrack] = useState<null | SoundcloudTrack>(null);
 
   const changeTrack = (next: boolean) => {
+
     setPause(true);
 
-    setCurrentTrack((currentTrack: any) => {
+    setCurrentTrack((currentTrack) => {
+      if (!currentTrack) return null;
+
       const currentTrackIndex = tracks.indexOf(currentTrack);
       const nextTrackIndex = next
         ? currentTrackIndex + 1
@@ -54,17 +58,20 @@ function App() {
     });
   };
 
-
   const [duration, setDuration] = useState(1);
 
   useEffect(() => {
     (currentTrack) && (async () => {
       player.current = await SoundCloud.getPlayer(currentTrack.id);
+      console.log(player);
+      if (!player.current) return;
 
       player.current.play();
-      player.current.on('play-start', () => {
+      player.current.on('play-start', async () => {
+        if (!player.current) return;
+        
         setDuration(
-          milliseconds2seconds(player.current.getDuration())
+          milliseconds2seconds(await player.current.getDuration())
         );
         setPause(false);
       });
@@ -75,9 +82,9 @@ function App() {
   const [timestamp, setTimestamp] = useState(0);
 
   useEffect(() => {
-    const timestampTimer = setInterval(() => {
+    const timestampTimer = setInterval(async () => {
       player.current && setTimestamp(
-        milliseconds2seconds(player.current.currentTime())
+        milliseconds2seconds(await player.current.currentTime())
       );
     }, 1000);
 
