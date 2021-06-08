@@ -4,16 +4,15 @@
 
 Made with React, Redux, Typescript, and SoundCloud API
 
-<br>
+## Challenges
+
+Making the miniplayer dragable was a pain. I initally created a useDrag hook, but due to the nature of ref being possibly null, it doesn't work well with typescript. The need to use useRef to get the ref in the first place made the hook tedious to use. The final hook ended up bloated with typescript type for possible dom refs. I ended up switching to a reusable HOC that creates a draggable div.
 
 ## Todos
 
 ### Fixes:
 - Search bar select text is disabled. Turn that on
 - Fetch more songs than just ~10, I know in SoundCloud have way more search result with the same input
-- Replace .then with async await
-- Move floating player states down into the component
-- Typescript?
 
 
 ### Features:
