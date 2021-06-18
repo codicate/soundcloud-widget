@@ -1,16 +1,44 @@
 import styles from 'components/Miniplayer.module.scss';
+import { useState, useEffect } from 'react';
 
 import { useAppSelector, useAppDispatch } from 'app/hooks';
 import { selectSoundcloud, pauseTrack, prevTrack, nextTrack } from 'app/soundcloudSlice';
 
 import { imgPlaceholder } from 'utils/constants';
-import { displayTime } from 'utils/functions';
+import { millisecond2second, displayTime } from 'utils/functions';
 import Draggie from 'components/Draggie';
 
 export default function MiniPlayer() {
   const dispatch = useAppDispatch();
-  const { tracks, currentTrackIndex, isPaused } = useAppSelector(selectSoundcloud);
+  const { player, tracks, currentTrackIndex, isPaused } = useAppSelector(selectSoundcloud);
   const currentTrack = tracks[currentTrackIndex];
+
+  const [timestamp, setTimestamp] = useState(0);
+  const [duration, setDuration] = useState(1);
+
+  useEffect(() => {
+    (async () => {
+      if (!player) return;
+
+      await player.play();
+
+      setDuration(player.getDuration());
+      setTimestamp(0);
+    })();
+  }, [dispatch, player]);
+
+
+  useEffect(() => {
+    if (!player) return;
+
+    const timestampTimer = setInterval(() => {
+      const newTime = player.currentTime();
+      if (newTime >= duration) dispatch(nextTrack());
+      else setTimestamp(newTime);
+    }, 1000);
+
+    return () => clearInterval(timestampTimer);
+  }, [dispatch, player, duration]);
 
   return (
     <Draggie id='miniplayer'>
@@ -28,7 +56,7 @@ export default function MiniPlayer() {
             {currentTrack.user.username}
           </p>
           <p className='timestamp'>
-            {displayTime(player.timestamp)} / {displayTime(info.duration)}
+            {displayTime(millisecond2second(timestamp))} / {displayTime(millisecond2second(duration))}
           </p>
         </div>
         <div className='control'>

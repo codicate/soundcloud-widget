@@ -19,7 +19,7 @@ export interface SoundcloudStreamPlayer {
   /**
    * @returns Returns the current position (in milliseconds)
   */
-  currentTime: () => Promise<number>;
+  currentTime: () => number;
 
   /**
    * @param volume - Sets the volume (from 0 to 1)
@@ -34,7 +34,7 @@ export interface SoundcloudStreamPlayer {
   /**
    * @returns Returns the duration (in milliseconds)
   */
-  getDuration: () => Promise<number>;
+  getDuration: () => number;
 
   /**
    * @returns Returns true whilst the player is buffering

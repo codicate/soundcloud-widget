@@ -5,6 +5,10 @@ export const clamp = (
 ) =>
   Math.min(Math.max(num, min), max);
 
+export const millisecond2second = (milliseconds: number) => {
+  return Math.floor(milliseconds / 1000);
+};
+
 export const displayTime = (seconds: number) => {
   return [seconds % 3600 / 60, seconds % 60]
     .map((val: number) =>

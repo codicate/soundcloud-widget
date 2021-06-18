@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useRef } from 'react';
 
 import useEventListener from 'hooks/useEventListener';
-import clamp from 'utils/functions';
+import { clamp } from 'utils/functions';
 
 
 function Draggie({
