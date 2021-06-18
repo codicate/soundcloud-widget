@@ -63,19 +63,23 @@ const soundcloudSlice = createSlice({
       state.currentTrackIndex = action.payload;
     },
     prevTrack: (state) => {
-      state.currentTrackIndex = (state.currentTrackIndex === state.tracks.length - 1)
+      state.player?.pause()
+
+      state.currentTrackIndex = (state.currentTrackIndex === 0)
         ? state.tracks.length - 1
         : state.currentTrackIndex - 1;
     },
     nextTrack: (state) => {
-      state.currentTrackIndex = (state.currentTrackIndex === 0)
+      state.player?.pause()
+
+      state.currentTrackIndex = (state.currentTrackIndex === state.tracks.length - 1)
         ? 0
         : state.currentTrackIndex + 1;
     },
     pauseTrack: (state, action: PayloadAction<boolean>) => {
       state.isPaused = action.payload;
-
-      (state.isPaused)
+      
+      (action.payload)
         ? state.player?.pause()
         : state.player?.play();
     }

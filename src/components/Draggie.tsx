@@ -58,7 +58,7 @@ function Draggie({
   return (
     <div
       {...props}
-      style={{ position: 'absolute' }}
+      style={{ position: 'fixed' }}
       ref={draggie}
       onMouseDown={(e) => {
         dragable.current = true;
