@@ -5,7 +5,7 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
-import tracksReducer from 'app/TracksSlice';
+import soundcloudReducer from 'app/soundcloudSlice';
 
 
 const persistConfig = {
@@ -15,7 +15,7 @@ const persistConfig = {
 };
 
 const rootReducer = combineReducers({
-  tracks: tracksReducer,
+  soundcloud: soundcloudReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -28,7 +28,7 @@ export const store = configureStore({
       ignoredActions: [
         FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER,
       ],
-      ignoredPaths: ['tracks.tracks']
+      // ignoredPaths: ['tracks.tracks']
     }
   })
 });

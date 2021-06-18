@@ -1,4 +1,8 @@
 import styles from 'components/Miniplayer.module.scss';
+
+import { useAppDispatch } from 'app/hooks';
+import { prevTrack, nextTrack } from 'app/soundcloudSlice';
+
 import Draggie from 'components/Draggie';
 
 const imgPlaceholder = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
@@ -22,9 +26,10 @@ export default function MiniPlayer(
     },
     pause: boolean,
     onPause: () => void,
-    skip: (next: boolean) => void;
   }
 ) {
+const dispatch = useAppDispatch()
+
   return (
     <Draggie id='miniplayer'>
       <img
@@ -48,7 +53,7 @@ export default function MiniPlayer(
           <span
             id='previous'
             className='material-icons btn'
-            onClick={() => props.skip(false)}
+            onClick={() => dispatch(prevTrack())}
           >
             skip_previous
           </span>
@@ -62,7 +67,7 @@ export default function MiniPlayer(
           <span
             id='next'
             className='material-icons btn'
-            onClick={() => props.skip(true)}
+            onClick={() => dispatch(nextTrack())}
           >
             skip_next
           </span>

@@ -1,8 +1,8 @@
 import { useEffect, useRef } from 'react';
 
 const useEventListener = <
-  E extends  Element | Document | Window,
-  T extends keyof ElementEventMap| keyof DocumentEventMap | keyof WindowEventMap,
+  E extends Element | Document | Window,
+  T extends keyof ElementEventMap | keyof DocumentEventMap | keyof WindowEventMap,
   >(
     element: E,
     eventType: T | string,

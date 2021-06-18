@@ -109,7 +109,7 @@ export interface SoundcloudStreamPlayer {
    * 
    * `no_connection`: when we failed to connect to an endpoint due to missing    * transport or request timeout
   */
-  on: (event: OnEvents, handler: () => void) => void;
+  on: (event: OnEvents, handler: () => void) => Promise<void>;
 }
 
 type OnEvents = 'state-change' | 'play' | 'play-start' | 'play-resume' | 'play-rejection' | 'pause' | 'finish' | 'seek' | 'seeked' | 'seek-rejection' | 'geo_blocked' | 'buffering_start' | 'buffering_end' | 'audio_error' | 'time' | 'no_streams' | 'no_protocol' | 'no_connection';

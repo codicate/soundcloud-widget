@@ -1,11 +1,13 @@
-import { useState, useRef } from 'react';
 import styles from 'components/Searchbar.module.scss';
+import { useState, useRef } from 'react';
 
-export default function Searchbar({
-  returnInput
-}: {
-  returnInput: (input: string) => void;
-}) {
+import { useAppDispatch } from 'app/hooks';
+import { searchForTracks } from 'app/soundcloudSlice';
+
+
+export default function Searchbar() {
+  const dispatch = useAppDispatch();
+
   const [input, setInput] = useState('');
   const searchbar = useRef<null | HTMLInputElement>(null);
 
@@ -13,16 +15,15 @@ export default function Searchbar({
     <div id='searchBar'>
       <input
         autoFocus
-        type='text'
         placeholder='Search'
         ref={searchbar}
         value={input}
-        onChange={
-          e => setInput(e.target.value)
-        }
-        onKeyUp={e =>
-          e.key === 'Enter' && returnInput((e.target as HTMLInputElement).value)
-        }
+        onChange={(e) => setInput(e.target.value)}
+        onKeyUp={(e) => {
+          if (e.key === 'Enter') {
+            dispatch(searchForTracks((e.target as HTMLInputElement).value));
+          }
+        }}
       />
       <div id='clearDiv'>
         <span
