@@ -14,11 +14,13 @@ const initialState: {
   tracks: SoundcloudTrack[];
   currentTrackIndex: number;
   player: null | SoundcloudStreamPlayer;
+  isPaused: boolean
 } = {
   status: 'idle',
   tracks: [],
   currentTrackIndex: -1,
   player: null,
+  isPaused: false
 };
 
 
@@ -69,6 +71,13 @@ const soundcloudSlice = createSlice({
       state.currentTrackIndex = (state.currentTrackIndex === 0)
         ? 0
         : state.currentTrackIndex + 1;
+    },
+    pauseTrack: (state, action: PayloadAction<boolean>) => {
+      state.isPaused = action.payload;
+
+      (state.isPaused)
+        ? state.player?.pause()
+        : state.player?.play();
     }
   },
   extraReducers: (builder) => {
@@ -98,7 +107,7 @@ const soundcloudSlice = createSlice({
 });
 
 export const {
-  changeTrack, prevTrack, nextTrack
+  changeTrack, prevTrack, nextTrack, pauseTrack
 } = soundcloudSlice.actions;
 export default soundcloudSlice.reducer;
 

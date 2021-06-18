@@ -1,7 +1,7 @@
 import styles from 'components/Miniplayer.module.scss';
 
-import { useAppDispatch } from 'app/hooks';
-import { prevTrack, nextTrack } from 'app/soundcloudSlice';
+import { useAppSelector, useAppDispatch } from 'app/hooks';
+import { selectSoundcloud, pauseTrack, prevTrack, nextTrack } from 'app/soundcloudSlice';
 
 import Draggie from 'components/Draggie';
 
@@ -23,13 +23,11 @@ export default function MiniPlayer(
       imgURL: string,
       timestamp: number,
       duration: number;
-    },
-    pause: boolean,
-    onPause: () => void,
+    };
   }
 ) {
-const dispatch = useAppDispatch()
-
+  const dispatch = useAppDispatch();
+  const { isPaused } = useAppSelector(selectSoundcloud);
   return (
     <Draggie id='miniplayer'>
       <img
@@ -60,9 +58,9 @@ const dispatch = useAppDispatch()
           <span
             id='play'
             className='material-icons btn'
-            onClick={props.onPause}
+            onClick={() => dispatch(pauseTrack(!isPaused))}
           >
-            {props.pause ? 'play_arrow' : 'pause'}
+            {isPaused ? 'play_arrow' : 'pause'}
           </span>
           <span
             id='next'

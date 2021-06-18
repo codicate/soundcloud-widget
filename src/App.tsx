@@ -2,9 +2,7 @@ import 'App.scss';
 import { useState, useEffect } from 'react';
 
 import { useAppDispatch, useAppSelector } from 'app/hooks';
-import { playTrack, changeTrack, selectSoundcloud, nextTrack } from 'app/soundcloudSlice';
-import { SoundcloudTrack, SoundcloudStreamPlayer } from 'types/soundcloud';
-
+import { selectSoundcloud, playTrack, pauseTrack, changeTrack, nextTrack } from 'app/soundcloudSlice';
 
 import Searchbar from 'components/Searchbar';
 import Spinner from 'components/Spinner';
@@ -19,8 +17,6 @@ function App() {
   const dispatch = useAppDispatch();
   const { status, tracks, currentTrackIndex, player } = useAppSelector(selectSoundcloud);
 
-
-  const [pause, setPause] = useState(false);
   const [duration, setDuration] = useState(1);
 
   useEffect(() => {
@@ -37,7 +33,6 @@ function App() {
     setDuration(
       milliseconds2seconds(await player.getDuration())
     );
-    setPause(false);
   })()}, [player])
 
   const [timestamp, setTimestamp] = useState(0);
@@ -52,17 +47,10 @@ function App() {
     return () => clearInterval(timestampTimer);
   }, [player]);
 
-  if (!pause && timestamp === duration) {
+  if ( timestamp === duration) {
     console.log(timestamp, duration);
     dispatch(nextTrack);
   }
-
-  useEffect(() => {
-    if (player) {
-      pause ? player.pause() : player.play();
-    }
-  }, [pause, player]);
-
   return <>
     <Searchbar />
     <div id='searchResults'>
@@ -100,8 +88,6 @@ function App() {
           duration: duration,
           imgURL: tracks[currentTrackIndex].artwork_url?.replace(/large(?=.jpg)/i, 't500x500')
         }}
-        pause={pause}
-        onPause={() => setPause(pause => !pause)}
       />
     )}
   </>;
