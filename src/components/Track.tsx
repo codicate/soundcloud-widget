@@ -1,6 +1,7 @@
 import styles from 'components/Track.module.scss';
 
-const imgPlaceholder = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+import { imgPlaceholder } from 'utils/constants';
+
 
 export default function Card(
   { info, play }: {

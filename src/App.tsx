@@ -2,7 +2,7 @@ import 'App.scss';
 import { useState, useEffect } from 'react';
 
 import { useAppDispatch, useAppSelector } from 'app/hooks';
-import { selectSoundcloud, playTrack, pauseTrack, changeTrack, nextTrack } from 'app/soundcloudSlice';
+import { selectSoundcloud, playTrack, changeTrack, nextTrack } from 'app/soundcloudSlice';
 
 import Searchbar from 'components/Searchbar';
 import Spinner from 'components/Spinner';
@@ -80,15 +80,7 @@ function App() {
       })()}
     </div>
     {(currentTrackIndex !== -1) && (
-      <MiniPlayer
-        info={{
-          title: tracks[currentTrackIndex].title,
-          artist: tracks[currentTrackIndex].user.username,
-          timestamp: timestamp,
-          duration: duration,
-          imgURL: tracks[currentTrackIndex].artwork_url?.replace(/large(?=.jpg)/i, 't500x500')
-        }}
-      />
+      <MiniPlayer />
     )}
   </>;
 };
