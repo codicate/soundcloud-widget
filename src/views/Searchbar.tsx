@@ -12,7 +12,7 @@ export default function Searchbar() {
   const searchbar = useRef<null | HTMLInputElement>(null);
 
   return (
-    <div id='searchBar'>
+    <div id={styles.searchbar}>
       <input
         autoFocus
         placeholder='Search'
@@ -25,9 +25,8 @@ export default function Searchbar() {
           }
         }}
       />
-      <div id='clearDiv'>
+      <div id={styles.clearDiv}>
         <span
-          id='clear'
           className='material-icons btn'
           onClick={() => {
             setInput('');

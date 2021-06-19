@@ -1,0 +1,67 @@
+@import "/src/styles/variables";
+@import "/src/styles/mixins";
+
+.track {
+  display: flex;
+  align-items: center;
+
+  padding: 1.25em 0;
+
+  &:not(:last-child) {
+    border-bottom: 2px solid $border;
+  }
+
+  .cover {
+    @include artworkPlaceholder;
+    height: 32px;
+    width: 32px;
+    margin-right: 1em;
+  }
+
+  .info {
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+
+    min-width: 0;
+
+    p {
+      margin: 0;
+      line-height: 1.2em;
+      color: $faded;
+
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .title {
+      color: white;
+      font-weight: 500;
+      font-size: 0.875rem;
+    }
+  
+    .artist {
+      font-size: 0.75rem;
+    }
+  }
+
+  .material-icons {
+    display: block;
+    margin: auto 0;
+
+    font-size: 24px;
+  }
+
+  .control {
+    margin: auto 0;
+    margin-left: auto;
+    padding: 0 1em;
+
+    display: none;
+  }
+
+  &:hover>.control {
+    display: block;
+  }
+}

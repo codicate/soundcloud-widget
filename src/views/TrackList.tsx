@@ -20,7 +20,7 @@ function TrackList() {
             info={{
               title: track.title,
               artist: track.user.username,
-              imgURL: track.artwork_url?.replace(/large(?=.jpg)/i, 'small')
+              artworkURL: track.artwork_url?.replace(/large(?=.jpg)/i, 'small')
             }}
             play={() => dispatch(changeTrack(index))}
           />

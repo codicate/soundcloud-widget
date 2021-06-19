@@ -1,0 +1,15 @@
+@mixin headings {
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @content;
+  }
+}
+
+@mixin artworkPlaceholder {
+  background-image: linear-gradient(135deg, #70929c, #846170);
+}

@@ -1,0 +1,99 @@
+@import "/src/styles/variables";
+@import "/src/styles/mixins";
+
+#miniplayer {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  height: 15rem;
+  width: 15rem;
+
+  &>* {
+    height: 100%;
+    width: 100%;
+  }
+
+  & * {
+    max-width: 100%;
+  }
+
+  .cover {
+    @include artworkPlaceholder;
+  }
+}
+
+#overlay {
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  flex-flow: column;
+  justify-content: flex-end;
+  align-items: center;
+
+  padding: 0.5em;
+
+  user-select: none;
+  background: linear-gradient(0deg, hsla(0, 0%, 0%, 0.5) 30%, hsla(0, 0%, 100%, 0.1) 100%);
+
+  opacity: 0;
+  transition: opacity 0.2s ease-out;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  cursor: grab;
+
+  &:active {
+    cursor: grabbing;
+  }
+
+  .info {
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+    align-items: center;
+
+    min-width: 0;
+
+    p {
+      overflow: hidden;
+      margin: 0;
+      margin-bottom: 0.5em;
+
+      color: $faded;
+      line-height: 1.2em;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    .title {
+      color: white;
+      font-weight: 500;
+      font-size: 0.875rem;
+    }
+
+    .artist {
+      font-size: 0.625rem;
+    }
+  }
+
+  .timestamp {
+    font-size: 0.75rem;
+  }
+
+  .control {
+    display: flex;
+    align-items: center;
+  }
+
+  .material-icons {
+    font-size: 20px;
+  }
+
+  #play {
+    font-size: 28px;
+    margin: 0 0.125em;
+  }
+}

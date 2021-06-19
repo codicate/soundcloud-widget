@@ -2,43 +2,48 @@ import styles from './Track.module.scss';
 
 import { imgPlaceholder } from 'utils/constants';
 
+import Button from 'components/Button'
 
-export default function Card(
+
+function Track(
   { info, play }: {
     info: {
       title: string,
       artist: string,
-      imgURL: string;
+      artworkURL: string;
     },
     play: () => void;
   }
 ) {
   return (
     <div
-      className='track'
+      className={styles.track}
     >
       <img
-        className='cover'
+        className={styles.cover}
         alt={info.title + ' cover'}
-        src={info.imgURL || imgPlaceholder}
+        src={info.artworkURL || imgPlaceholder}
       />
-      <div className='info'>
-        <p className='title'>
+
+      <div className={styles.info}>
+        <p className={styles.title}>
           {info.title}
         </p>
-        <p className='artist'>
+        <p className={styles.artist}>
           {info.artist}
         </p>
       </div>
-      <div className='control'>
-        <span
-          id='add'
+
+      <div className={styles.control}>
+        <Button
           className='material-icons btn'
           onClick={play}
         >
           add_box
-        </span>
+        </Button>
       </div>
     </div>
   );
 }
+
+export default Track;

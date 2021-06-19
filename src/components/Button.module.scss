@@ -1,0 +1,18 @@
+@import "/src/styles/variables";
+@import "/src/styles/mixins";
+
+.btn {
+  cursor: pointer;
+  user-select: none;
+
+  color: $alternative;
+
+  &:hover,
+  &:focus {
+    color: white;
+  }
+
+  &:active {
+    color: $clicked;
+  }
+}

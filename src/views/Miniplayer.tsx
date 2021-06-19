@@ -4,9 +4,11 @@ import { useState, useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from 'app/hooks';
 import { selectSoundcloud, pauseTrack, prevTrack, nextTrack } from 'app/soundcloudSlice';
 
-import { imgPlaceholder } from 'utils/constants';
 import { millisecond2second, displayTime } from 'utils/functions';
+import { imgPlaceholder } from 'utils/constants';
+
 import Draggie from 'components/Draggie';
+import Button from 'components/Button';
 
 
 export default function MiniPlayer() {
@@ -28,7 +30,6 @@ export default function MiniPlayer() {
     })();
   }, [dispatch, player]);
 
-
   useEffect(() => {
     if (!player) return;
 
@@ -42,46 +43,48 @@ export default function MiniPlayer() {
   }, [dispatch, player, duration]);
 
   return (
-    <Draggie id='miniplayer'>
+    <Draggie id={styles.miniplayer}>
       <img
-        className='cover'
+        className={styles.cover}
         alt={currentTrack.title + ' cover'}
         src={currentTrack.artwork_url?.replace(/large(?=.jpg)/i, 't500x500') || imgPlaceholder}
       />
-      <div id='overlay'>
-        <div className='info'>
-          <p className='title'>
+
+      <div id={styles.overlay}>
+        <div className={styles.info}>
+          <p className={styles.title}>
             {currentTrack.title}
           </p>
-          <p className='artist'>
+          <p className={styles.artist}>
             {currentTrack.user.username}
           </p>
-          <p className='timestamp'>
+          <p className={styles.timestamp}>
             {displayTime(millisecond2second(timestamp))} / {displayTime(millisecond2second(duration))}
           </p>
         </div>
-        <div className='control'>
-          <span
-            id='previous'
-            className='material-icons btn'
+
+        <div className={styles.control}>
+          <Button
+            id={styles.previous}
+            className='material-icons'
             onClick={() => dispatch(prevTrack())}
           >
             skip_previous
-          </span>
-          <span
-            id='play'
-            className='material-icons btn'
+          </Button>
+          <Button
+            id={styles.play}
+            className='material-icons'
             onClick={() => dispatch(pauseTrack(!isPaused))}
           >
             {isPaused ? 'play_arrow' : 'pause'}
-          </span>
-          <span
-            id='next'
-            className='material-icons btn'
+          </Button>
+          <Button
+            id={styles.next}
+            className='material-icons'
             onClick={() => dispatch(nextTrack())}
           >
             skip_next
-          </span>
+          </Button>
         </div>
       </div>
     </Draggie>

@@ -1,4 +1,4 @@
-import 'App.scss';
+import styles from './App.module.scss';
 import { useState, useEffect } from 'react';
 
 import { useAppDispatch, useAppSelector } from 'app/hooks';
@@ -20,22 +20,22 @@ function App() {
 
   return <>
     <Searchbar />
-    <div id='searchResults'>
+    <main id={styles.main}>
       {(() => {
         switch (status) {
           case 'pending':
             return <Spinner />;
           case 'fulfilled':
             return (tracks.length === 0)
-              ? <div id='noResult'>No Result :(</div>
+              ? <div id={styles.noResult}>No Result :(</div>
               : <TrackList />;
           case 'rejected':
-            return <div id='noResult'>Something went wrong :(</div>;
+            return <div id={styles.noResult}>Something went wrong :(</div>;
           default:
             return;
         }
       })()}
-    </div>
+    </main>
     {(currentTrackIndex !== -1) && (
       <MiniPlayer />
     )}
