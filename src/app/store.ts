@@ -27,8 +27,9 @@ export const store = configureStore({
     serializableCheck: {
       ignoredActions: [
         FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER,
+        'tracks/playTrack/fulfilled'
       ],
-      // ignoredPaths: ['tracks.tracks']
+      ignoredPaths: ['soundcloud.player', 'soundcloud.tracks']
     }
   })
 });
@@ -44,3 +45,13 @@ export type AppThunk<ReturnType = void> = ThunkAction<
   unknown,
   Action<string>
 >;
+
+
+export const errorHandler = (func: () => Promise<any>) => {
+  try {
+    return func();
+  } catch (err) {
+    console.error('BREUHRHRHRHHHHHh:', err);
+    return err;
+  }
+};

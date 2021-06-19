@@ -1,5 +1,5 @@
 import { createSlice, createDraftSafeSelector, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from 'app/store';
+import { RootState, errorHandler } from 'app/store';
 
 import Soundcloud from 'soundcloud';
 import { SoundcloudTrack, SoundcloudStreamPlayer } from 'types/soundcloud';
@@ -14,7 +14,7 @@ const initialState: {
   tracks: SoundcloudTrack[];
   currentTrackIndex: number;
   player: null | SoundcloudStreamPlayer;
-  isPaused: boolean
+  isPaused: boolean;
 } = {
   status: 'idle',
   tracks: [],
@@ -26,32 +26,61 @@ const initialState: {
 
 export const searchForTracks = createAsyncThunk(
   'tracks/searchForTracks',
-  async (input: string, {
-    rejectWithValue
-  }) => {
-    try {
-      return await Soundcloud.get('/tracks', {
-        q: input
-      });
-    } catch (err) {
-      console.error(err);
-      return rejectWithValue(err.response.value);
-    }
-  },
+  (input: string) => errorHandler(async () => {
+    return await Soundcloud.get('/tracks', {
+      q: input
+    });
+  })
 );
 
 export const playTrack = createAsyncThunk(
   'tracks/playTrack',
-  async (trackId: number, {
-    rejectWithValue
-  }) => {
-    try {
-      return await Soundcloud.stream('/tracks/' + trackId);
-    } catch (err) {
-      console.error(err);
-      return rejectWithValue(err.response.value);
-    }
-  },
+  async (trackId: number) => errorHandler(async () => {
+    return await Soundcloud.stream('/tracks/' + trackId);
+  })
+);
+
+export const prevTrack = createAsyncThunk(
+  'tracks/prevTrack',
+  async (_, { getState }) => errorHandler(async () => {
+    const state = (getState() as RootState).soundcloud;
+
+    (await state.player?.isPlaying())
+      && (await state.player?.pause());
+
+    return (state.currentTrackIndex === 0)
+      ? state.tracks.length - 1
+      : state.currentTrackIndex - 1;
+  })
+);
+
+export const nextTrack = createAsyncThunk(
+  'tracks/nextTrack',
+  async (_, { getState }) => errorHandler(async () => {
+    const state = (getState() as RootState).soundcloud;
+
+    (await state.player?.isPlaying())
+      && (await state.player?.pause());
+
+    return (state.currentTrackIndex === state.tracks.length - 1)
+      ? 0
+      : state.currentTrackIndex + 1;
+  })
+);
+
+export const pauseTrack = createAsyncThunk(
+  'tracks/pauseTrack',
+  async (pause: boolean, { getState }) => errorHandler(async () => {
+    const state = (getState() as RootState).soundcloud;
+
+    (pause)
+      ? (await state.player?.isPlaying())
+      && (await state.player?.pause())
+      : (!await state.player?.isPlaying())
+      && (await state.player?.play());
+
+    return pause;
+  })
 );
 
 
@@ -61,27 +90,6 @@ const soundcloudSlice = createSlice({
   reducers: {
     changeTrack: (state, action: PayloadAction<number>) => {
       state.currentTrackIndex = action.payload;
-    },
-    prevTrack: (state) => {
-      state.player?.pause()
-
-      state.currentTrackIndex = (state.currentTrackIndex === 0)
-        ? state.tracks.length - 1
-        : state.currentTrackIndex - 1;
-    },
-    nextTrack: (state) => {
-      state.player?.pause()
-
-      state.currentTrackIndex = (state.currentTrackIndex === state.tracks.length - 1)
-        ? 0
-        : state.currentTrackIndex + 1;
-    },
-    pauseTrack: (state, action: PayloadAction<boolean>) => {
-      state.isPaused = action.payload;
-      
-      (action.payload)
-        ? state.player?.pause()
-        : state.player?.play();
     }
   },
   extraReducers: (builder) => {
@@ -106,12 +114,27 @@ const soundcloudSlice = createSlice({
       (state, action: PayloadAction<SoundcloudStreamPlayer>) => {
         state.player = action.payload;
       }
+    ).addCase(
+      prevTrack.fulfilled,
+      (state, action: PayloadAction<number>) => {
+        state.currentTrackIndex = action.payload;
+      }
+    ).addCase(
+      nextTrack.fulfilled,
+      (state, action: PayloadAction<number>) => {
+        state.currentTrackIndex = action.payload;
+      }
+    ).addCase(
+      pauseTrack.fulfilled,
+      (state, action: PayloadAction<boolean>) => {
+        state.isPaused = action.payload;
+      }
     );
   }
 });
 
 export const {
-  changeTrack, prevTrack, nextTrack, pauseTrack
+  changeTrack
 } = soundcloudSlice.actions;
 export default soundcloudSlice.reducer;
 
