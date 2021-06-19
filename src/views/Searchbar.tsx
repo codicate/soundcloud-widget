@@ -23,7 +23,11 @@ export default function Searchbar() {
         onChange={(e) => setInput(e.target.value)}
         onKeyUp={(e) => {
           if (e.key === 'Enter') {
-            dispatch(searchForTracks((e.target as HTMLInputElement).value));
+            dispatch(searchForTracks({
+              input: (e.target as HTMLInputElement).value,
+              limit: 20,
+              pagination: true
+            }));
           }
         }}
       />

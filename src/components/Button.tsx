@@ -8,7 +8,7 @@ function Button({
   ...props
 }: {
   children: string;
-  styledAs?: "";
+  styledAs?: "bigWhite";
 } & React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>
 ) {
   return (

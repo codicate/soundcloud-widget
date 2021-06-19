@@ -1,8 +1,7 @@
 import { createSlice, createDraftSafeSelector, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { RootState, errorHandler } from 'app/store';
 
-import Soundcloud from 'soundcloud';
-import { SoundcloudTrack, SoundcloudStreamPlayer } from 'types/soundcloud';
+import Soundcloud, { PaginatedSearchResult, SoundcloudTrack, SoundcloudStreamPlayer } from 'soundcloud';
 
 
 Soundcloud.initialize({
@@ -12,6 +11,8 @@ Soundcloud.initialize({
 const initialState: {
   status: 'idle' | 'pending' | 'fulfilled' | 'rejected';
   tracks: SoundcloudTrack[];
+  offset?: number;
+  nextPageQuery?: string;
   currentTrackIndex: number;
   player: null | SoundcloudStreamPlayer;
   isPaused: boolean;
@@ -23,13 +24,39 @@ const initialState: {
   isPaused: false
 };
 
+type QueryResult = Pick<typeof initialState, 'tracks' | 'offset' | 'nextPageQuery'>;
 
 export const searchForTracks = createAsyncThunk(
   'tracks/searchForTracks',
-  (input: string) => errorHandler(async () => {
-    return await Soundcloud.get('/tracks', {
-      q: input
-    });
+  ({
+    input,
+    limit = 10,
+    pagination = false,
+    nextPageQuery
+  }: {
+    input?: string;
+    limit?: number;
+    pagination?: boolean;
+    nextPageQuery?: string;
+  }) => errorHandler(async () => {
+    const tracks = (nextPageQuery)
+      ? await Soundcloud.get(nextPageQuery)
+      : await Soundcloud.get('/tracks', {
+        q: input,
+        limit: limit,
+        linked_partitioning: pagination ? 1 : undefined,
+        offset: 0
+      });
+
+    console.log(tracks);
+    return (pagination)
+      ? {
+        tracks: (tracks as PaginatedSearchResult).collection,
+        offset: (tracks as PaginatedSearchResult).next_href?.match(/(?<=offset=)\d+/),
+        nextPageQuery: (tracks as PaginatedSearchResult).next_href
+      } : {
+        tracks: tracks
+      };
   })
 );
 
@@ -100,9 +127,12 @@ const soundcloudSlice = createSlice({
       }
     ).addCase(
       searchForTracks.fulfilled,
-      (state, action: PayloadAction<SoundcloudTrack[]>) => {
+      (state, action: PayloadAction<QueryResult>) => {
         state.status = 'fulfilled';
-        state.tracks = action.payload;
+        console.log(action);
+        state.tracks = action.payload.tracks;
+        state.offset = action.payload.offset;
+        state.nextPageQuery = action.payload.nextPageQuery;
       }
     ).addCase(
       searchForTracks.rejected,

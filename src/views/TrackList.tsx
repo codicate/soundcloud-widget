@@ -2,14 +2,15 @@ import styles from './TrackList.module.scss';
 import React from 'react';
 
 import { useAppDispatch, useAppSelector } from 'app/hooks';
-import { selectSoundcloud, changeTrack } from 'app/soundcloudSlice';
+import { selectSoundcloud, changeTrack, searchForTracks } from 'app/soundcloudSlice';
 
+import Button from 'components/Button';
 import Track from './Track';
 
 
 function TrackList() {
   const dispatch = useAppDispatch();
-  const { tracks } = useAppSelector(selectSoundcloud);
+  const { tracks, nextPageQuery } = useAppSelector(selectSoundcloud);
 
   return (
     <div id={styles.trackList}>
@@ -25,6 +26,17 @@ function TrackList() {
             play={() => dispatch(changeTrack(index))}
           />
         ))
+      }
+
+      {(nextPageQuery) && (
+        <Button 
+          styledAs='bigWhite'
+        onClick={() => {
+          dispatch(searchForTracks({ nextPageQuery }));
+        }}>
+          Load More
+        </Button>
+      )
       }
     </div>
   );

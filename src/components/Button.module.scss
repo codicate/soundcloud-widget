@@ -15,4 +15,14 @@
   &:active {
     color: $clicked;
   }
+
+  &.bigWhite {
+    letter-spacing: 0.5px;
+    line-height: 50px;
+    padding: 0 2rem;
+    background-color: white;
+    color: black;
+    text-transform: uppercase;
+    font-weight: bolder;
+  }
 }
