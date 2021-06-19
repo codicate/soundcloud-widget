@@ -4,6 +4,8 @@ import { useState, useRef } from 'react';
 import { useAppDispatch } from 'app/hooks';
 import { searchForTracks } from 'app/soundcloudSlice';
 
+import Button from 'components/Button';
+
 
 export default function Searchbar() {
   const dispatch = useAppDispatch();
@@ -26,15 +28,15 @@ export default function Searchbar() {
         }}
       />
       <div id={styles.clearDiv}>
-        <span
-          className='material-icons btn'
+        <Button
+          className='material-icons'
           onClick={() => {
             setInput('');
             searchbar.current && searchbar.current.focus();
           }}
         >
           clear
-        </span>
+        </Button>
       </div>
     </div>
   );

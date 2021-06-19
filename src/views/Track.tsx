@@ -36,7 +36,7 @@ function Track(
 
       <div className={styles.control}>
         <Button
-          className='material-icons btn'
+          className='material-icons'
           onClick={play}
         >
           add_box
