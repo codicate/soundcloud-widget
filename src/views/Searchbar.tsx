@@ -1,4 +1,4 @@
-import styles from 'components/Searchbar.module.scss';
+import styles from './Searchbar.module.scss';
 import { useState, useRef } from 'react';
 
 import { useAppDispatch } from 'app/hooks';

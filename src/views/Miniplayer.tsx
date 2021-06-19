@@ -1,4 +1,4 @@
-import styles from 'components/Miniplayer.module.scss';
+import styles from './Miniplayer.module.scss';
 import { useState, useEffect } from 'react';
 
 import { useAppSelector, useAppDispatch } from 'app/hooks';

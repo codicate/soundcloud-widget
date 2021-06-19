@@ -4,7 +4,7 @@ import React from 'react';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { selectSoundcloud, changeTrack } from 'app/soundcloudSlice';
 
-import Track from 'components/Track';
+import Track from './Track';
 
 
 function TrackList() {

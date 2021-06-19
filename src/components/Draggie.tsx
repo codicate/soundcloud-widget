@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 
 import useEventListener from 'hooks/useEventListener';
 import { clamp } from 'utils/functions';
@@ -9,7 +9,8 @@ function Draggie({
   ...props
 }: {
   children: React.ReactNode;
-} & React.HTMLAttributes<HTMLDivElement>) {
+} & React.HTMLAttributes<HTMLDivElement>
+) {
   const draggie = useRef<HTMLDivElement>(null);
   const dragable = useRef(false);
   const offset = useRef({ x: 0, y: 0 });

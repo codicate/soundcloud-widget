@@ -4,10 +4,10 @@ import { useState, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { selectSoundcloud, playTrack } from 'app/soundcloudSlice';
 
-import Searchbar from 'components/Searchbar';
 import Spinner from 'components/Spinner';
-import MiniPlayer from 'components/Miniplayer';
-import TrackList from 'components/TrackList';
+import Searchbar from 'views/Searchbar';
+import MiniPlayer from 'views/Miniplayer';
+import TrackList from 'views/TrackList';
 
 function App() {
   const dispatch = useAppDispatch();

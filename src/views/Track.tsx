@@ -1,4 +1,4 @@
-import styles from 'components/Track.module.scss';
+import styles from './Track.module.scss';
 
 import { imgPlaceholder } from 'utils/constants';
 
