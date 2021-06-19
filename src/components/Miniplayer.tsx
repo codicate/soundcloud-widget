@@ -8,6 +8,7 @@ import { imgPlaceholder } from 'utils/constants';
 import { millisecond2second, displayTime } from 'utils/functions';
 import Draggie from 'components/Draggie';
 
+
 export default function MiniPlayer() {
   const dispatch = useAppDispatch();
   const { player, tracks, currentTrackIndex, isPaused } = useAppSelector(selectSoundcloud);
