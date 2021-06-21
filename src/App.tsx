@@ -11,7 +11,7 @@ import TrackList from 'views/TrackList';
 
 function App() {
   const dispatch = useAppDispatch();
-  const { status, tracks, currentTrackIndex } = useAppSelector(selectSoundcloud);
+  const { searchStatus, tracks, currentTrackIndex } = useAppSelector(selectSoundcloud);
 
   useEffect(() => {
     (currentTrackIndex !== -1) &&
@@ -22,7 +22,7 @@ function App() {
     <Searchbar />
     <main id={styles.main}>
       {(() => {
-        switch (status) {
+        switch (searchStatus) {
           case 'pending':
             return <Spinner />;
           case 'fulfilled':

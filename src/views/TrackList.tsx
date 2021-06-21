@@ -1,19 +1,37 @@
 import styles from './TrackList.module.scss';
-import React from 'react';
+import { useRef } from 'react';
 
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { selectSoundcloud, changeTrack, queryNextPage } from 'app/soundcloudSlice';
 
-import Button from 'components/Button';
+import useEventListener from 'hooks/useEventListener';
 import Track from './Track';
 
 
 function TrackList() {
   const dispatch = useAppDispatch();
-  const { tracks } = useAppSelector(selectSoundcloud);
+  const { tracks, paginationStatus } = useAppSelector(selectSoundcloud);
+
+  const trackListRef = useRef<HTMLDivElement>(null);
+
+  useEventListener(window, 'scroll', () => {
+    const trackListDiv = trackListRef.current;
+
+    if (trackListDiv && paginationStatus === 'idle') {
+      const trackListOffset = trackListDiv.offsetTop + trackListDiv.clientHeight;
+      const pageOffset = window.pageYOffset + window.innerHeight;
+
+      if (pageOffset > trackListOffset) {
+        dispatch(queryNextPage());
+      }
+    }
+  });
 
   return (
-    <div id={styles.trackList}>
+    <div
+      id={styles.trackList}
+      ref={trackListRef}
+    >
       {
         tracks.map((track, index) => (
           <Track
@@ -27,16 +45,6 @@ function TrackList() {
           />
         ))
       }
-
-      {/* {(nextPageQuery) && ( */}
-        <Button
-          styledAs='bigWhite'
-          onClick={() => {
-            dispatch(queryNextPage());
-          }}>
-          Load More
-        </Button>
-      {/* } */}
     </div>
   );
 }

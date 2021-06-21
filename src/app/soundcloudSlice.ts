@@ -1,5 +1,5 @@
 import { createSlice, createDraftSafeSelector, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import { RootState, errorHandler } from 'app/store';
+import { RootState, statusState, errorHandler } from 'app/store';
 
 import Soundcloud, { PaginatedSearchResult, SoundcloudTrack, SoundcloudStreamPlayer } from 'soundcloud';
 
@@ -9,7 +9,8 @@ Soundcloud.initialize({
 });
 
 const initialState: {
-  status: 'idle' | 'pending' | 'fulfilled' | 'rejected';
+  searchStatus: statusState;
+  paginationStatus: statusState;
   tracks: SoundcloudTrack[];
   input: string;
   limit: number;
@@ -18,7 +19,8 @@ const initialState: {
   player: null | SoundcloudStreamPlayer;
   isPaused: boolean;
 } = {
-  status: 'idle',
+  searchStatus: 'idle',
+  paginationStatus: 'idle',
   tracks: [],
   input: '',
   limit: 10,
@@ -48,7 +50,6 @@ const paginatedSearch = async (
   };
 };
 
-
 export const queryNextPage = createAsyncThunk(
   'tracks/queryNextPage',
   (_, { getState }) => errorHandler(async () => {
@@ -63,7 +64,6 @@ export const queryNextPage = createAsyncThunk(
     };
   })
 );
-
 
 export const searchForTracks = createAsyncThunk(
   'tracks/searchForTracks',
@@ -149,12 +149,12 @@ const soundcloudSlice = createSlice({
     builder.addCase(
       searchForTracks.pending,
       (state) => {
-        state.status = 'pending';
+        state.searchStatus = 'pending';
       }
     ).addCase(
       searchForTracks.fulfilled,
       (state, action: PayloadAction<QueryResult>) => {
-        state.status = 'fulfilled';
+        state.searchStatus = 'fulfilled';
         state.tracks = action.payload.tracks;
         state.input = action.payload.input;
         state.limit = action.payload.limit;
@@ -163,11 +163,17 @@ const soundcloudSlice = createSlice({
     ).addCase(
       searchForTracks.rejected,
       (state) => {
-        state.status = 'rejected';
+        state.searchStatus = 'rejected';
+      }
+    ).addCase(
+      queryNextPage.pending,
+      (state) => {
+        state.paginationStatus = 'pending';
       }
     ).addCase(
       queryNextPage.fulfilled,
       (state, action: PayloadAction<QueryResult>) => {
+        state.paginationStatus = 'idle'
         state.tracks = state.tracks.concat(action.payload.tracks);
         state.offset = action.payload.offset;
       }

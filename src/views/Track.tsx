@@ -1,8 +1,7 @@
 import styles from './Track.module.scss';
 
 import { imgPlaceholder } from 'utils/constants';
-
-import Button from 'components/Button'
+import Button from 'components/Button';
 
 
 function Track(

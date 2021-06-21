@@ -47,11 +47,13 @@ export type AppThunk<ReturnType = void> = ThunkAction<
 >;
 
 
+export type statusState = 'idle' | 'pending' | 'fulfilled' | 'rejected';
+
 export const errorHandler = (func: () => Promise<any>) => {
   try {
     return func();
   } catch (err) {
-    console.error('BREUHRHRHRHHHHHh:', err);
+    console.error('redux store error:', err);
     return err;
   }
 };
