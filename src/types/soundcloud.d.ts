@@ -51,12 +51,12 @@ declare module 'soundcloud' {
     /**
      * @param volume - Sets the volume (from 0 to 1)
     */
-    setVolume: (volume: number) => Promise<void>;
+    setVolume: (volume: number) => void;
 
     /**
      * @returns Returns the current volume (from 0 to 1)
     */
-    getVolume: () => Promise<number>;
+    getVolume: () => number;
 
     /**
      * @returns Returns the duration (in milliseconds)
@@ -66,32 +66,32 @@ declare module 'soundcloud' {
     /**
      * @returns Returns true whilst the player is buffering
     */
-    isBuffering: () => Promise<boolean>;
+    isBuffering: () => boolean;
 
     /**
      * @returns Returns true whilst the intended state is to be playing. This flips with play() and pause() calls.
     */
-    isPlaying: () => Promise<boolean>;
+    isPlaying: () => boolean;
 
     /**
      * @returns Returns true whilst the player is actually playing
     */
-    isActuallyPlaying: () => Promise<boolean>;
+    isActuallyPlaying: () => boolean;
 
     /**
      * @returns Returns true if the player is dead because of an error
     */
-    hasErrored: () => Promise<boolean>;
+    hasErrored: () => boolean;
 
     /**
      * @returns Returns true if the player is dead
     */
-    isDead: () => Promise<boolean>;
+    isDead: () => boolean;
 
     /**
      * @returns Returns 'playing', 'paused', 'loading', 'ended', 'error' or 'dead'
     */
-    getState: () => Promise<'playing' | 'paused' | 'laoding' | 'ended' | 'error' | 'dead'>;
+    getState: () => 'playing' | 'paused' | 'laoding' | 'ended' | 'error' | 'dead';
 
     /**
      * Kill the player. Call this when you do not need it anymore.

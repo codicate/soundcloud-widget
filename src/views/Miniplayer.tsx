@@ -75,7 +75,11 @@ export default function MiniPlayer() {
             className='material-icons'
             onClick={() => dispatch(pauseTrack(!isPaused))}
           >
-            {isPaused ? 'play_arrow' : 'pause'}
+            {
+              (player?.isPlaying())
+                ? 'pause'
+                : 'play_arrow'
+            }
           </Button>
           <Button
             id={styles.next}

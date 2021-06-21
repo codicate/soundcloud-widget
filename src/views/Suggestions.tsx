@@ -16,10 +16,11 @@ function Suggestions() {
 
   return (
     <div id={styles.suggestions}>
-      {searchTerms.map((term) => {
+      {searchTerms.map((term, idx) => {
         const randColor = colorList[getRandNumBetween(0, colorList.length)];
         return (
           <button
+            key={idx}
             style={{
               'backgroundColor': randColor
             }}
