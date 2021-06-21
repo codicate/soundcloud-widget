@@ -3,16 +3,20 @@ import { useCallback, useEffect, useRef } from 'react';
 import useEventListener from 'hooks/useEventListener';
 import { clamp } from 'utils/functions';
 
-
+/**
+ * @params controlledMode - if set `true`, a children must have a classname of 'draggie' to drag the draggie itself
+ */
 function Draggie({
+  controlledMode = false,
   children,
   ...props
 }: {
+  controlledMode?: boolean;
   children: React.ReactNode;
 } & React.HTMLAttributes<HTMLDivElement>
 ) {
   const draggie = useRef<HTMLDivElement>(null);
-  const dragable = useRef(false);
+  const isDraggable = useRef(false);
   const offset = useRef({ x: 0, y: 0 });
   const pos = useRef({ x: 0, y: 0 });
   const edge = useRef({ x: 0, y: 0 });
@@ -48,12 +52,12 @@ function Draggie({
   });
 
   useEventListener(document, 'mouseup', () => {
-    dragable.current = false;
+    isDraggable.current = false;
   }, true);
 
   useEventListener(document, 'mousemove', (e) => {
     e.preventDefault();
-    dragable.current && setPos(e);
+    isDraggable.current && setPos(e);
   }, true);
 
   return (
@@ -62,18 +66,24 @@ function Draggie({
       style={{ position: 'fixed' }}
       ref={draggie}
       onMouseDown={(e) => {
-        dragable.current = true;
+        if (
+          (!controlledMode)
+          || ((e.target as HTMLElement).classList.contains('draggie'))
+        ) {
+          isDraggable.current = true;
 
-        pos.current = {
-          x: e.clientX,
-          y: e.clientY
-        };
+          pos.current = {
+            x: e.clientX,
+            y: e.clientY
+          };
 
-        offset.current = {
-          x: pos.current.x - (draggie.current?.offsetLeft || 0),
-          y: pos.current.y - (draggie.current?.offsetTop || 0)
-        };
-      }}
+          offset.current = {
+            x: pos.current.x - (draggie.current?.offsetLeft || 0),
+            y: pos.current.y - (draggie.current?.offsetTop || 0)
+          };
+        }
+      }
+      }
     >
       {children}
     </div>

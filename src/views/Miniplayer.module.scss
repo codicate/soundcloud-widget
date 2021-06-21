@@ -43,10 +43,24 @@
     opacity: 1;
   }
 
-  cursor: grab;
+  .draggie {
+    position: absolute;
+    top: 0;
+    left: 0;
 
-  &:active {
-    cursor: grabbing;
+    padding: 6px 4px;
+
+    cursor: grab;
+    font-size: 1.625rem;
+    color: $faded;
+
+    &:hover {
+      color: white;
+    }
+
+    &:active {
+      cursor: grabbing;
+    }
   }
 
   .info {
@@ -86,10 +100,6 @@
   .control {
     display: flex;
     align-items: center;
-  }
-
-  .material-icons {
-    font-size: 20px;
   }
 
   #play {

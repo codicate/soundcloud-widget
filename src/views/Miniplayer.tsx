@@ -42,7 +42,7 @@ export default function MiniPlayer() {
   }, [dispatch, player, duration]);
 
   return (currentTrack) && (
-    <Draggie id={styles.miniplayer}>
+    <Draggie controlledMode id={styles.miniplayer}>
       <img
         className={styles.cover}
         alt={currentTrack.title + ' cover'}
@@ -50,6 +50,9 @@ export default function MiniPlayer() {
       />
 
       <div id={styles.overlay}>
+        <div className={styles.draggie + ' material-icons draggie'}>
+          drag_indicator
+        </div>
         <div className={styles.info}>
           <p className={styles.title}>
             {currentTrack.title}

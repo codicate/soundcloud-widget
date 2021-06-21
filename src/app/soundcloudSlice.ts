@@ -95,7 +95,7 @@ export const prevTrack = createAsyncThunk(
   async (_, { getState }) => errorHandler(async () => {
     const state = (getState() as RootState).soundcloud;
 
-    (await state.player?.isPlaying())
+    (state.player?.isPlaying())
       && (await state.player?.pause());
 
     return (state.currentTrackIndex <= 0)
@@ -109,7 +109,7 @@ export const nextTrack = createAsyncThunk(
   async (_, { getState }) => errorHandler(async () => {
     const state = (getState() as RootState).soundcloud;
 
-    (await state.player?.isPlaying())
+    (state.player?.isPlaying())
       && (await state.player?.pause());
 
     return (state.currentTrackIndex >= state.tracks.length - 1)
@@ -124,9 +124,9 @@ export const pauseTrack = createAsyncThunk(
     const state = (getState() as RootState).soundcloud;
 
     (pause)
-      ? (await state.player?.isPlaying())
+      ? (state.player?.isPlaying())
       && (await state.player?.pause())
-      : (!await state.player?.isPlaying())
+      : (!state.player?.isPlaying())
       && (await state.player?.play());
 
     return pause;
