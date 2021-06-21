@@ -13,8 +13,7 @@ import Button from 'components/Button';
 
 export default function MiniPlayer() {
   const dispatch = useAppDispatch();
-  const { player, tracks, currentTrackIndex, isPaused } = useAppSelector(selectSoundcloud);
-  const currentTrack = tracks[currentTrackIndex];
+  const { player, currentTrack, isPaused } = useAppSelector(selectSoundcloud);
 
   const [timestamp, setTimestamp] = useState(0);
   const [duration, setDuration] = useState(1);
@@ -42,7 +41,7 @@ export default function MiniPlayer() {
     return () => clearInterval(timestampTimer);
   }, [dispatch, player, duration]);
 
-  return (
+  return (currentTrack) && (
     <Draggie id={styles.miniplayer}>
       <img
         className={styles.cover}

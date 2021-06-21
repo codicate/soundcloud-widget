@@ -13,24 +13,26 @@ Soundcloud.initialize({
 
 const initialState: {
   searchStatus: statusState;
-  paginationStatus: statusState;
   tracks: SoundcloudTrack[];
-  input: string;
-  limit: number;
-  offset: number;
+  currentTrack: SoundcloudTrack | null;
   currentTrackIndex: number;
   player: null | SoundcloudStreamPlayer;
   isPaused: boolean;
+  paginationStatus: statusState;
+  input: string;
+  limit: number;
+  offset: number;
 } = {
   searchStatus: 'idle',
-  paginationStatus: 'idle',
   tracks: [],
-  input: '',
-  limit: 10,
-  offset: 0,
+  currentTrack: null,
   currentTrackIndex: -1,
   player: null,
-  isPaused: false
+  isPaused: false,
+  paginationStatus: 'idle',
+  input: '',
+  limit: 10,
+  offset: 0
 };
 
 type QueryResult = Pick<typeof initialState, 'tracks' | 'input' | 'limit' | 'offset'>;
@@ -95,7 +97,7 @@ export const prevTrack = createAsyncThunk(
     (await state.player?.isPlaying())
       && (await state.player?.pause());
 
-    return (state.currentTrackIndex === 0)
+    return (state.currentTrackIndex <= 0)
       ? state.tracks.length - 1
       : state.currentTrackIndex - 1;
   })
@@ -109,7 +111,7 @@ export const nextTrack = createAsyncThunk(
     (await state.player?.isPlaying())
       && (await state.player?.pause());
 
-    return (state.currentTrackIndex === state.tracks.length - 1)
+    return (state.currentTrackIndex >= state.tracks.length - 1)
       ? 0
       : state.currentTrackIndex + 1;
   })
@@ -137,6 +139,7 @@ const soundcloudSlice = createSlice({
   reducers: {
     changeTrack: (state, action: PayloadAction<number>) => {
       state.currentTrackIndex = action.payload;
+      state.currentTrack = state.tracks[state.currentTrackIndex];
     }
   },
   extraReducers: (builder) => {
@@ -180,11 +183,13 @@ const soundcloudSlice = createSlice({
       prevTrack.fulfilled,
       (state, action: PayloadAction<number>) => {
         state.currentTrackIndex = action.payload;
+        state.currentTrack = state.tracks[state.currentTrackIndex];
       }
     ).addCase(
       nextTrack.fulfilled,
       (state, action: PayloadAction<number>) => {
         state.currentTrackIndex = action.payload;
+        state.currentTrack = state.tracks[state.currentTrackIndex];
       }
     ).addCase(
       pauseTrack.fulfilled,

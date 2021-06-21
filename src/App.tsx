@@ -14,12 +14,12 @@ import TrackList from 'views/TrackList';
 
 function App() {
   const dispatch = useAppDispatch();
-  const { searchStatus, tracks, currentTrackIndex } = useAppSelector(selectSoundcloud);
+  const { searchStatus, tracks, currentTrack } = useAppSelector(selectSoundcloud);
 
   useEffect(() => {
-    (currentTrackIndex !== -1) &&
-      dispatch(playTrack(tracks[currentTrackIndex].id));
-  }, [currentTrackIndex, dispatch, tracks]);
+    (currentTrack) &&
+      dispatch(playTrack(currentTrack.id));
+  }, [currentTrack, dispatch]);
 
   return <>
     <Searchbar />
@@ -48,9 +48,8 @@ function App() {
         }
       })()}
     </main>
-    {(currentTrackIndex !== -1) && (
-      <MiniPlayer />
-    )}
+
+    <MiniPlayer />
   </>;
 };
 
