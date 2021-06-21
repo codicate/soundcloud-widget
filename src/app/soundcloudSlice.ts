@@ -56,8 +56,6 @@ export const queryNextPage = createAsyncThunk(
     const { input, limit, offset } = (getState() as RootState).soundcloud;
     const { tracks, nextQuery } = await paginatedSearch(input, limit, offset);
 
-    console.log(offset);
-
     return {
       tracks,
       offset: offset + limit
@@ -76,7 +74,6 @@ export const searchForTracks = createAsyncThunk(
   }) => errorHandler(async () => {
     const { tracks, nextQuery } = await paginatedSearch(input, limit, 0);
 
-    console.log(tracks);
     return {
       tracks,
       input,

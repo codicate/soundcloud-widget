@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { selectSoundcloud, playTrack } from 'app/soundcloudSlice';
 
-import Spinner from 'components/Spinner';
+import SpinnerRect from 'components/SpinnerRect';
 import Searchbar from 'views/Searchbar';
 import MiniPlayer from 'views/Miniplayer';
 import TrackList from 'views/TrackList';
@@ -24,7 +24,7 @@ function App() {
       {(() => {
         switch (searchStatus) {
           case 'pending':
-            return <Spinner />;
+            return <SpinnerRect />;
           case 'fulfilled':
             return (tracks.length === 0)
               ? <div id={styles.noResult}>No Result :(</div>

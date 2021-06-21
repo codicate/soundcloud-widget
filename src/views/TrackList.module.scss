@@ -1,4 +1,12 @@
 @import "/src/styles/variables";
 
 #trackList {
+  display: flex;
+  flex-flow: column;
+
+  #paginationResult {
+    height: 16em;
+    display: grid;
+    place-items: center;
+  }
 }

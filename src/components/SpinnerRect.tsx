@@ -29,7 +29,7 @@ const Rect = styled.div<{
   animation-delay: -${props => 1.1 - props.index / 10}s;
 `;
 
-export default function Spinner(
+export default function SpinnerRect(
   {
     num = 5,
     height = 50,

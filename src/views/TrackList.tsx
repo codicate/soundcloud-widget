@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { selectSoundcloud, changeTrack, queryNextPage } from 'app/soundcloudSlice';
 
 import useEventListener from 'hooks/useEventListener';
+import SpinnerChase from 'components/SpinnerChase';
 import Track from './Track';
 
 
@@ -21,7 +22,7 @@ function TrackList() {
       const trackListOffset = trackListDiv.offsetTop + trackListDiv.clientHeight;
       const pageOffset = window.pageYOffset + window.innerHeight;
 
-      if (pageOffset > trackListOffset) {
+      if (pageOffset >= trackListOffset) {
         dispatch(queryNextPage());
       }
     }
@@ -45,6 +46,18 @@ function TrackList() {
           />
         ))
       }
+      <div id={styles.paginationResult}>
+        {(() => {
+          switch (paginationStatus) {
+            case 'pending':
+              return <SpinnerChase />;
+            case 'rejected':
+              return <div>Something went wrong :(</div>;
+            default:
+              return;
+          }
+        })()}
+      </div>
     </div>
   );
 }
