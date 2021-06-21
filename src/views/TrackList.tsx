@@ -52,12 +52,17 @@ function TrackList() {
           switch (paginationStatus) {
             case 'pending':
               return <SpinnerChase />;
+            case 'fulfilled':
+              return <MessageDisplay
+                iconCode='do_not_disturb_on'
+                message='You have reached the end'
+              />;
             case 'rejected':
               return <MessageDisplay
                 id={styles.rejected}
-                severity='warning'
+                severity='error'
                 iconCode='error'
-                message='Something Went Wrong'
+                message='Something went wrong'
               />;
             default:
               return;

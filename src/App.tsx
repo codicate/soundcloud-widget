@@ -34,14 +34,14 @@ function App() {
             return (tracks.length === 0)
               ? <MessageDisplay
                 iconCode='sentiment_dissatisfied'
-                message='No Result'
+                message='No result'
               />
               : <TrackList />;
           case 'rejected':
             return <MessageDisplay
               severity='error'
               iconCode='error'
-              message='Something Went Wrong'
+              message='Something went wrong'
             />;
           default:
             return;
