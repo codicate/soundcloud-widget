@@ -43,6 +43,12 @@ export default function Searchbar() {
       <div id={styles.searchbarControl}>
         <Button
           className='material-icons'
+          onClick={submitHandler}
+        >
+          search
+        </Button>
+        <Button
+          className='material-icons'
           onClick={() => {
             setInput('');
             searchbar.current && searchbar.current.focus();

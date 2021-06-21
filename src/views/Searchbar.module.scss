@@ -30,5 +30,11 @@
 
     display: flex;
     align-items: center;
+
+    &>:not(:first-child) {
+      padding-left: .5em;
+      margin-left: .5em;
+      box-shadow: -2px 0 $border;
+    }
   }
 }
