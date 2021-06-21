@@ -5,6 +5,10 @@ export const clamp = (
 ) =>
   Math.min(Math.max(num, min), max);
 
+export const getRandNumBetween = (min: number, max: number) => {
+  return Math.floor(Math.random() * (max - min) + min);
+};
+
 export const millisecond2second = (milliseconds: number) => {
   return Math.floor(milliseconds / 1000);
 };

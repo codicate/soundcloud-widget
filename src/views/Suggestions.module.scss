@@ -1,0 +1,28 @@
+@import "/src/styles/variables";
+@import "/src/styles/mixins";
+
+#suggestions {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 1em;
+
+  max-width: 50em;
+  margin: 0 auto;
+  padding: 1em;
+
+  color: hsl(0, 0, 85);
+ 
+  &>button {
+    margin: 0;
+    padding: .75em 1.5em;
+
+    cursor: pointer;
+    font-size: .875rem;
+
+    border-radius: 999rem;
+
+    &:hover {
+      color: white;
+    }
+  }
+}

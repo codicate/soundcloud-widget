@@ -4,6 +4,9 @@ import { RootState, statusState, errorHandler } from 'app/store';
 import Soundcloud, { PaginatedSearchResult, SoundcloudTrack, SoundcloudStreamPlayer } from 'soundcloud';
 
 
+const paginationLength = 20;
+
+
 Soundcloud.initialize({
   client_id: process.env.REACT_APP_SOUNDCLOUD_CLIENT_ID
 });
@@ -39,8 +42,8 @@ const paginatedSearch = async (
 ) => {
   const { collection, next_href } = await Soundcloud.get('/tracks', {
     q: input,
-    limit: limit,
-    offset: offset,
+    limit,
+    offset,
     linked_partitioning: 1
   }) as PaginatedSearchResult;
 
@@ -49,6 +52,20 @@ const paginatedSearch = async (
     nextQuery: next_href
   };
 };
+
+export const searchForTracks = createAsyncThunk(
+  'tracks/searchForTracks',
+  (input: string) => errorHandler(async () => {
+    const { tracks, nextQuery } = await paginatedSearch(input, paginationLength, 0);
+
+    return {
+      tracks,
+      input,
+      limit: paginationLength,
+      offset: paginationLength
+    };
+  })
+);
 
 export const queryNextPage = createAsyncThunk(
   'tracks/queryNextPage',
@@ -59,26 +76,6 @@ export const queryNextPage = createAsyncThunk(
     return {
       tracks,
       offset: offset + limit
-    };
-  })
-);
-
-export const searchForTracks = createAsyncThunk(
-  'tracks/searchForTracks',
-  ({
-    input,
-    limit = 10,
-  }: {
-    input: string;
-    limit?: number;
-  }) => errorHandler(async () => {
-    const { tracks, nextQuery } = await paginatedSearch(input, limit, 0);
-
-    return {
-      tracks,
-      input,
-      limit,
-      offset: limit
     };
   })
 );
@@ -170,7 +167,7 @@ const soundcloudSlice = createSlice({
     ).addCase(
       queryNextPage.fulfilled,
       (state, action: PayloadAction<QueryResult>) => {
-        state.paginationStatus = 'idle'
+        state.paginationStatus = 'idle';
         state.tracks = state.tracks.concat(action.payload.tracks);
         state.offset = action.payload.offset;
       }

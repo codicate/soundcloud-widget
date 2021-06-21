@@ -52,7 +52,7 @@ function TrackList() {
           switch (paginationStatus) {
             case 'pending':
               return <SpinnerChase />;
-            case 'idle':
+            case 'rejected':
               return <MessageDisplay
                 id={styles.rejected}
                 severity='warning'
