@@ -1,9 +1,10 @@
 import styles from './Searchbar.module.scss';
-import { useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 
 import { useAppDispatch } from 'app/hooks';
 import { searchForTracks } from 'app/soundcloudSlice';
 
+import useEventListener from 'hooks/useEventListener';
 import Button from 'components/Button';
 
 
@@ -12,6 +13,17 @@ export default function Searchbar() {
 
   const [input, setInput] = useState('');
   const searchbar = useRef<null | HTMLInputElement>(null);
+
+  const submitHandler = () => {
+    dispatch(searchForTracks(input));
+  };
+
+  useEventListener(document.body, "keydown", (e) => {
+    if (e.key === "/") {
+      e.preventDefault();
+      searchbar.current?.focus();
+    }
+  });
 
   return (
     <div id={styles.searchbar}>
@@ -23,11 +35,12 @@ export default function Searchbar() {
         onChange={(e) => setInput(e.target.value)}
         onKeyUp={(e) => {
           if (e.key === 'Enter') {
-            dispatch(searchForTracks((e.target as HTMLInputElement).value));
+            submitHandler();
           }
         }}
       />
-      <div id={styles.clearDiv}>
+
+      <div id={styles.searchbarControl}>
         <Button
           className='material-icons'
           onClick={() => {
