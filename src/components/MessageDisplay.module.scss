@@ -1,0 +1,22 @@
+.rejected {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+
+  :first-child {
+    margin: .25em;
+    font-size: 2rem;
+  }
+}
+
+.warning {
+  &>:first-child {
+    color: hsl(43, 70%, 55%);
+  }
+}
+
+.error {
+  &>:first-child {
+    color: hsl(0, 40%, 50%);
+  }
+}

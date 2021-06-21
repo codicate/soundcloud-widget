@@ -6,6 +6,7 @@ import { selectSoundcloud, changeTrack, queryNextPage } from 'app/soundcloudSlic
 
 import useEventListener from 'hooks/useEventListener';
 import SpinnerChase from 'components/SpinnerChase';
+import MessageDisplay from 'components/MessageDisplay';
 import Track from './Track';
 
 
@@ -51,8 +52,13 @@ function TrackList() {
           switch (paginationStatus) {
             case 'pending':
               return <SpinnerChase />;
-            case 'rejected':
-              return <div>Something went wrong :(</div>;
+            case 'idle':
+              return <MessageDisplay
+                id={styles.rejected}
+                severity='warning'
+                iconCode='error'
+                message='Something Went Wrong'
+              />;
             default:
               return;
           }

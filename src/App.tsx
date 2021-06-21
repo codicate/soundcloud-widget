@@ -5,6 +5,8 @@ import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { selectSoundcloud, playTrack } from 'app/soundcloudSlice';
 
 import SpinnerRect from 'components/SpinnerRect';
+import MessageDisplay from 'components/MessageDisplay';
+
 import Searchbar from 'views/Searchbar';
 import MiniPlayer from 'views/Miniplayer';
 import TrackList from 'views/TrackList';
@@ -27,10 +29,17 @@ function App() {
             return <SpinnerRect />;
           case 'fulfilled':
             return (tracks.length === 0)
-              ? <div id={styles.noResult}>No Result :(</div>
+              ? <MessageDisplay
+                iconCode='sentiment_dissatisfied'
+                message='No Result'
+              />
               : <TrackList />;
           case 'rejected':
-            return <div id={styles.noResult}>Something went wrong :(</div>;
+            return <MessageDisplay
+              severity='error'
+              iconCode='error'
+              message='Something Went Wrong'
+            />;
           default:
             return;
         }
