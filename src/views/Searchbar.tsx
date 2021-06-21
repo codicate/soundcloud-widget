@@ -26,7 +26,6 @@ export default function Searchbar() {
             dispatch(searchForTracks({
               input: (e.target as HTMLInputElement).value,
               limit: 20,
-              pagination: true
             }));
           }
         }}
