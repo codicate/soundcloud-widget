@@ -19,13 +19,15 @@
 
     height: 32px;
     width: 32px;
-    
+
     margin-right: 1em;
 
     .cover {
-      @include artworkPlaceholder;     
+      @include artworkPlaceholder;
+      height: inherit;
+      width: inherit;
     }
-    
+
     button {
       position: absolute;
       inset: 0;
