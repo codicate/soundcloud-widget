@@ -26,7 +26,7 @@ export default function Searchbar() {
   });
 
   return (
-    <div id={styles.searchbar}>
+    <div className={styles.searchbar}>
       <input
         autoFocus
         placeholder='Search'
@@ -40,7 +40,7 @@ export default function Searchbar() {
         }}
       />
 
-      <div id={styles.searchbarControl}>
+      <div className={styles.searchbarControl}>
         <Button
           className='material-icons'
           onClick={submitHandler}
@@ -56,6 +56,10 @@ export default function Searchbar() {
         >
           clear
         </Button>
+      </div>
+
+      <div className={styles.focusTip}>
+        Press <code>/</code> to Focus
       </div>
     </div>
   );

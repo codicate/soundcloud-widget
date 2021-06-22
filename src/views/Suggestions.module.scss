@@ -3,21 +3,23 @@
 
 #suggestions {
   display: flex;
+  justify-content: center;
   flex-flow: row wrap;
   gap: 1em;
 
   max-width: 50em;
-  margin: 0 auto;
+  margin: 4em auto 0;
   padding: 1em;
 
   color: hsl(0, 0%, 85%);
 
   &>button {
     margin: 0;
-    padding: .75em 1.5em;
+    padding: .875em 1.75em;
 
     cursor: pointer;
     font-size: .875rem;
+    line-height: 100%;
 
     border-radius: 999rem;
 
