@@ -2,6 +2,7 @@ import { createSlice, createDraftSafeSelector, createAsyncThunk, PayloadAction }
 import { RootState, statusState, errorHandler } from 'app/store';
 
 import Soundcloud, { PaginatedSearchResult, SoundcloudTrack, SoundcloudStreamPlayer } from 'soundcloud';
+import { clamp } from 'utils/functions';
 
 
 const paginationLength = 20;
@@ -85,14 +86,14 @@ export const queryNextPage = createAsyncThunk(
 
 export const playTrack = createAsyncThunk(
   'tracks/playTrack',
-  async (trackId: number) => errorHandler(async () => {
+  (trackId: number) => errorHandler(async () => {
     return await Soundcloud.stream('/tracks/' + trackId);
   })
 );
 
 export const prevTrack = createAsyncThunk(
   'tracks/prevTrack',
-  async (_, { getState }) => errorHandler(async () => {
+  (_, { getState }) => errorHandler(async () => {
     const state = (getState() as RootState).soundcloud;
 
     (state.player?.isPlaying())
@@ -106,30 +107,42 @@ export const prevTrack = createAsyncThunk(
 
 export const nextTrack = createAsyncThunk(
   'tracks/nextTrack',
-  async (_, { getState }) => errorHandler(async () => {
-    const state = (getState() as RootState).soundcloud;
+  (_, { getState }) => errorHandler(async () => {
+    const { player, currentTrackIndex, tracks } = (getState() as RootState).soundcloud;
 
-    (state.player?.isPlaying())
-      && (await state.player?.pause());
+    (player?.isPlaying())
+      && (await player?.pause());
 
-    return (state.currentTrackIndex >= state.tracks.length - 1)
+    return (currentTrackIndex >= tracks.length - 1)
       ? 0
-      : state.currentTrackIndex + 1;
+      : currentTrackIndex + 1;
   })
 );
 
 export const pauseTrack = createAsyncThunk(
   'tracks/pauseTrack',
-  async (pause: boolean, { getState }) => errorHandler(async () => {
-    const state = (getState() as RootState).soundcloud;
+  (pause: boolean, { getState }) => errorHandler(async () => {
+    const { player } = (getState() as RootState).soundcloud;
 
     (pause)
-      ? (state.player?.isPlaying())
-      && (await state.player?.pause())
-      : (!state.player?.isPlaying())
-      && (await state.player?.play());
+      ? (player?.isPlaying())
+      && (await player?.pause())
+      : (!player?.isPlaying())
+      && (await player?.play());
 
     return pause;
+  })
+);
+
+export const seekTrack = createAsyncThunk(
+  'tracks/seekTrack',
+  async (second: number, { getState }) => errorHandler(async () => {
+    const { player } = (getState() as RootState).soundcloud;
+    if (!player) return;
+
+    const currentTime = player.currentTime();
+    const seekTime = clamp(currentTime + second * 1000, 0, player.getDuration());
+    await player?.seek(seekTime);
   })
 );
 
@@ -206,6 +219,9 @@ const soundcloudSlice = createSlice({
       (state, action: PayloadAction<boolean>) => {
         state.isPaused = action.payload;
       }
+    ).addCase(
+      seekTrack.fulfilled,
+      () => { }
     );
   }
 });

@@ -2,7 +2,7 @@ import styles from './Miniplayer.module.scss';
 import { useState, useEffect } from 'react';
 
 import { useAppSelector, useAppDispatch } from 'app/hooks';
-import { selectSoundcloud, pauseTrack, prevTrack, nextTrack } from 'app/soundcloudSlice';
+import { selectSoundcloud, pauseTrack, prevTrack, nextTrack, seekTrack } from 'app/soundcloudSlice';
 
 import { millisecond2second, displayTime } from 'utils/functions';
 import { imgPlaceholder } from 'utils/constants';
@@ -79,6 +79,7 @@ export default function MiniPlayer() {
           <Button
             id={styles.rewind}
             className='material-icons'
+            onClick={() => dispatch(seekTrack(-10))}
           >
             fast_rewind
           </Button>
@@ -110,6 +111,7 @@ export default function MiniPlayer() {
           <Button
             id={styles.forward}
             className='material-icons'
+            onClick={() => dispatch(seekTrack(10))}
           >
             fast_forward
           </Button>
