@@ -10,18 +10,11 @@ Making the miniplayer dragable was a pain. I initally created a useDrag hook, bu
 
 ## Todos
 
-### Fixes:
-- Search bar select text is disabled. Turn that on
-- Fetch more songs than just ~10, I know in SoundCloud have way more search result with the same input
-
-
 ### Features:
 - Add songs to playlist, and will play them in order
 - Shuffle in playlist
 - localStorage or Firebase to store playlist
 - Multiple playlists and queue
-- Fast forward and backward
-- Miniplayer resizing
 
 
 ### End Goals:
