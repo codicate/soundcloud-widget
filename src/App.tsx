@@ -28,8 +28,10 @@ function App() {
         switch (searchStatus) {
           case 'idle':
             return <Suggestions />;
+
           case 'pending':
             return <SpinnerRect />;
+
           case 'fulfilled':
             return (tracks.length === 0)
               ? <MessageDisplay
@@ -37,12 +39,14 @@ function App() {
                 message='No result'
               />
               : <TrackList />;
+
           case 'rejected':
             return <MessageDisplay
               severity='error'
               iconCode='error'
               message='Something went wrong'
             />;
+            
           default:
             return;
         }

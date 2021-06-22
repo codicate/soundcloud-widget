@@ -11,11 +11,33 @@
     border-bottom: 2px solid $border;
   }
 
-  .cover {
-    @include artworkPlaceholder;
+  .coverDiv {
+    position: relative;
+
+    display: grid;
+    place-items: center;
+
     height: 32px;
     width: 32px;
+    
     margin-right: 1em;
+
+    .cover {
+      @include artworkPlaceholder;     
+    }
+    
+    button {
+      position: absolute;
+      inset: 0;
+      display: none;
+    }
+  }
+
+  &:hover>.coverDiv {
+    button {
+      display: block;
+      background-color: hsl(0, 0, 0%, 0.7);
+    }
   }
 
   .info {
@@ -40,7 +62,7 @@
       font-weight: 500;
       font-size: 0.875rem;
     }
-  
+
     .artist {
       font-size: 0.75rem;
     }

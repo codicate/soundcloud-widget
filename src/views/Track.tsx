@@ -18,11 +18,19 @@ function Track(
     <div
       className={styles.track}
     >
-      <img
-        className={styles.cover}
-        alt={info.title + ' cover'}
-        src={info.artworkURL || imgPlaceholder}
-      />
+      <div className={styles.coverDiv}>
+        <img
+          className={styles.cover}
+          alt={info.title + ' cover'}
+          src={info.artworkURL || imgPlaceholder}
+        />
+        <Button
+          className='material-icons'
+          onClick={play}
+        >
+          play_arrow
+        </Button>
+      </div>
 
       <div className={styles.info}>
         <p className={styles.title}>
@@ -36,7 +44,6 @@ function Track(
       <div className={styles.control}>
         <Button
           className='material-icons'
-          onClick={play}
         >
           add_box
         </Button>

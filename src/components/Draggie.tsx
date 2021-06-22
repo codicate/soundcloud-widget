@@ -4,7 +4,7 @@ import useEventListener from 'hooks/useEventListener';
 import { clamp } from 'utils/functions';
 
 /**
- * @params controlledMode - if set `true`, a children must have a classname of 'draggie' to drag the draggie itself
+ * @params controlledMode - if set `true`, a children must have a className of 'draggie' to drag the draggie itself
  */
 function Draggie({
   controlledMode = false,

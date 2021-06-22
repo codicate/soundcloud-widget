@@ -21,7 +21,8 @@
 
     border-radius: 999rem;
 
-    &:hover {
+    &:hover,
+    &:focus {
       color: white;
     }
   }

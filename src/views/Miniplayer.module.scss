@@ -5,8 +5,11 @@
   position: fixed;
   bottom: 0;
   right: 0;
+  
   height: 16rem;
   width: 16rem;
+
+  overflow: hidden;
 
   &>* {
     height: 100%;
@@ -19,6 +22,10 @@
 
   .cover {
     @include artworkPlaceholder;
+  }
+
+  &:hover>.cover {
+    filter: blur(2px);
   }
 }
 
@@ -34,7 +41,7 @@
   padding: 0.5em;
 
   user-select: none;
-  background: linear-gradient(0deg, hsla(0, 0%, 0%, 0.5) 30%, hsla(0, 0%, 100%, 0.1) 100%);
+  background: linear-gradient(0deg, hsla(0, 0%, 0%, 0.8) 30%, hsla(0, 0%, 100%, 0.1) 100%);
 
   opacity: 0;
   transition: opacity 0.2s ease-out;
@@ -43,9 +50,12 @@
     opacity: 1;
   }
 
-  #draggie {
+  &>button {
     position: absolute;
     top: 0;
+  }
+
+  #draggie {
     left: 0;
 
     padding: 10px 6px;
@@ -58,8 +68,6 @@
   }
 
   #expand {
-    position: absolute;
-    top: 0;
     right: 0;
 
     padding: 8px 8px;
