@@ -26,6 +26,10 @@
   &:hover>.cover {
     filter: blur(3px) saturate(150%) brightness(0.9);
   }
+
+  &:hover>#trackProgress {
+    height: 4px;
+  }
 }
 
 #overlay {
@@ -37,7 +41,7 @@
   justify-content: flex-end;
   align-items: center;
 
-  padding: 0.5em;
+  padding: 1em;
 
   user-select: none;
   background: linear-gradient(0deg, hsla(0, 0%, 0%, 0.7) 30%, hsla(0, 0%, 100%, 0.1) 100%);
@@ -126,9 +130,11 @@
   border-radius: 0;
   border: none;
   appearance: none;
+  pointer-events: none;
 
-  height: 2px;
+  height: 1px;
   background-color: hsla(0, 0%, 0%, 0.7);
+  transition: .2s;
 
   $progressColor: hsl(0, 0, 100%, 0.7);
   color: $progressColor;
