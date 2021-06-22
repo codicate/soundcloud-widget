@@ -50,9 +50,19 @@ export default function MiniPlayer() {
       />
 
       <div id={styles.overlay}>
-        <div className={styles.draggie + ' material-icons draggie'}>
+        <Button
+          id={styles.draggie}
+          className='material-icons draggie'
+        >
           drag_indicator
-        </div>
+        </Button>
+        <Button
+          id={styles.expand}
+          className='material-icons'
+        >
+          launch
+        </Button>
+
         <div className={styles.info}>
           <p className={styles.title}>
             {currentTrack.title}
@@ -66,6 +76,12 @@ export default function MiniPlayer() {
         </div>
 
         <div className={styles.control}>
+          <Button
+            id={styles.rewind}
+            className='material-icons'
+          >
+            fast_rewind
+          </Button>
           <Button
             id={styles.previous}
             className='material-icons'
@@ -91,8 +107,14 @@ export default function MiniPlayer() {
           >
             skip_next
           </Button>
+          <Button
+            id={styles.forward}
+            className='material-icons'
+          >
+            fast_forward
+          </Button>
         </div>
       </div>
-    </Draggie>
+    </Draggie >
   );
 }
