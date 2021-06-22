@@ -2,10 +2,9 @@
 @import "/src/styles/mixins";
 
 #miniplayer {
-  position: fixed;
   bottom: 0;
   right: 0;
-  
+
   height: 16rem;
   width: 16rem;
 
@@ -116,5 +115,29 @@
   #play {
     font-size: 28px;
     margin: 0 0.125em;
+  }
+}
+
+#trackProgress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+
+  border-radius: 0;
+  border: none;
+  appearance: none;
+
+  height: 2px;
+  background-color: hsla(0, 0%, 0%, 0.7);
+
+  $progressColor: hsl(0, 0, 100%, 0.7);
+  color: $progressColor;
+
+  &::-moz-progress-bar {
+    background: $progressColor;
+  }
+
+  &::-webkit-progress-value {
+    background: $progressColor;
   }
 }

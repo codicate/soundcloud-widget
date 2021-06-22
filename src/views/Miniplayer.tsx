@@ -117,6 +117,12 @@ export default function MiniPlayer() {
           </Button>
         </div>
       </div>
+
+      <progress
+        id={styles.trackProgress}
+        max={duration}
+        value={timestamp}
+      />
     </Draggie >
   );
 }
