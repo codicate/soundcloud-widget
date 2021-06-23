@@ -22,12 +22,6 @@
 
     margin-right: 1em;
 
-    .cover {
-      @include artworkPlaceholder;
-      height: inherit;
-      width: inherit;
-    }
-
     button {
       position: absolute;
       inset: 0;

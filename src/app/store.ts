@@ -7,6 +7,7 @@ import storage from 'redux-persist/lib/storage';
 
 import playerReducer from 'app/playerSlice';
 import trackReducer from 'app/trackSlice';
+import playlistReducer from 'app/playlistSlice';
 
 import Soundcloud from 'soundcloud';
 
@@ -24,7 +25,8 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   player: playerReducer,
-  track: trackReducer
+  track: trackReducer,
+  playlist: playlistReducer
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

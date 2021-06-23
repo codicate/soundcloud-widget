@@ -133,5 +133,5 @@ export default function MiniPlayer() {
         }}
       />
     </Draggie >
-  ) : (<> no</>);
+  ) : (<></>);
 }

@@ -39,11 +39,7 @@ function TrackList() {
         tracks.map((track, index) => (
           <Track
             key={index}
-            info={{
-              title: track.title,
-              artist: track.user.username,
-              artworkURL: track.artwork_url?.replace(/large(?=.jpg)/i, 'small')
-            }}
+            track={track}
             play={() => dispatch(changeTrack(index))}
           />
         ))

@@ -1,0 +1,8 @@
+@import "/src/styles/variables";
+@import "/src/styles/mixins";
+
+.cover {
+  @include artworkPlaceholder;
+  height: inherit;
+  width: inherit;
+}

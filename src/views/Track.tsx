@@ -1,29 +1,27 @@
 import styles from './Track.module.scss';
+import { useState } from 'react';
 
-import { imgPlaceholder } from 'utils/constants';
+import { SoundcloudTrack } from 'soundcloud';
+
+import AddToPlaylist from './AddToPlaylist';
+import TrackCover from 'views/TrackCover';
 import Button from 'components/Button';
 
 
-function Track(
-  { info, play }: {
-    info: {
-      title: string,
-      artist: string,
-      artworkURL: string;
-    },
-    play: () => void;
-  }
-) {
+function Track({
+  track, play
+}: {
+  track: SoundcloudTrack;
+  play: () => void;
+}) {
+  const [showAddToPlaylist, setShowAddToPlaylist] = useState(false);
+
   return (
     <div
       className={styles.track}
     >
       <div className={styles.coverDiv}>
-        <img
-          className={styles.cover}
-          alt={info.title + ' cover'}
-          src={info.artworkURL || imgPlaceholder}
-        />
+        <TrackCover track={track} />
         <Button
           className='material-icons'
           onClick={play}
@@ -34,20 +32,25 @@ function Track(
 
       <div className={styles.info}>
         <p className={styles.title}>
-          {info.title}
+          {track.title}
         </p>
         <p className={styles.artist}>
-          {info.artist}
+          {track.user.username}
         </p>
       </div>
 
       <div className={styles.control}>
         <Button
           className='material-icons'
+          onClick={() => setShowAddToPlaylist(!showAddToPlaylist)}
         >
           add_box
         </Button>
       </div>
+
+      {(showAddToPlaylist) && (
+        <AddToPlaylist />
+      )}
     </div>
   );
 }
