@@ -123,6 +123,14 @@ export default function MiniPlayer() {
         id={styles.trackProgress}
         max={duration}
         value={timestamp}
+        onClick={(e) => {
+          const progressBar = e.target as HTMLProgressElement;
+          const pos = progressBar.getBoundingClientRect();
+          const clickOffset = e.clientX - pos.left;
+          const progressBarWidth = progressBar.clientWidth;
+          const distanceToSeek = clickOffset / progressBarWidth * duration - timestamp;
+          dispatch(seekTrack(distanceToSeek / 1000));
+        }}
       />
     </Draggie >
   ) : (<> no</>);

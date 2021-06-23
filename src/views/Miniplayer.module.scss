@@ -29,8 +29,14 @@ $hoverTransition: .3s;
     filter: blur(3px) saturate(150%) brightness(0.9);
   }
 
-  &:hover>#trackProgress {
-    height: 4px;
+  &:hover {
+    #trackProgress {
+      height: 6px;
+    }
+
+    #overlay {
+      opacity: 1;
+    }
   }
 }
 
@@ -50,10 +56,6 @@ $hoverTransition: .3s;
 
   opacity: 0;
   transition: opacity $hoverTransition ease-out;
-
-  &:hover {
-    opacity: 1;
-  }
 
   &>button {
     position: absolute;
@@ -132,7 +134,7 @@ $hoverTransition: .3s;
   border-radius: 0;
   border: none;
   appearance: none;
-  pointer-events: none;
+  cursor: pointer;
 
   height: 1px;
   background-color: hsla(0, 0%, 0%, 0.7);
