@@ -3,7 +3,8 @@ import styles from './AddToPlaylist.module.scss';
 import { useAppSelector, useAppDispatch } from 'app/hooks';
 import { selectPlaylist, createPlaylist, addToPlaylist } from 'app/playlistSlice';
 
-import PlaylistOverview from './PlaylistOverview';
+import PlaylistOverview from 'views/PlaylistOverview';
+import Button from 'components/Button';
 
 
 function AddToPlaylist() {
@@ -12,12 +13,23 @@ function AddToPlaylist() {
 
   return (
     <div className={styles.addToPlaylist}>
-      {(playlists).map((playlist, idx) =>
-        <PlaylistOverview
-          key={idx}
-          playlist={playlist}
-        />
-      )}
+      <p className={styles.title}>
+        Add to playlist
+      </p>
+      <div className={styles.playlists}>
+        {(playlists).map((playlist, idx) =>
+          <PlaylistOverview
+            key={idx}
+            playlist={playlist}
+          />
+        )}
+      </div>
+      <Button styledAs='bigWhite' className={styles.add}>
+        <span className='material-icons'>
+          add
+        </span>
+        NEW PLAYLIST
+      </Button>
     </div>
   );
 }

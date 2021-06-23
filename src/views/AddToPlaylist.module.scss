@@ -1,0 +1,38 @@
+@import "/src/styles/variables";
+@import "/src/styles/mixins";
+
+.addToPlaylist {
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  visibility: visible;
+  overflow: hidden;
+  z-index: 1;
+
+  display: flex;
+  flex-flow: column;
+
+  width: 16em;
+
+  border-radius: .5em;
+  border: 1px solid $border;
+  background-color: $background;
+
+  &>:not(:is(:last-child, :empty)) {
+    padding: 1em;
+    border-bottom: 1px solid $border;
+  }
+
+  .title {
+    margin: 0;
+
+    font-size: 1.125rem;
+    color: $faded;
+    font-weight: bold;
+  }
+
+  .playlists {}
+
+  .add {}
+}

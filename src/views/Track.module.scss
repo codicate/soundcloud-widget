@@ -2,6 +2,8 @@
 @import "/src/styles/mixins";
 
 .track {
+  position: relative;
+
   display: flex;
   align-items: center;
 
@@ -76,10 +78,20 @@
     margin-left: auto;
     padding: 0 1em;
 
-    display: none;
+    visibility: hidden;
+
+    .addToPlaylist {
+      &>div {
+        visibility: hidden;
+      }
+
+      &:focus-within>div {
+        visibility: visible;
+      }
+    }
   }
 
   &:hover>.control {
-    display: block;
+    visibility: visible;
   }
 }

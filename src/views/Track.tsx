@@ -40,17 +40,13 @@ function Track({
       </div>
 
       <div className={styles.control}>
-        <Button
-          className='material-icons'
-          onClick={() => setShowAddToPlaylist(!showAddToPlaylist)}
-        >
-          add_box
+        <Button className={styles.addToPlaylist}>
+          <span className='material-icons'>
+            add_box
+          </span>
+          <AddToPlaylist />
         </Button>
       </div>
-
-      {(showAddToPlaylist) && (
-        <AddToPlaylist />
-      )}
     </div>
   );
 }

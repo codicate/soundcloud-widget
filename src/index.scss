@@ -1,5 +1,6 @@
 @import-normalize;
 @import "/src/styles/variables";
+@import "/src/styles/mixins";
 
 *,
 *::before,
@@ -50,5 +51,5 @@ textarea {
   padding: 0 2em;
 
   color: white;
-  background-color: hsl(0, 0%, 1%);
+  background-color: $background;
 }
