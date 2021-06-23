@@ -2,8 +2,7 @@ import styles from './Miniplayer.module.scss';
 import { useState, useEffect } from 'react';
 
 import { useAppSelector, useAppDispatch } from 'app/hooks';
-import { selectPlayer, isPlayerPaused, selectCurrentTrack, pauseTrack, seekTrack, skipTrack } from 'app/playerSlice';
-
+import { selectPlayer, selectCurrentTrack, pauseTrack, seekTrack, skipTrack } from 'app/playerSlice';
 
 import { millisecond2second, displayTime } from 'utils/functions';
 import { imgPlaceholder } from 'utils/constants';
@@ -16,7 +15,6 @@ export default function MiniPlayer() {
   const dispatch = useAppDispatch();
   const currentTrack = useAppSelector(selectCurrentTrack);
   const { player } = useAppSelector(selectPlayer);
-  const isPaused = useAppSelector(isPlayerPaused);
 
   const [timestamp, setTimestamp] = useState(0);
   const [duration, setDuration] = useState(1);
@@ -99,7 +97,7 @@ export default function MiniPlayer() {
             onClick={() => dispatch(pauseTrack())}
           >
             {
-              (isPaused)
+              (player?.isPlaying())
                 ? 'pause'
                 : 'play_arrow'
             }

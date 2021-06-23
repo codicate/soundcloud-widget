@@ -112,11 +112,6 @@ export const selectPlayer = createDraftSafeSelector(
   (player) => player
 );
 
-export const isPlayerPaused = createDraftSafeSelector(
-  selectSelf,
-  (player) => player.player?.isPlaying()
-);
-
 export const selectCurrentTrack = createDraftSafeSelector(
   selectSelf,
   selectTrack,
