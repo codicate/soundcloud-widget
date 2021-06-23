@@ -2,7 +2,8 @@ import styles from './Miniplayer.module.scss';
 import { useState, useEffect } from 'react';
 
 import { useAppSelector, useAppDispatch } from 'app/hooks';
-import { selectSoundcloud, pauseTrack, prevTrack, nextTrack, seekTrack } from 'app/soundcloudSlice';
+import { selectPlayer, isPlayerPaused, selectCurrentTrack, pauseTrack, seekTrack, skipTrack } from 'app/playerSlice';
+
 
 import { millisecond2second, displayTime } from 'utils/functions';
 import { imgPlaceholder } from 'utils/constants';
@@ -13,7 +14,9 @@ import Button from 'components/Button';
 
 export default function MiniPlayer() {
   const dispatch = useAppDispatch();
-  const { player, currentTrack, isPaused } = useAppSelector(selectSoundcloud);
+  const currentTrack = useAppSelector(selectCurrentTrack);
+  const { player } = useAppSelector(selectPlayer);
+  const isPaused = useAppSelector(isPlayerPaused);
 
   const [timestamp, setTimestamp] = useState(0);
   const [duration, setDuration] = useState(1);
@@ -34,14 +37,14 @@ export default function MiniPlayer() {
 
     const timestampTimer = setInterval(() => {
       const newTime = player.currentTime();
-      if (newTime >= duration) dispatch(nextTrack());
+      if (newTime >= duration) dispatch(skipTrack('next'));
       else setTimestamp(newTime);
     }, 1000);
 
     return () => clearInterval(timestampTimer);
   }, [dispatch, player, duration]);
 
-  return (currentTrack) && (
+  return (currentTrack) ? (
     <Draggie controlledMode id={styles.miniplayer}>
       <img
         className={styles.cover}
@@ -86,17 +89,17 @@ export default function MiniPlayer() {
           <Button
             id={styles.previous}
             className='material-icons'
-            onClick={() => dispatch(prevTrack())}
+            onClick={() => dispatch(skipTrack('prev'))}
           >
             skip_previous
           </Button>
           <Button
             id={styles.play}
             className='material-icons'
-            onClick={() => dispatch(pauseTrack(!isPaused))}
+            onClick={() => dispatch(pauseTrack())}
           >
             {
-              (player?.isPlaying())
+              (isPaused)
                 ? 'pause'
                 : 'play_arrow'
             }
@@ -104,7 +107,7 @@ export default function MiniPlayer() {
           <Button
             id={styles.next}
             className='material-icons'
-            onClick={() => dispatch(nextTrack())}
+            onClick={() => dispatch(skipTrack('next'))}
           >
             skip_next
           </Button>
@@ -124,5 +127,5 @@ export default function MiniPlayer() {
         value={timestamp}
       />
     </Draggie >
-  );
+  ) : (<> no</>);
 }

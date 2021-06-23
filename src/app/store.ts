@@ -5,7 +5,15 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
-import soundcloudReducer from 'app/soundcloudSlice';
+import playerReducer from 'app/playerSlice';
+import trackReducer from 'app/trackSlice';
+
+import Soundcloud from 'soundcloud';
+
+
+Soundcloud.initialize({
+  client_id: process.env.REACT_APP_SOUNDCLOUD_CLIENT_ID
+});
 
 
 const persistConfig = {
@@ -15,7 +23,8 @@ const persistConfig = {
 };
 
 const rootReducer = combineReducers({
-  soundcloud: soundcloudReducer,
+  player: playerReducer,
+  track: trackReducer
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -29,7 +38,7 @@ export const store = configureStore({
         FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER,
         'tracks/playTrack/fulfilled'
       ],
-      ignoredPaths: ['soundcloud.player', 'soundcloud.tracks']
+      ignoredPaths: ['player.player', 'track.tracks']
     }
   })
 });

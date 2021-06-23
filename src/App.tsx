@@ -2,7 +2,8 @@ import styles from './App.module.scss';
 import { useEffect } from 'react';
 
 import { useAppDispatch, useAppSelector } from 'app/hooks';
-import { selectSoundcloud, playTrack } from 'app/soundcloudSlice';
+import { selectPlayer, playTrack } from 'app/playerSlice';
+import { selectTrack } from 'app/trackSlice';
 
 import SpinnerRect from 'components/SpinnerRect';
 import MessageDisplay from 'components/MessageDisplay';
@@ -14,12 +15,12 @@ import TrackList from 'views/TrackList';
 
 function App() {
   const dispatch = useAppDispatch();
-  const { searchStatus, tracks, currentTrack } = useAppSelector(selectSoundcloud);
+  const { searchStatus, tracks } = useAppSelector(selectTrack);
+  const { currentTrackIndex } = useAppSelector(selectPlayer);
 
   useEffect(() => {
-    (currentTrack) &&
-      dispatch(playTrack(currentTrack.id));
-  }, [currentTrack, dispatch]);
+    dispatch(playTrack());
+  }, [dispatch, currentTrackIndex]);
 
   return <>
     <Searchbar />
@@ -46,7 +47,7 @@ function App() {
               iconCode='error'
               message='Something went wrong'
             />;
-            
+
           default:
             return;
         }

@@ -2,7 +2,8 @@ import styles from './TrackList.module.scss';
 import { useRef } from 'react';
 
 import { useAppDispatch, useAppSelector } from 'app/hooks';
-import { selectSoundcloud, changeTrack, queryNextPage } from 'app/soundcloudSlice';
+import { selectTrack, queryNextPage } from 'app/trackSlice';
+import { changeTrack } from 'app/playerSlice';
 
 import useEventListener from 'hooks/useEventListener';
 import SpinnerChase from 'components/SpinnerChase';
@@ -12,7 +13,7 @@ import Track from './Track';
 
 function TrackList() {
   const dispatch = useAppDispatch();
-  const { tracks, paginationStatus } = useAppSelector(selectSoundcloud);
+  const { tracks, paginationStatus } = useAppSelector(selectTrack);
 
   const trackListRef = useRef<HTMLDivElement>(null);
 

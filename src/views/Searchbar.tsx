@@ -1,8 +1,8 @@
 import styles from './Searchbar.module.scss';
-import React, { useState, useRef } from 'react';
+import { useState, useRef } from 'react';
 
 import { useAppDispatch } from 'app/hooks';
-import { searchForTracks } from 'app/soundcloudSlice';
+import { searchForTracks } from 'app/trackSlice';
 
 import useEventListener from 'hooks/useEventListener';
 import Button from 'components/Button';

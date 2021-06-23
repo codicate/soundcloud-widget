@@ -1,7 +1,7 @@
 import styles from './Suggestions.module.scss';
 
 import { useAppDispatch } from 'app/hooks';
-import { searchForTracks } from 'app/soundcloudSlice';
+import { searchForTracks } from 'app/trackSlice';
 
 import { getRandNumBetween } from 'utils/functions';
 
