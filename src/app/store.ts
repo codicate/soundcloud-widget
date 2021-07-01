@@ -20,7 +20,7 @@ Soundcloud.initialize({
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: []
+  whitelist: ['playlist']
 };
 
 const rootReducer = combineReducers({
