@@ -1,0 +1,33 @@
+.group {
+  position: relative;
+
+  input,
+  textarea {
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    background-color: inherit;
+
+    text-decoration: none;
+    border: none;
+    border-radius: 0;
+
+    display: block;
+    width: 100%;
+    padding: 1em 1.5em;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  label {
+    font-size: 16px;
+    font-weight: normal;
+    position: absolute;
+    pointer-events: none;
+    left: 5px;
+    top: 10px;
+    transition: 300ms ease all;
+  }
+}

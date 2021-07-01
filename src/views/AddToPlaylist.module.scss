@@ -26,6 +26,8 @@
   border: 1px solid $border;
   background-color: $background;
 
+  font-weight: 500;
+
   &>:not(:is(:last-child, :empty)) {
     padding: .875em 1.5em;
     border-bottom: 1px solid $border;
@@ -38,7 +40,6 @@
 
     font-size: 1rem;
     color: $faded;
-    font-weight: 500;
 
     p {
       margin: 0;
@@ -47,5 +48,21 @@
 
   .playlists {}
 
-  .add {}
+  .newPlaylistForm {
+
+  }
+
+  .btns {
+    display: flex;
+    width: 100%;
+    font-weight: 400;
+    font-size: .875rem;
+
+    &>* {
+      flex: 1 auto;
+      &:not(:last-child) {
+        border-right: 2px solid black;
+      }
+    }
+  }
 }

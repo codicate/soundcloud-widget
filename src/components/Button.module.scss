@@ -2,8 +2,13 @@
 @import "/src/styles/mixins";
 
 .btn {
-  cursor: pointer;
+  text-decoration: none;
+  font-weight: inherit;
+  color: inherit;
+  background-color: transparent;
+  border: none;
   user-select: none;
+  cursor: pointer;
 
   color: $alternative;
 
@@ -17,16 +22,17 @@
   }
 
   &.bigWhite {
+    font-family: inherit;
+    font-size: inherit;
+
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: .75em;
 
     padding: .5em .2em;
 
     background-color: white;
     color: black;
-
-    text-transform: uppercase;
-    font-weight: bolder;
   }
 }

@@ -6,6 +6,8 @@ import { selectPlaylist, createPlaylist, addToPlaylist } from 'app/playlistSlice
 
 import PlaylistOverview from 'views/PlaylistOverview';
 import Button from 'components/Button';
+import Form from 'components/Form';
+import { useState } from 'react';
 
 
 function AddToPlaylist({
@@ -17,12 +19,13 @@ function AddToPlaylist({
 }) {
   const dispatch = useAppDispatch();
   const playlists = useAppSelector(selectPlaylist);
+  const [showNewPlaylist, setShowNewPlaylist] = useState(false);
 
   return (
     <div
       className={styles.overlay}
       onClick={(e) => {
-        if(e.target !== e.currentTarget) return;
+        if (e.target !== e.currentTarget) return;
         hideAddToPlaylist();
       }}
     >
@@ -33,20 +36,58 @@ function AddToPlaylist({
           </p>
           <Button className='material-icons'>close</Button>
         </div>
-        <div className={styles.playlists}>
-          {(playlists).map((playlist, idx) =>
-            <PlaylistOverview
-              key={idx}
-              playlist={playlist}
-            />
-          )}
-        </div>
-        <Button styledAs='bigWhite' className={styles.add}>
-          <span className='material-icons'>
-            add
-          </span>
-          NEW PLAYLIST
-        </Button>
+        {(
+          showNewPlaylist
+        ) ? (
+          <Form
+            className={styles.newPlaylistForm}
+            inputItems={{
+              playlistName: {
+                placeholder: 'playlistName',
+                required: true,
+              }
+            }}
+            submitFn={(inputItems) => {
+              dispatch(createPlaylist(inputItems.playlistName));
+              setShowNewPlaylist(false);
+            }}
+          >
+            <div className={styles.btns}>
+              <Button
+                styledAs='bigWhite'
+                onClick={() => setShowNewPlaylist(false)}
+              >
+                Cancel
+              </Button>
+              <Button
+                styledAs='bigWhite'
+                type='submit'
+              >
+                Create
+              </Button>
+            </div>
+          </Form>
+        ) : (
+          <>
+            <div className={styles.playlists}>
+              {(playlists).map((playlist, idx) =>
+                <PlaylistOverview
+                  key={idx}
+                  playlist={playlist}
+                />
+              )}
+            </div>
+            <Button
+              styledAs='bigWhite'
+              onClick={() => setShowNewPlaylist(true)}
+            >
+              <span className='material-icons'>
+                add
+              </span>
+              New Playlist
+            </Button>
+          </>
+        )}
       </div>
     </div>
   );

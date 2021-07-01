@@ -1,0 +1,10 @@
+.form {
+  display: flex;
+  flex-flow: column;
+  
+  .inputs{
+    display: flex;
+    flex-flow: column;
+    gap: 1em;
+  }
+}
