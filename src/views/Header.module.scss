@@ -1,0 +1,22 @@
+@import "/src/styles/variables";
+@import "/src/styles/mixins";
+
+
+#header {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  gap: 1.5rem;
+
+  padding: 1.25rem 0 2.5rem;
+}
+
+#nav {
+  display: flex;
+  justify-content: center;
+  gap: 2em;
+
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: $faded;
+}

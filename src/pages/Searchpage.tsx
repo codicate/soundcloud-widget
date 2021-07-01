@@ -9,6 +9,7 @@ import SpinnerRect from 'components/SpinnerRect';
 import MessageDisplay from 'components/MessageDisplay';
 import { useState } from 'react';
 
+
 function Searchpage() {
   const dispatch = useAppDispatch();
   const { input } = useParams<{ input: string; }>();

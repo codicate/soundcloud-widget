@@ -5,7 +5,7 @@ import { Switch, Route } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { selectPlayer, playTrack } from 'app/playerSlice';
 
-import Searchbar from 'views/Searchbar';
+import Header from 'views/Header';
 import MiniPlayer from 'views/Miniplayer';
 
 import SuggestionPage from 'pages/SuggestionPage';
@@ -20,7 +20,7 @@ function App() {
   }, [dispatch, currentTrackIndex]);
 
   return <>
-    <Searchbar />
+    <Header />
     <main id={styles.main}>
       <Switch>
         <Route exact path='/'>
