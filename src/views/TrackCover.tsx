@@ -17,6 +17,10 @@ function TrackCover({
           track.artwork_url?.replace(/large(?=.jpg)/i, 'small')
           || imgPlaceholder
         }
+        onError={(e) => {
+          const img = e.target as HTMLImageElement;
+          img.src = imgPlaceholder;
+        }}
       />
     </div>
   );

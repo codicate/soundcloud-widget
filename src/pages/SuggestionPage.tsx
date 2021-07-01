@@ -1,7 +1,5 @@
 import styles from './SuggestionPage.module.scss';
-
-import { useAppDispatch } from 'app/hooks';
-import { searchForTracks } from 'app/trackSlice';
+import { useHistory } from 'react-router-dom';
 
 import { getRandNumBetween } from 'utils/functions';
 
@@ -12,7 +10,7 @@ const colorList = ['hsl(272, 7%, 23%)', 'hsl(80, 1%, 20%)', 'hsl(312, 24%, 24%)'
 
 
 function SuggestionPage() {
-  const dispatch = useAppDispatch();
+  const history = useHistory();
 
   return (
     <div id={styles.suggestions}>
@@ -25,7 +23,7 @@ function SuggestionPage() {
               'backgroundColor': randColor
             }}
             onClick={() =>
-              dispatch(searchForTracks(term))
+              history.push(`/search/${term}`)
             }
           >
             {term}

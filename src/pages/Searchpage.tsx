@@ -1,12 +1,21 @@
-import { useAppSelector } from 'app/hooks';
-import { selectTrack } from 'app/trackSlice';
+import { useEffect } from 'react';
+import { useParams } from 'react-router';
 
+import { useAppSelector, useAppDispatch } from 'app/hooks';
+import { selectTrack, searchForTracks } from 'app/trackSlice';
+
+import TrackList from 'views/TrackList';
 import SpinnerRect from 'components/SpinnerRect';
 import MessageDisplay from 'components/MessageDisplay';
 
-import TrackList from 'pages/TrackList';
-
 function Searchpage() {
+  const dispatch = useAppDispatch();
+  const { input } = useParams<{ input: string; }>();
+
+  useEffect(() => {
+    dispatch(searchForTracks(input));
+  }, [dispatch, input]);
+
   const { searchStatus, tracks } = useAppSelector(selectTrack);
 
   return (
