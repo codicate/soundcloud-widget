@@ -3,6 +3,5 @@
 
 .cover {
   @include artworkPlaceholder;
-  height: inherit;
-  width: inherit;
+  display: flex;
 }

@@ -1,0 +1,20 @@
+.PlaylistOverview {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+
+  font-size: .875rem;
+  text-align: left;
+
+  &>p {
+    margin: 0;
+    padding: .25em;
+  }
+
+  .covers {
+    width: fit-content;
+
+    display: grid;
+    grid-template: auto auto / auto auto;
+  }
+}
