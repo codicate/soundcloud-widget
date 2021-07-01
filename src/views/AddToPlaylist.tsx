@@ -34,7 +34,10 @@ function AddToPlaylist({
           <p>
             Add to...
           </p>
-          <Button className='material-icons'>
+          <Button
+            className='material-icons'
+            onClick={() => hideAddToPlaylist()}
+          >
             close
           </Button>
         </div>
