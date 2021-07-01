@@ -1,5 +1,6 @@
 import styles from './Searchbar.module.scss';
 import { useState, useRef } from 'react';
+import { useHistory } from 'react-router';
 
 import { useAppDispatch } from 'app/hooks';
 import { searchForTracks } from 'app/trackSlice';
@@ -10,12 +11,14 @@ import Button from 'components/Button';
 
 export default function Searchbar() {
   const dispatch = useAppDispatch();
+  const history = useHistory();
 
   const [input, setInput] = useState('');
   const searchbar = useRef<null | HTMLInputElement>(null);
 
   const submitHandler = () => {
     dispatch(searchForTracks(input));
+    history.push(`/search/${input}`);
   };
 
   useEventListener(document.body, "keydown", (e) => {

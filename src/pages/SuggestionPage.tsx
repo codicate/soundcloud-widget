@@ -1,4 +1,4 @@
-import styles from './Suggestions.module.scss';
+import styles from './SuggestionPage.module.scss';
 
 import { useAppDispatch } from 'app/hooks';
 import { searchForTracks } from 'app/trackSlice';
@@ -11,7 +11,7 @@ const searchTerms = ['DROELOE', 'Illenium', 'San Holo', 'Christian Loffler', 'RE
 const colorList = ['hsl(272, 7%, 23%)', 'hsl(80, 1%, 20%)', 'hsl(312, 24%, 24%)', 'hsl(352, 33%, 45%)', 'hsl(300, 9%, 41%)', 'hsl(267, 21%, 7%)', 'hsl(359, 32%, 26%)', 'hsl(19, 39%, 41%)', 'hsl(207, 35%, 42%)', 'hsl(215, 43%, 25%)', 'hsl(352, 18%, 27%)', 'hsl(177, 29%, 34%)', 'hsl(193, 39%, 16%)', 'hsl(74, 24%, 32%)', 'hsl(130, 26%, 35%)', 'hsl(64, 14%, 36%)', 'hsl(171, 14%, 36%)'];
 
 
-function Suggestions() {
+function SuggestionPage() {
   const dispatch = useAppDispatch();
 
   return (
@@ -36,4 +36,4 @@ function Suggestions() {
   );
 }
 
-export default Suggestions;
+export default SuggestionPage;
