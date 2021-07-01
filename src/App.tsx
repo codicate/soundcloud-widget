@@ -10,6 +10,7 @@ import MiniPlayer from 'views/Miniplayer';
 
 import SuggestionPage from 'pages/SuggestionPage';
 import SearchPage from 'pages/Searchpage';
+import Library from 'pages/Library';
 
 function App() {
   const dispatch = useAppDispatch();
@@ -28,6 +29,9 @@ function App() {
         </Route>
         <Route exact path='/search/:input'>
           <SearchPage />
+        </Route>
+        <Route exact path='/library'>
+          <Library />
         </Route>
       </Switch>
     </main>

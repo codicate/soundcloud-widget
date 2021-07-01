@@ -1,8 +1,6 @@
 import styles from './PlaylistOverview.module.scss';
 
-import { SoundcloudTrack } from 'soundcloud';
-import { useDispatch } from 'react-redux';
-import { Playlist, addToPlaylist } from 'app/playlistSlice';
+import { Playlist } from 'app/playlistSlice';
 
 import TrackCover from 'views/TrackCover';
 import Button from 'components/Button';
@@ -10,17 +8,16 @@ import Button from 'components/Button';
 
 function PlaylistOverview({
   playlist,
-  track
+  clickHandler
 }: {
   playlist: Playlist;
-  track: SoundcloudTrack;
+  clickHandler?: () => void;
 }) {
-  const dispatch = useDispatch();
 
   return (
     <Button
       className={styles.playlistOverview}
-      onClick={() => dispatch(addToPlaylist({ playlist, track }))}
+      onClick={clickHandler}
     >
       <div className={styles.covers}>
         {playlist.tracks.slice(0, 4).map((track, idx) =>

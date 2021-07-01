@@ -11,7 +11,7 @@
 
   &:hover,
   &:focus {
-    background-color: hsl(0, 0%, 10%);
+    background-color: hsl(0, 0%, 12%);
   }
 
   .covers {
@@ -20,6 +20,8 @@
 
     display: grid;
     grid-template: 32px 32px / 32px 32px;
+
+    background-color: hsl(0, 0%, 8%);
   }
 
   .playlistInfo {

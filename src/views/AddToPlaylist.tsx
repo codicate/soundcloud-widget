@@ -2,7 +2,7 @@ import styles from './AddToPlaylist.module.scss';
 import { SoundcloudTrack } from 'soundcloud';
 
 import { useAppSelector, useAppDispatch } from 'app/hooks';
-import { selectPlaylist, createPlaylist } from 'app/playlistSlice';
+import { selectPlaylist, createPlaylist, addToPlaylist } from 'app/playlistSlice';
 
 import PlaylistOverview from 'views/PlaylistOverview';
 import Button from 'components/Button';
@@ -79,7 +79,7 @@ function AddToPlaylist({
                 <PlaylistOverview
                   key={idx}
                   playlist={playlist}
-                  track={track}
+                  clickHandler={() => dispatch(addToPlaylist({ playlist, track }))}
                 />
               )}
             </div>
