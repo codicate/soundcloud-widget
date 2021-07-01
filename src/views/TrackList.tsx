@@ -8,7 +8,7 @@ import { changeTrack } from 'app/playerSlice';
 import useEventListener from 'hooks/useEventListener';
 import SpinnerChase from 'components/SpinnerChase';
 import MessageDisplay from 'components/MessageDisplay';
-import Track from './Track';
+import Track from 'views/Track';
 
 
 function TrackList() {
