@@ -7,20 +7,22 @@ import { selectTrack, searchForTracks } from 'app/trackSlice';
 import TrackList from 'views/TrackList';
 import SpinnerRect from 'components/SpinnerRect';
 import MessageDisplay from 'components/MessageDisplay';
+import { useState } from 'react';
 
 function Searchpage() {
   const dispatch = useAppDispatch();
   const { input } = useParams<{ input: string; }>();
+  const [isFetched, setIsFetched] = useState(false);
+  const { searchStatus, tracks } = useAppSelector(selectTrack);
 
   useEffect(() => {
     dispatch(searchForTracks(input));
+    setIsFetched(true);
   }, [dispatch, input]);
-
-  const { searchStatus, tracks } = useAppSelector(selectTrack);
 
   return (
     <>
-      {(() => {
+      {(isFetched) && (() => {
         switch (searchStatus) {
           case 'pending':
             return <SpinnerRect />;
