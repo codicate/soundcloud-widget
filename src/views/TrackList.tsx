@@ -6,9 +6,9 @@ import { selectTrack, queryNextPage } from 'app/trackSlice';
 import { changeTrack } from 'app/playerSlice';
 
 import useEventListener from 'hooks/useEventListener';
+import Track from 'views/Track';
 import SpinnerChase from 'components/SpinnerChase';
 import MessageDisplay from 'components/MessageDisplay';
-import Track from 'views/Track';
 
 
 function TrackList() {

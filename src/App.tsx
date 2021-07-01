@@ -10,7 +10,8 @@ import MiniPlayer from 'views/Miniplayer';
 
 import SuggestionPage from 'pages/SuggestionPage';
 import SearchPage from 'pages/Searchpage';
-import Library from 'pages/Library';
+import LibraryPage from 'pages/LibraryPage';
+import PlaylistPage from 'pages/PlaylistPage';
 
 function App() {
   const dispatch = useAppDispatch();
@@ -31,7 +32,10 @@ function App() {
           <SearchPage />
         </Route>
         <Route exact path='/library'>
-          <Library />
+          <LibraryPage />
+        </Route>
+        <Route exact path='/playlist/:playlistName'>
+          <PlaylistPage />
         </Route>
       </Switch>
     </main>

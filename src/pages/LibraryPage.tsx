@@ -1,14 +1,16 @@
-import styles from './Library.module.scss';
+import styles from './LibraryPage.module.scss';
+import { useHistory } from 'react-router-dom';
 
 import { useAppSelector, useAppDispatch } from 'app/hooks';
-import { selectPlaylist, createPlaylist } from 'app/playlistSlice';
+import { selectPlaylists } from 'app/playlistSlice';
 
 import PlaylistOverview from 'views/PlaylistOverview';
 
 
-function Library() {
+function LibraryPage() {
+  const history = useHistory();
   const dispatch = useAppDispatch();
-  const playlists = useAppSelector(selectPlaylist);
+  const playlists = useAppSelector(selectPlaylists);
 
   return (
     <div>
@@ -17,7 +19,7 @@ function Library() {
           <PlaylistOverview
             key={idx}
             playlist={playlist}
-            clickHandler={() => { }}
+            clickHandler={() => history.push(`/playlist/${playlist.name}`)}
           />
         )}
       </div>
@@ -25,4 +27,4 @@ function Library() {
   );
 }
 
-export default Library;
+export default LibraryPage;

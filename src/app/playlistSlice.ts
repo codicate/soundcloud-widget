@@ -60,7 +60,16 @@ export default playlistSlice.reducer;
 
 const selectSelf = (state: RootState) => state.playlist;
 
-export const selectPlaylist = createDraftSafeSelector(
+export const selectPlaylists = createDraftSafeSelector(
   selectSelf,
   (playlist) => playlist.playlists
 );
+
+export const selectPlaylist = (playlistName: string) => {
+  return createDraftSafeSelector(
+    selectSelf,
+    (playlist) => playlist.playlists.filter((playlist) =>
+      playlist.name === playlistName
+    )[0]
+  );
+};
