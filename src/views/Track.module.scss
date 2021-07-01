@@ -78,20 +78,10 @@
     margin-left: auto;
     padding: 0 1em;
 
-    visibility: hidden;
-
-    .addToPlaylist {
-      &>div {
-        visibility: hidden;
-      }
-
-      &:focus-within>div {
-        visibility: visible;
-      }
-    }
+    display: none;
   }
 
   &:hover>.control {
-    visibility: visible;
+    display: flex;
   }
 }
