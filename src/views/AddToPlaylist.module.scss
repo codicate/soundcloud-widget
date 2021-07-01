@@ -28,16 +28,14 @@
 
   font-weight: 500;
 
-  &>:not(:is(:last-child, :empty)) {
-    padding: .875em 1.5em;
-    border-bottom: 1px solid $border;
-  }
-
   .titleDiv {
     display: flex;
     justify-content: space-between;
     align-items: center;
 
+    padding: .875em 1.5em;
+
+    border-bottom: 1px solid $border;
     font-size: 1rem;
     color: $faded;
 
@@ -49,7 +47,10 @@
   .playlists {
     display: flex;
     flex-flow: column;
-    gap: 1em;
+
+    &:not(:empty) {
+      padding: .75rem 0;
+    }
   }
 
   .newPlaylistForm {}

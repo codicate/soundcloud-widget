@@ -19,11 +19,8 @@ function PlaylistOverview({
 
   return (
     <Button
-      className={styles.PlaylistOverview}
-      onClick={() => dispatch(addToPlaylist({
-        name: playlist.name,
-        track
-      }))}
+      className={styles.playlistOverview}
+      onClick={() => dispatch(addToPlaylist({ playlist, track }))}
     >
       <div className={styles.covers}>
         {playlist.tracks.slice(0, 4).map((track, idx) =>

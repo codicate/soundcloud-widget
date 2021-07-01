@@ -1,20 +1,31 @@
-.PlaylistOverview {
+.playlistOverview {
   display: flex;
   align-items: center;
   gap: 1em;
 
+  width: 100%;
+  padding: .75em 1.5rem;
+
   font-size: .875rem;
   text-align: left;
 
-  &>p {
-    margin: 0;
-    padding: .25em;
+  &:hover,
+  &:focus {
+    background-color: hsl(0, 0%, 10%);
   }
 
   .covers {
-    width: fit-content;
+    height: 64px;
+    width: 64px;
 
     display: grid;
-    grid-template: auto auto / auto auto;
+    grid-template: 32px 32px / 32px 32px;
+  }
+
+  .playlistInfo {
+    &>p {
+      margin: 0;
+      padding: .25em;
+    }
   }
 }

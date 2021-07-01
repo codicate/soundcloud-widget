@@ -29,14 +29,18 @@ const playlistSlice = createSlice({
     addToPlaylist: (
       state,
       action: PayloadAction<{
-        name: string,
+        playlist: Playlist,
         track: SoundcloudTrack;
       }>
     ) => {
-      const { name, track } = action.payload;
-      state.playlists.forEach((playlist) => {
-        if (playlist.name === name) {
-          playlist.tracks.push(track);
+      const { playlist, track } = action.payload;
+      state.playlists.forEach((playlist_) => {
+        if (playlist_.name === playlist.name) {
+          const isTrackDuplicate = playlist_.tracks.some((track_) =>
+            (track_.id === track.id)
+          );
+
+          (!isTrackDuplicate) && playlist_.tracks.push(track);
         }
       });
     }
