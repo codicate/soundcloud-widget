@@ -1,2 +1,9 @@
 @import "/src/styles/variables";
 @import "/src/styles/mixins";
+
+.playlists {
+  .title {
+    color: $faded;
+    font-weight: 700;
+  }
+}

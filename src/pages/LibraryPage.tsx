@@ -13,16 +13,15 @@ function LibraryPage() {
   const playlists = useAppSelector(selectPlaylists);
 
   return (
-    <div>
-      <div className={styles.playlists}>
-        {(playlists).map((playlist, idx) =>
-          <PlaylistOverview
-            key={idx}
-            playlist={playlist}
-            clickHandler={() => history.push(`/playlist/${playlist.name}`)}
-          />
-        )}
-      </div>
+    <div className={styles.playlists}>
+      <h3 className={styles.title}>PLAYLISTS</h3>
+      {(playlists).map((playlist, idx) =>
+        <PlaylistOverview
+          key={idx}
+          playlist={playlist}
+          clickHandler={() => history.push(`/playlist/${playlist.name}`)}
+        />
+      )}
     </div>
   );
 }

@@ -50,6 +50,7 @@ function AddToPlaylist({
                 playlistName: {
                   placeholder: 'playlistName',
                   required: true,
+                  autoFocus: true
                 }
               }}
               submitFn={(inputItems) => {
