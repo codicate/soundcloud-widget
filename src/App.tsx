@@ -7,6 +7,7 @@ import { selectPlayer, playTrack } from 'app/playerSlice';
 
 import Header from 'views/Header';
 import MiniPlayer from 'views/Miniplayer';
+import ErrorFallback from 'components/ErrorFallback';
 
 const SuggestionPage = lazy(() => import('pages/SuggestionPage'));
 const SearchPage = lazy(() => import('pages/Searchpage'));
@@ -25,22 +26,24 @@ function App() {
     <Header />
 
     <main id={styles.main}>
-      <Suspense fallback=''>
-        <Switch>
-          <Route exact path='/'>
-            <SuggestionPage />
-          </Route>
-          <Route exact path='/search/:input'>
-            <SearchPage />
-          </Route>
-          <Route exact path='/library'>
-            <LibraryPage />
-          </Route>
-          <Route exact path='/playlist/:playlistName'>
-            <PlaylistPage />
-          </Route>
-        </Switch>
-      </Suspense>
+      <ErrorFallback>
+        <Suspense fallback=''>
+          <Switch>
+            <Route exact path='/'>
+              <SuggestionPage />
+            </Route>
+            <Route exact path='/search/:input'>
+              <SearchPage />
+            </Route>
+            <Route exact path='/library'>
+              <LibraryPage />
+            </Route>
+            <Route exact path='/playlist/:playlistName'>
+              <PlaylistPage />
+            </Route>
+          </Switch>
+        </Suspense>
+      </ErrorFallback>
     </main>
 
     <MiniPlayer />

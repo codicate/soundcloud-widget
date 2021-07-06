@@ -1,9 +1,12 @@
-.rejected {
+@import "/src/styles/variables";
+@import "/src/styles/mixins";
+
+.messageDisplay {
   display: flex;
   flex-flow: column;
   align-items: center;
 
-  :first-child {
+  &>:first-child {
     margin: .375em;
     font-size: 2.5rem;
   }

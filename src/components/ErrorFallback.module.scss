@@ -1,0 +1,37 @@
+@import "/src/styles/variables";
+@import "/src/styles/mixins";
+
+.errorDisplay {
+  margin-top: 4rem;
+
+  .errorInner {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    gap: 1em;
+
+    p {
+      margin: 0;
+    }
+
+    &>p:first-child {
+      font-size: 1.25rem;
+    }
+
+    .errorMsg {
+      font-size: .875rem;
+      color: $faded;
+
+      &>pre {
+        padding: 1em;
+        text-align: center;
+        border-radius: .5em;
+        background-color: $emp;
+
+        max-width: 60em;
+        white-space: pre-wrap;
+        word-break: break-all;
+      }
+    }
+  }
+}

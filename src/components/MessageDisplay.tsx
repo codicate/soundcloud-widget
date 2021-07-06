@@ -9,14 +9,14 @@ function MessageDisplay({
   ...props
 }: {
   iconCode: string;
-  message: string;
+  message: React.ReactNode;
   severity?: 'default' | 'warning' | 'error';
 } & React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>
 ) {
   return (
     <div
       className={cn(
-        styles.rejected,
+        styles.messageDisplay,
         styles[severity],
         className
       )}
