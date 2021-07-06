@@ -1,5 +1,6 @@
 import styles from "./Input.module.scss";
 import { useRef } from "react";
+import cn from "classnames";
 
 export interface InputOptions {
   type?: string,
@@ -20,7 +21,6 @@ const Input = ({
   label,
   value,
   option,
-  readOnly,
   selectAllOnFocus,
   ...props
 }: {
@@ -37,7 +37,9 @@ const Input = ({
     <div className={styles.group}>
       {
         label && (
-          <label>
+          <label
+            className={cn({ [styles.shrink]: value })}
+          >
             {label}
           </label>
         )
@@ -50,15 +52,8 @@ const Input = ({
           : styles.input
         }
         onChange={changeHandler}
-        {...((
-          selectAllOnFocus
-        ) && {
+        {...((selectAllOnFocus) && {
           onFocus: () => inputRef.current?.select()
-        })}
-        {...((
-          readOnly
-        ) && {
-          readOnly: true
         })}
         {...props}
       />

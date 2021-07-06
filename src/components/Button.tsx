@@ -1,4 +1,6 @@
 import styles from "./Button.module.scss";
+import cn from "classnames";
+
 
 function Button({
   children,
@@ -13,11 +15,11 @@ function Button({
 ) {
   return (
     <button
-      className={`
-        ${styles.btn} 
-        ${styledAs ? styles[styledAs] : styles.default} 
-        ${className || ""}
-      `}
+      className={cn(
+        styles.button,
+        styledAs ? styles[styledAs] : styles.default,
+        className
+      )}
       type={type}
       {...props}
     >

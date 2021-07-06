@@ -1,7 +1,9 @@
-import styles from './Form.module.scss';
-import { useState, FormEvent } from "react";
+import styles from "./Form.module.scss";
+import { useState } from "react";
+import cn from "classnames";
 
 import Input, { InputOptions, ChangeHandler } from "./Input";
+
 
 function Form<
   T extends Record<string, InputOptions>
@@ -12,7 +14,7 @@ function Form<
   className,
   ...props
 }: {
-  submitFn?: (inputItems: Record<keyof T, string>) => any;
+  submitFn?: (inputItems: Record<keyof T, string>) => void | Promise<void>;
   inputItems: T;
   children?: React.ReactNode;
 } & React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLFormElement>, HTMLFormElement>
@@ -35,19 +37,15 @@ function Form<
     });
   };
 
-  const submitHandler = async (e: FormEvent) => {
+  const submitHandler = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    const reset = submitFn
-      ? await submitFn(input)
-      : true;
-
-    reset && setInput(defaultItems);
+    await submitFn?.(input);
+    setInput(defaultItems);
   };
 
   return (
     <form
-      className={`${styles.form} ${className || ""}`}
+      className={cn(styles.form, className)}
       onSubmit={submitHandler}
       {...props}
     >
@@ -65,7 +63,7 @@ function Form<
         }
       </div>
       {children}
-    </form>
+    </ form>
   );
 }
 

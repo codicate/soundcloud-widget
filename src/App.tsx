@@ -1,6 +1,6 @@
 import styles from './App.module.scss';
 import { useEffect } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, useHistory } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { selectPlayer, playTrack } from 'app/playerSlice';

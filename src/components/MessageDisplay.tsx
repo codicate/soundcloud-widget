@@ -1,4 +1,5 @@
 import styles from './MessageDisplay.module.scss';
+import cn from 'classnames';
 
 function MessageDisplay({
   iconCode,
@@ -10,15 +11,15 @@ function MessageDisplay({
   iconCode: string;
   message: string;
   severity?: 'default' | 'warning' | 'error';
-} & React.HTMLAttributes<HTMLDivElement>
+} & React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>
 ) {
   return (
     <div
-      className={`
-        ${styles.rejected} 
-        ${styles[severity]} 
-        ${className || ''}
-      `}
+      className={cn(
+        styles.rejected,
+        styles[severity],
+        className
+      )}
       {...props}
     >
       <div className='material-icons'>
