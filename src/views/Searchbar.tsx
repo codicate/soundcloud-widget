@@ -13,7 +13,9 @@ export default function Searchbar() {
   const searchbar = useRef<null | HTMLInputElement>(null);
 
   const submitHandler = () => {
-    history.push(`/search/${input}`);
+    if (input !== '') {
+      history.push(`/search/${input}`);
+    }
   };
 
   useEventListener(document.body, 'keydown', (e) => {
