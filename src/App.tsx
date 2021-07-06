@@ -1,6 +1,6 @@
 import styles from './App.module.scss';
-import { useEffect } from 'react';
-import { Switch, Route, useHistory } from 'react-router-dom';
+import { useEffect, Suspense, lazy } from 'react';
+import { Switch, Route } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { selectPlayer, playTrack } from 'app/playerSlice';
@@ -8,10 +8,10 @@ import { selectPlayer, playTrack } from 'app/playerSlice';
 import Header from 'views/Header';
 import MiniPlayer from 'views/Miniplayer';
 
-import SuggestionPage from 'pages/SuggestionPage';
-import SearchPage from 'pages/Searchpage';
-import LibraryPage from 'pages/LibraryPage';
-import PlaylistPage from 'pages/PlaylistPage';
+const SuggestionPage = lazy(() => import('pages/SuggestionPage'));
+const SearchPage = lazy(() => import('pages/Searchpage'));
+const LibraryPage = lazy(() => import('pages/LibraryPage'));
+const PlaylistPage = lazy(() => import('pages/PlaylistPage'));
 
 function App() {
   const dispatch = useAppDispatch();
@@ -23,21 +23,24 @@ function App() {
 
   return <>
     <Header />
+
     <main id={styles.main}>
-      <Switch>
-        <Route exact path='/'>
-          <SuggestionPage />
-        </Route>
-        <Route exact path='/search/:input'>
-          <SearchPage />
-        </Route>
-        <Route exact path='/library'>
-          <LibraryPage />
-        </Route>
-        <Route exact path='/playlist/:playlistName'>
-          <PlaylistPage />
-        </Route>
-      </Switch>
+      <Suspense fallback=''>
+        <Switch>
+          <Route exact path='/'>
+            <SuggestionPage />
+          </Route>
+          <Route exact path='/search/:input'>
+            <SearchPage />
+          </Route>
+          <Route exact path='/library'>
+            <LibraryPage />
+          </Route>
+          <Route exact path='/playlist/:playlistName'>
+            <PlaylistPage />
+          </Route>
+        </Switch>
+      </Suspense>
     </main>
 
     <MiniPlayer />
