@@ -16,7 +16,7 @@ function Button({
   return (
     <button
       className={cn(
-        styles.button,
+        styles.btn,
         styledAs ? styles[styledAs] : styles.default,
         className
       )}
