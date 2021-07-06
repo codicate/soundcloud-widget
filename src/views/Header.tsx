@@ -1,20 +1,32 @@
 import styles from './Header.module.scss';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import Searchbar from './Searchbar';
 
 
-function Header() {
+const HeaderNavLink = ({
+  to,
+  text,
+}: {
+  to: string;
+  text: string;
+}) => (
+  <NavLink exact activeClassName={styles.activeLink} to={to}>
+    {text}
+  </NavLink>
+);
+
+const Header = () => {
   return (
     <header id={styles.header}>
       <nav id={styles.nav}>
-        <Link to='/'>Home</Link>
-        <Link to='/library'>Library</Link>
-        <Link to='/account'>Account</Link>
+        <HeaderNavLink to='/' text='Home' />
+        <HeaderNavLink to='/library' text='Library' />
+        <HeaderNavLink to='/account' text='Account' />
       </nav>
       <Searchbar />
     </header>
   );
-}
+};
 
 export default Header;
