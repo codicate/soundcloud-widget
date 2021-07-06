@@ -1,6 +1,6 @@
-import styles from "./Input.module.scss";
-import { useRef } from "react";
-import cn from "classnames";
+import styles from './Input.module.scss';
+import { useRef } from 'react';
+import cn from 'classnames';
 
 export interface InputOptions {
   type?: string,
@@ -8,7 +8,7 @@ export interface InputOptions {
   readOnly?: boolean;
   required?: boolean;
 
-  option?: "input" | "textarea";
+  option?: 'input' | 'textarea';
   label?: string;
   defaultValue?: string,
   selectAllOnFocus?: boolean;
@@ -30,7 +30,7 @@ const Input = ({
   value: string;
 } & InputOptions
 ) => {
-  const InputOrTextarea = option || "input";
+  const InputOrTextarea = option || 'input';
   const inputRef = useRef<HTMLInputElement & HTMLTextAreaElement>(null);
 
   return (
@@ -47,7 +47,7 @@ const Input = ({
       <InputOrTextarea
         ref={inputRef}
         className={(
-          option === "textarea"
+          option === 'textarea'
         ) ? styles.textarea
           : styles.input
         }

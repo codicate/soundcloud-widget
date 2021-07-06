@@ -1,7 +1,7 @@
 import styles from './Header.module.scss';
 import { Link } from 'react-router-dom';
 
-import Searchbar from "./Searchbar";
+import Searchbar from './Searchbar';
 
 
 function Header() {

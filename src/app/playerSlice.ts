@@ -50,7 +50,7 @@ export const seekTrack = createAsyncThunk(
 
 export const skipTrack = createAsyncThunk(
   'player/skipTrack',
-  (direction: 'prev' | 'next', { getState, dispatch }) => errorHandler(async () => {
+  (direction: 'prev' | 'next', { getState }) => errorHandler(async () => {
     const { player, track } = getState() as RootState;
     if (!player.player) return;
 

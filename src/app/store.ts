@@ -60,7 +60,7 @@ export type AppThunk<ReturnType = void> = ThunkAction<
 
 export type statusState = 'idle' | 'pending' | 'fulfilled' | 'rejected';
 
-export const errorHandler = (func: () => Promise<any>) => {
+export const errorHandler = (func: () => Promise<unknown>) => {
   try {
     return func();
   } catch (err) {

@@ -1,16 +1,16 @@
-import styles from "./Button.module.scss";
-import cn from "classnames";
+import styles from './Button.module.scss';
+import cn from 'classnames';
 
 
 function Button({
   children,
-  type = "button",
+  type = 'button',
   styledAs,
   className,
   ...props
 }: {
   children: React.ReactNode;
-  styledAs?: "bigWhite";
+  styledAs?: 'bigWhite';
 } & React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>
 ) {
   return (

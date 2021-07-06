@@ -25,26 +25,26 @@ function Searchpage() {
     <>
       {(isFetched) && (() => {
         switch (searchStatus) {
-          case 'pending':
-            return <SpinnerRect />;
+        case 'pending':
+          return <SpinnerRect />;
 
-          case 'fulfilled':
-            return (tracks.length === 0)
-              ? <MessageDisplay
-                iconCode='sentiment_dissatisfied'
-                message='No result'
-              />
-              : <TrackList />;
+        case 'fulfilled':
+          return (tracks.length === 0)
+            ? <MessageDisplay
+              iconCode='sentiment_dissatisfied'
+              message='No result'
+            />
+            : <TrackList />;
 
-          case 'rejected':
-            return <MessageDisplay
-              severity='error'
-              iconCode='error'
-              message='Something went wrong'
-            />;
+        case 'rejected':
+          return <MessageDisplay
+            severity='error'
+            iconCode='error'
+            message='Something went wrong'
+          />;
 
-          default:
-            return;
+        default:
+          return;
         }
       })()}
     </>

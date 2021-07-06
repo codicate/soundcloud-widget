@@ -44,56 +44,56 @@ function AddToPlaylist({
         {(
           showNewPlaylist
         ) ? (
-          <Form
-            className={styles.newPlaylistForm}
-            inputItems={{
-              playlistName: {
-                placeholder: 'playlistName',
-                required: true,
-              }
-            }}
-            submitFn={(inputItems) => {
-              dispatch(createPlaylist(inputItems.playlistName));
-              setShowNewPlaylist(false);
-            }}
-          >
-            <div className={styles.btns}>
-              <Button
-                styledAs='bigWhite'
-                onClick={() => setShowNewPlaylist(false)}
-              >
-                Cancel
-              </Button>
-              <Button
-                styledAs='bigWhite'
-                type='submit'
-              >
-                Create
-              </Button>
-            </div>
-          </Form>
-        ) : (
-          <>
-            <div className={styles.playlists}>
-              {(playlists).map((playlist, idx) =>
-                <PlaylistOverview
-                  key={idx}
-                  playlist={playlist}
-                  clickHandler={() => dispatch(addToPlaylist({ playlist, track }))}
-                />
-              )}
-            </div>
-            <Button
-              styledAs='bigWhite'
-              onClick={() => setShowNewPlaylist(true)}
+            <Form
+              className={styles.newPlaylistForm}
+              inputItems={{
+                playlistName: {
+                  placeholder: 'playlistName',
+                  required: true,
+                }
+              }}
+              submitFn={(inputItems) => {
+                dispatch(createPlaylist(inputItems.playlistName));
+                setShowNewPlaylist(false);
+              }}
             >
-              <span className='material-icons'>
+              <div className={styles.btns}>
+                <Button
+                  styledAs='bigWhite'
+                  onClick={() => setShowNewPlaylist(false)}
+                >
+                Cancel
+                </Button>
+                <Button
+                  styledAs='bigWhite'
+                  type='submit'
+                >
+                Create
+                </Button>
+              </div>
+            </Form>
+          ) : (
+            <>
+              <div className={styles.playlists}>
+                {(playlists).map((playlist, idx) =>
+                  <PlaylistOverview
+                    key={idx}
+                    playlist={playlist}
+                    clickHandler={() => dispatch(addToPlaylist({ playlist, track }))}
+                  />
+                )}
+              </div>
+              <Button
+                styledAs='bigWhite'
+                onClick={() => setShowNewPlaylist(true)}
+              >
+                <span className='material-icons'>
                 add
-              </span>
+                </span>
               New Playlist
-            </Button>
-          </>
-        )}
+              </Button>
+            </>
+          )}
       </div>
     </div>
   );

@@ -47,22 +47,22 @@ function TrackList() {
       <div id={styles.paginationResult}>
         {(() => {
           switch (paginationStatus) {
-            case 'pending':
-              return <SpinnerChase />;
-            case 'fulfilled':
-              return <MessageDisplay
-                iconCode='do_not_disturb_on'
-                message='You have reached the end'
-              />;
-            case 'rejected':
-              return <MessageDisplay
-                id={styles.rejected}
-                severity='error'
-                iconCode='error'
-                message='Something went wrong'
-              />;
-            default:
-              return;
+          case 'pending':
+            return <SpinnerChase />;
+          case 'fulfilled':
+            return <MessageDisplay
+              iconCode='do_not_disturb_on'
+              message='You have reached the end'
+            />;
+          case 'rejected':
+            return <MessageDisplay
+              id={styles.rejected}
+              severity='error'
+              iconCode='error'
+              message='Something went wrong'
+            />;
+          default:
+            return;
           }
         })()}
       </div>

@@ -17,7 +17,7 @@ declare module 'soundcloud' {
 
   export function get(
     path: string,
-    params?: {}
+    params?: Record<string, unknown>
   ): Promise<SoundcloudTrack[] | PaginatedSearchResult>;
 
   export function stream(
@@ -157,7 +157,7 @@ declare module 'soundcloud' {
   }
 
   export interface SoundcloudUser {
-    kind: "user";
+    kind: 'user';
     id: number;
     permalink: string;
     subscriptions: [];
@@ -200,7 +200,7 @@ declare module 'soundcloud' {
   }
 
   export interface SoundcloudWebProfile {
-    kind: "web-profile";
+    kind: 'web-profile';
     id: number;
     service: string;
     title: string;
@@ -227,34 +227,34 @@ declare module 'soundcloud' {
   }
 
   export type SoundcloudLicense =
-    | "no-rights-reserved"
-    | "all-rights-reserved"
-    | "cc-by"
-    | "cc-by-nc"
-    | "cc-by-nd"
-    | "cc-by-sa"
-    | "cc-by-nc-nd"
-    | "cc-by-nc-sa";
+    | 'no-rights-reserved'
+    | 'all-rights-reserved'
+    | 'cc-by'
+    | 'cc-by-nc'
+    | 'cc-by-nd'
+    | 'cc-by-sa'
+    | 'cc-by-nc-nd'
+    | 'cc-by-nc-sa';
 
   export type SoundcloudTrackType =
-    | "original"
-    | "remix"
-    | "live"
-    | "recording"
-    | "spoken"
-    | "podcast"
-    | "demo"
-    | "in progress"
-    | "stem"
-    | "loop"
-    | "sound effect"
-    | "sample"
-    | "other";
+    | 'original'
+    | 'remix'
+    | 'live'
+    | 'recording'
+    | 'spoken'
+    | 'podcast'
+    | 'demo'
+    | 'in progress'
+    | 'stem'
+    | 'loop'
+    | 'sound effect'
+    | 'sample'
+    | 'other';
 
   export interface SoundcloudTrackFilter {
     q?: string;
     tags?: string;
-    filter?: "public" | "private" | "all";
+    filter?: 'public' | 'private' | 'all';
     license?: SoundcloudLicense;
     bpm_from?: number;
     bpm_to?: number;
@@ -269,14 +269,14 @@ declare module 'soundcloud' {
 
   export interface SoundcloudTrack {
     comment_count: number;
-    release: number | "";
+    release: number | '';
     original_content_size: number;
     track_type: SoundcloudTrackType | null;
     original_format: string;
     streamable: boolean;
     download_url: string | null;
     id: number;
-    state: "processing" | "failed" | "finished";
+    state: 'processing' | 'failed' | 'finished';
     last_modified: string;
     favoritings_count: number;
     kind: string;
@@ -325,7 +325,7 @@ declare module 'soundcloud' {
   }
 
   export interface SoundcloudSecretToken {
-    kind: "secret-token";
+    kind: 'secret-token';
     token: string;
     uri: string;
     resource_uri: string;

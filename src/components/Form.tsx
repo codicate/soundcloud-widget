@@ -1,8 +1,8 @@
-import styles from "./Form.module.scss";
-import { useState } from "react";
-import cn from "classnames";
+import styles from './Form.module.scss';
+import { useState } from 'react';
+import cn from 'classnames';
 
-import Input, { InputOptions, ChangeHandler } from "./Input";
+import Input, { InputOptions, ChangeHandler } from './Input';
 
 
 function Form<
@@ -22,7 +22,7 @@ function Form<
 
   const defaultItems = Object.assign(
     Object.entries(inputItems).map(([name, value]) => ({
-      [name]: value.defaultValue || ""
+      [name]: value.defaultValue || ''
     }))
   );
 

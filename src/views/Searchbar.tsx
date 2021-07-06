@@ -16,8 +16,8 @@ export default function Searchbar() {
     history.push(`/search/${input}`);
   };
 
-  useEventListener(document.body, "keydown", (e) => {
-    if (e.key === "/") {
+  useEventListener(document.body, 'keydown', (e) => {
+    if (e.key === '/') {
       e.preventDefault();
       searchbar.current?.focus();
     }
