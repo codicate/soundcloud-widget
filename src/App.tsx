@@ -8,6 +8,7 @@ import { selectPlayer, playTrack } from 'app/playerSlice';
 import Header from 'views/Header';
 import MiniPlayer from 'views/Miniplayer';
 import ErrorFallback from 'components/ErrorFallback';
+import Notifier from 'views/Notifier';
 
 const SuggestionPage = lazy(() => import('pages/SuggestionPage'));
 const SearchPage = lazy(() => import('pages/Searchpage'));
@@ -42,6 +43,7 @@ function App() {
     </main>
 
     <MiniPlayer />
+    <Notifier />
   </>;
 };
 
