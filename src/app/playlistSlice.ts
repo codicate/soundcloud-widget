@@ -20,10 +20,19 @@ const playlistSlice = createSlice({
   initialState,
   reducers: {
     createPlaylist: (state, action: PayloadAction<string>) => {
+      const newPlaylistName = action.payload;
+
+      const isDuplicatePlaylist = state.playlists.some((playlist) => {
+        if (playlist.name === newPlaylistName)
+          return true;
+      });
+      if (isDuplicatePlaylist) return;
+
       const newPlaylist = {
-        name: action.payload,
+        name: newPlaylistName,
         tracks: []
       };
+
       state.playlists.push(newPlaylist);
     },
     addToPlaylist: (
@@ -34,15 +43,16 @@ const playlistSlice = createSlice({
       }>
     ) => {
       const { playlist, track } = action.payload;
-      state.playlists.forEach((playlist_) => {
-        if (playlist_.name === playlist.name) {
-          const isTrackDuplicate = playlist_.tracks.some((track_) =>
-            (track_.id === track.id)
-          );
+      const playlistToAdd = state.playlists.find((playlist_) =>
+        playlist.name === playlist_.name
+      );
 
-          (!isTrackDuplicate) && playlist_.tracks.push(track);
-        }
-      });
+      const isDuplicateTrack = playlistToAdd?.tracks.some((track_) =>
+        track_.id === track.id
+      );
+      if (!playlistToAdd || isDuplicateTrack) return;
+
+      playlistToAdd.tracks.push(track);
     }
   },
   extraReducers: (builder) => {
