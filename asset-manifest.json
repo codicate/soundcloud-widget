@@ -1,20 +1,38 @@
 {
   "files": {
-    "main.css": "/soundcloud-widget/static/css/main.24bdff54.chunk.css",
-    "main.js": "/soundcloud-widget/static/js/main.bc3c0320.chunk.js",
-    "main.js.map": "/soundcloud-widget/static/js/main.bc3c0320.chunk.js.map",
-    "runtime-main.js": "/soundcloud-widget/static/js/runtime-main.c444ab7f.js",
-    "runtime-main.js.map": "/soundcloud-widget/static/js/runtime-main.c444ab7f.js.map",
-    "static/js/2.143fd23c.chunk.js": "/soundcloud-widget/static/js/2.143fd23c.chunk.js",
-    "static/js/2.143fd23c.chunk.js.map": "/soundcloud-widget/static/js/2.143fd23c.chunk.js.map",
+    "main.css": "/soundcloud-widget/static/css/main.835cb6b4.chunk.css",
+    "main.js": "/soundcloud-widget/static/js/main.98d30641.chunk.js",
+    "main.js.map": "/soundcloud-widget/static/js/main.98d30641.chunk.js.map",
+    "runtime-main.js": "/soundcloud-widget/static/js/runtime-main.cc1d6353.js",
+    "runtime-main.js.map": "/soundcloud-widget/static/js/runtime-main.cc1d6353.js.map",
+    "static/js/2.6d1d7923.chunk.js": "/soundcloud-widget/static/js/2.6d1d7923.chunk.js",
+    "static/js/2.6d1d7923.chunk.js.map": "/soundcloud-widget/static/js/2.6d1d7923.chunk.js.map",
+    "static/css/3.3ee23339.chunk.css": "/soundcloud-widget/static/css/3.3ee23339.chunk.css",
+    "static/js/3.0c9c58f6.chunk.js": "/soundcloud-widget/static/js/3.0c9c58f6.chunk.js",
+    "static/js/3.0c9c58f6.chunk.js.map": "/soundcloud-widget/static/js/3.0c9c58f6.chunk.js.map",
+    "static/css/4.1b2c3f9a.chunk.css": "/soundcloud-widget/static/css/4.1b2c3f9a.chunk.css",
+    "static/js/4.9c24a2da.chunk.js": "/soundcloud-widget/static/js/4.9c24a2da.chunk.js",
+    "static/js/4.9c24a2da.chunk.js.map": "/soundcloud-widget/static/js/4.9c24a2da.chunk.js.map",
+    "static/css/5.e007b410.chunk.css": "/soundcloud-widget/static/css/5.e007b410.chunk.css",
+    "static/js/5.5ce9d998.chunk.js": "/soundcloud-widget/static/js/5.5ce9d998.chunk.js",
+    "static/js/5.5ce9d998.chunk.js.map": "/soundcloud-widget/static/js/5.5ce9d998.chunk.js.map",
+    "static/js/6.9b1bf8f4.chunk.js": "/soundcloud-widget/static/js/6.9b1bf8f4.chunk.js",
+    "static/js/6.9b1bf8f4.chunk.js.map": "/soundcloud-widget/static/js/6.9b1bf8f4.chunk.js.map",
+    "static/css/7.a3b6b7f2.chunk.css": "/soundcloud-widget/static/css/7.a3b6b7f2.chunk.css",
+    "static/js/7.5f8bc24e.chunk.js": "/soundcloud-widget/static/js/7.5f8bc24e.chunk.js",
+    "static/js/7.5f8bc24e.chunk.js.map": "/soundcloud-widget/static/js/7.5f8bc24e.chunk.js.map",
     "index.html": "/soundcloud-widget/index.html",
-    "static/css/main.24bdff54.chunk.css.map": "/soundcloud-widget/static/css/main.24bdff54.chunk.css.map",
-    "static/js/2.143fd23c.chunk.js.LICENSE.txt": "/soundcloud-widget/static/js/2.143fd23c.chunk.js.LICENSE.txt"
+    "static/css/3.3ee23339.chunk.css.map": "/soundcloud-widget/static/css/3.3ee23339.chunk.css.map",
+    "static/css/4.1b2c3f9a.chunk.css.map": "/soundcloud-widget/static/css/4.1b2c3f9a.chunk.css.map",
+    "static/css/5.e007b410.chunk.css.map": "/soundcloud-widget/static/css/5.e007b410.chunk.css.map",
+    "static/css/7.a3b6b7f2.chunk.css.map": "/soundcloud-widget/static/css/7.a3b6b7f2.chunk.css.map",
+    "static/css/main.835cb6b4.chunk.css.map": "/soundcloud-widget/static/css/main.835cb6b4.chunk.css.map",
+    "static/js/2.6d1d7923.chunk.js.LICENSE.txt": "/soundcloud-widget/static/js/2.6d1d7923.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.c444ab7f.js",
-    "static/js/2.143fd23c.chunk.js",
-    "static/css/main.24bdff54.chunk.css",
-    "static/js/main.bc3c0320.chunk.js"
+    "static/js/runtime-main.cc1d6353.js",
+    "static/js/2.6d1d7923.chunk.js",
+    "static/css/main.835cb6b4.chunk.css",
+    "static/js/main.98d30641.chunk.js"
   ]
 }
