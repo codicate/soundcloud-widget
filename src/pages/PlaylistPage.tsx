@@ -1,16 +1,16 @@
-import { useParams } from 'react-router-dom';
-
-import { useAppSelector, useAppDispatch } from 'app/hooks';
-import { selectPlaylist } from 'app/playlistSlice';
+import { useAppDispatch } from 'app/hooks';
+import { Playlist } from 'app/playlistSlice';
 import { changeTrack } from 'app/playerSlice';
 
 import Track from 'views/Track';
 
 
-function PlaylistPage() {
-  const { playlistName } = useParams<{ playlistName: string; }>();
+function PlaylistPage({
+  playlist
+}: {
+  playlist: Playlist;
+}) {
   const dispatch = useAppDispatch();
-  const playlist = useAppSelector(selectPlaylist(playlistName));
 
   return (
     <div>

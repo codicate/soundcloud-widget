@@ -1,28 +1,38 @@
 import styles from './LibraryPage.module.scss';
-import { useHistory } from 'react-router-dom';
+import { Link, Route } from 'react-router-dom';
 
-import { useAppSelector, useAppDispatch } from 'app/hooks';
+import { useAppSelector } from 'app/hooks';
 import { selectPlaylists } from 'app/playlistSlice';
 
 import PlaylistOverview from 'views/PlaylistOverview';
+import PlaylistPage from './PlaylistPage';
 
 
 function LibraryPage() {
-  const history = useHistory();
-  const dispatch = useAppDispatch();
   const playlists = useAppSelector(selectPlaylists);
 
   return (
-    <div className={styles.playlists}>
-      <h3 className={styles.title}>PLAYLISTS</h3>
+    <>
+      <Route exact path='/library'>
+        <div className={styles.playlists}>
+          <h3 className={styles.title}>PLAYLISTS</h3>
+          {(playlists).map((playlist, idx) =>
+            <Link key={idx} to={`/playlist/${playlist.name}`}>
+              <PlaylistOverview
+                key={idx}
+                playlist={playlist}
+              />
+            </Link>
+          )}
+        </div>
+      </Route>
+
       {(playlists).map((playlist, idx) =>
-        <PlaylistOverview
-          key={idx}
-          playlist={playlist}
-          clickHandler={() => history.push(`/playlist/${playlist.name}`)}
-        />
+        <Route key={idx} path={`/playlist/${playlist.name}`}>
+          <PlaylistPage playlist={playlist} />
+        </Route>
       )}
-    </div>
+    </>
   );
 }
 

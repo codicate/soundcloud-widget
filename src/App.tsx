@@ -11,8 +11,8 @@ import ErrorFallback from 'components/ErrorFallback';
 
 const SuggestionPage = lazy(() => import('pages/SuggestionPage'));
 const SearchPage = lazy(() => import('pages/Searchpage'));
-const LibraryPage = lazy(() => import('pages/LibraryPage'));
-const PlaylistPage = lazy(() => import('pages/PlaylistPage'));
+import LibraryPage from 'pages/LibraryPage';
+
 
 function App() {
   const dispatch = useAppDispatch();
@@ -35,12 +35,7 @@ function App() {
             <Route exact path='/search/:input'>
               <SearchPage />
             </Route>
-            <Route exact path='/library'>
-              <LibraryPage />
-            </Route>
-            <Route exact path='/playlist/:playlistName'>
-              <PlaylistPage />
-            </Route>
+            <LibraryPage />
           </Switch>
         </Suspense>
       </ErrorFallback>
