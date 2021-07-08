@@ -18,7 +18,7 @@ export const newNotice = createAsyncThunk(
   (newNotice: Notice, { dispatch }) => {
     setTimeout(() => {
       dispatch(clearNotice());
-    }, 5000);
+    }, 3000);
 
     return newNotice;
   }

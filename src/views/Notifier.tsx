@@ -9,7 +9,7 @@ const Notifier = () => {
   return (
     <div id={styles.notifier}>
       {notices.slice(-5).map((notice, idx) => (
-        <div key={idx}>
+        <div key={idx} className={styles.notice}>
           {notice.msg}
         </div>
       ))}
