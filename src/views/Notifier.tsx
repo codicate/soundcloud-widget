@@ -7,7 +7,7 @@ const Notifier = () => {
   const notices = useAppSelector(selectNotices);
 
   return (
-    <div className={styles.notifier}>
+    <div id={styles.notifier}>
       {notices.map((notice, idx) => (
         <div key={idx}>
           {notice.msg}

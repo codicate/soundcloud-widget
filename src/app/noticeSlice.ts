@@ -1,4 +1,4 @@
-import { createSlice, createDraftSafeSelector, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, createDraftSafeSelector, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from 'app/store';
 
 
@@ -13,22 +13,36 @@ const initialState: {
 };
 
 
+export const newNotice = createAsyncThunk(
+  'notice/newNotice',
+  (newNotice: Notice, { dispatch }) => {
+    setTimeout(() => {
+      dispatch(clearNotice());
+    }, 5000);
+
+    return newNotice;
+  }
+);
+
 const noticeSlice = createSlice({
   name: 'notice',
   initialState,
   reducers: {
-    newNotice: (state, action: PayloadAction<Notice>) => {
-      const newNotice = action.payload;
-      state.notices.push(newNotice);
-      setTimeout(() => {
-        state.notices.splice(state.notices.indexOf(newNotice), 1);
-      }, 5000);
+    clearNotice: (state) => {
+      state.notices.shift();
     }
-  }
+  },
+  extraReducers: (builder) =>
+    builder.addCase(
+      newNotice.fulfilled,
+      (state, action) => {
+        state.notices.push(action.payload);
+      }
+    )
 });
 
 export const {
-  newNotice
+  clearNotice
 } = noticeSlice.actions;
 export default noticeSlice.reducer;
 

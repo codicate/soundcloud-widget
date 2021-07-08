@@ -48,7 +48,7 @@ function AddToPlaylist({
               className={styles.newPlaylistForm}
               inputItems={{
                 playlistName: {
-                  placeholder: 'playlistName',
+                  placeholder: 'Playlist Name',
                   required: true,
                   autoFocus: true
                 }

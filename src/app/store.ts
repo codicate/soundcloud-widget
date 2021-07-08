@@ -5,7 +5,7 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
-import noticeSlice from './noticeSlice';
+import noticeReducer from './noticeSlice';
 import playerReducer from './playerSlice';
 import trackReducer from './trackSlice';
 import playlistReducer from './playlistSlice';
@@ -25,7 +25,7 @@ const persistConfig = {
 };
 
 const rootReducer = combineReducers({
-  notice: noticeSlice,
+  notice: noticeReducer,
   player: playerReducer,
   track: trackReducer,
   playlist: playlistReducer

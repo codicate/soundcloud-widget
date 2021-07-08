@@ -1,5 +1,6 @@
 import { createSlice, createDraftSafeSelector, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { RootState, errorHandler } from 'app/store';
+import { newNotice } from 'app/noticeSlice';
 
 import { SoundcloudTrack } from 'soundcloud';
 
@@ -16,26 +17,34 @@ const initialState: {
 };
 
 
+export const createPlaylist = createAsyncThunk(
+  'playlist/createPlaylist',
+  async (newPlaylistName: string, { getState, dispatch }) => {
+    const state = (getState() as RootState).playlist;
+
+    const isDuplicatePlaylist = state.playlists.some((playlist) => {
+      if (playlist.name === newPlaylistName)
+        return true;
+    });
+    if (isDuplicatePlaylist) {
+      dispatch(newNotice({
+        msg: `You already have a playlist named '${newPlaylistName}'.`
+      }));
+      return;
+    }
+
+    return {
+      name: newPlaylistName,
+      tracks: []
+    };
+  }
+);
+
+
 const playlistSlice = createSlice({
   name: 'playlist',
   initialState,
   reducers: {
-    createPlaylist: (state, action: PayloadAction<string>) => {
-      const newPlaylistName = action.payload;
-
-      const isDuplicatePlaylist = state.playlists.some((playlist) => {
-        if (playlist.name === newPlaylistName)
-          return true;
-      });
-      if (isDuplicatePlaylist) return;
-
-      const newPlaylist = {
-        name: newPlaylistName,
-        tracks: []
-      };
-
-      state.playlists.push(newPlaylist);
-    },
     addToPlaylist: (
       state,
       action: PayloadAction<{
@@ -56,15 +65,18 @@ const playlistSlice = createSlice({
       playlistToAdd.tracks.push(track);
     }
   },
-  extraReducers: (builder) => {
-    // builder.addCase(
-
-    // )
-  }
+  extraReducers: (builder) =>
+    builder.addCase(
+      createPlaylist.fulfilled,
+      (state, action) => {
+        if (action.payload)
+          state.playlists.push(action.payload);
+      }
+    )
 });
 
 export const {
-  createPlaylist, addToPlaylist
+  addToPlaylist
 } = playlistSlice.actions;
 export default playlistSlice.reducer;
 
