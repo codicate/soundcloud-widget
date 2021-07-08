@@ -28,10 +28,7 @@
     "@typescript-eslint/no-empty-function": 0,
     "@typescript-eslint/explicit-function-return-type": 0,
     "@typescript-eslint/explicit-module-boundary-types": 0,
-    "indent": [
-      "error",
-      2
-    ],
+    "indent": 0,
     "linebreak-style": [
       "error",
       "unix"

@@ -11,21 +11,18 @@ export interface Playlist {
 }
 
 const initialState: {
-  playlists: Playlist[];
+  playlists: Record<string, Playlist>;
 } = {
-  playlists: []
+  playlists: {}
 };
 
 
 export const createPlaylist = createAsyncThunk(
   'playlist/createPlaylist',
   async (newPlaylistName: string, { getState, dispatch }) => {
-    const state = (getState() as RootState).playlist;
+    const { playlists } = (getState() as RootState).playlist;
 
-    const isDuplicatePlaylist = state.playlists.some((playlist) => {
-      if (playlist.name === newPlaylistName)
-        return true;
-    });
+    const isDuplicatePlaylist = !!playlists[newPlaylistName];
     if (isDuplicatePlaylist) {
       dispatch(newNotice({
         msg: `You already have a playlist named '${newPlaylistName}'.`
@@ -40,33 +37,36 @@ export const createPlaylist = createAsyncThunk(
   }
 );
 
+interface AddToPlaylist {
+  playlist: Playlist;
+  track: SoundcloudTrack;
+}
+
 export const addToPlaylist = createAsyncThunk(
   'playlist/addToPlaylist',
-  ({
-    playlist,
-    track
-  }: {
-    playlist: Playlist;
-    track: SoundcloudTrack;
-  }, { getState, dispatch }) => {
-    const state = (getState() as RootState).playlist;
+  (
+    { playlist, track }: AddToPlaylist,
+    { getState, dispatch }
+  ) => {
+    const { playlists } = (getState() as RootState).playlist;
 
-    const playlistToAdd = state.playlists.find((playlist_) =>
-      playlist.name === playlist_.name
-    );
+    const playlistToAdd = playlists[playlist.name];
     if (!playlistToAdd) return;
 
     const isDuplicateTrack = playlistToAdd.tracks.some((track_) =>
       track_.id === track.id
     );
-    if (!playlistToAdd || isDuplicateTrack) {
+    if (isDuplicateTrack) {
       dispatch(newNotice({
         msg: `The song is already added to '${playlist.name}'.`
       }));
       return;
     };
 
-    playlistToAdd.tracks.push(track);
+    return {
+      playlist,
+      track
+    };
   }
 );
 
@@ -79,12 +79,16 @@ const playlistSlice = createSlice({
     builder.addCase(
       createPlaylist.fulfilled,
       (state, action) => {
-        if (action.payload)
-          state.playlists.push(action.payload);
+        if (!action.payload) return;
+        const newPlaylist = action.payload;
+        state.playlists[newPlaylist.name] = newPlaylist;
       }
     ).addCase(
       addToPlaylist.fulfilled,
       (state, action) => {
+        if (!action.payload) return;
+        const { playlist, track } = action.payload;
+        state.playlists[playlist.name].tracks.push(track);
       }
     )
 });
@@ -100,11 +104,7 @@ export const selectPlaylists = createDraftSafeSelector(
   (playlist) => playlist.playlists
 );
 
-export const selectPlaylist = (playlistName: string) => {
-  return createDraftSafeSelector(
-    selectSelf,
-    (playlist) => playlist.playlists.filter((playlist) =>
-      playlist.name === playlistName
-    )[0]
-  );
-};
+export const selectPlaylistsAsArray = createDraftSafeSelector(
+  selectSelf,
+  (playlist) => Object.values(playlist.playlists)
+);

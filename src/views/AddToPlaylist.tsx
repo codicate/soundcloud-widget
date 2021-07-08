@@ -2,7 +2,7 @@ import styles from './AddToPlaylist.module.scss';
 import { SoundcloudTrack } from 'soundcloud';
 
 import { useAppSelector, useAppDispatch } from 'app/hooks';
-import { selectPlaylists, createPlaylist, addToPlaylist } from 'app/playlistSlice';
+import { selectPlaylistsAsArray, createPlaylist, addToPlaylist } from 'app/playlistSlice';
 
 import PlaylistOverview from 'views/PlaylistOverview';
 import Button from 'components/Button';
@@ -18,7 +18,7 @@ function AddToPlaylist({
   hideAddToPlaylist: () => void;
 }) {
   const dispatch = useAppDispatch();
-  const playlists = useAppSelector(selectPlaylists);
+  const playlists = useAppSelector(selectPlaylistsAsArray);
   const [showNewPlaylist, setShowNewPlaylist] = useState(false);
 
   return (
@@ -44,57 +44,57 @@ function AddToPlaylist({
         {(
           showNewPlaylist
         ) ? (
-            <Form
-              className={styles.newPlaylistForm}
-              inputItems={{
-                playlistName: {
-                  placeholder: 'Playlist Name',
-                  required: true,
-                  autoFocus: true
-                }
-              }}
-              submitFn={(inputItems) => {
-                dispatch(createPlaylist(inputItems.playlistName));
-                setShowNewPlaylist(false);
-              }}
-            >
-              <div className={styles.btns}>
-                <Button
-                  styledAs='bigWhite'
-                  onClick={() => setShowNewPlaylist(false)}
-                >
-                Cancel
-                </Button>
-                <Button
-                  styledAs='bigWhite'
-                  type='submit'
-                >
-                Create
-                </Button>
-              </div>
-            </Form>
-          ) : (
-            <>
-              <div className={styles.playlists}>
-                {(playlists).map((playlist, idx) =>
-                  <PlaylistOverview
-                    key={idx}
-                    playlist={playlist}
-                    clickHandler={() => dispatch(addToPlaylist({ playlist, track }))}
-                  />
-                )}
-              </div>
+          <Form
+            className={styles.newPlaylistForm}
+            inputItems={{
+              playlistName: {
+                placeholder: 'Playlist Name',
+                required: true,
+                autoFocus: true
+              }
+            }}
+            submitFn={(inputItems) => {
+              dispatch(createPlaylist(inputItems.playlistName));
+              setShowNewPlaylist(false);
+            }}
+          >
+            <div className={styles.btns}>
               <Button
                 styledAs='bigWhite'
-                onClick={() => setShowNewPlaylist(true)}
+                onClick={() => setShowNewPlaylist(false)}
               >
-                <span className='material-icons'>
-                add
-                </span>
-              New Playlist
+                Cancel
               </Button>
-            </>
-          )}
+              <Button
+                styledAs='bigWhite'
+                type='submit'
+              >
+                Create
+              </Button>
+            </div>
+          </Form>
+        ) : (
+          <>
+            <div className={styles.playlists}>
+              {(playlists).map((playlist, idx) =>
+                <PlaylistOverview
+                  key={idx}
+                  playlist={playlist}
+                  clickHandler={() => dispatch(addToPlaylist({ playlist, track }))}
+                />
+              )}
+            </div>
+            <Button
+              styledAs='bigWhite'
+              onClick={() => setShowNewPlaylist(true)}
+            >
+              <span className='material-icons'>
+                add
+              </span>
+              New Playlist
+            </Button>
+          </>
+        )}
       </div>
     </div>
   );
