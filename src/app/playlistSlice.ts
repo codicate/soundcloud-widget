@@ -22,8 +22,7 @@ export const createPlaylist = createAsyncThunk(
   async (newPlaylistName: string, { getState, dispatch }) => {
     const { playlists } = (getState() as RootState).playlist;
 
-    const isDuplicatePlaylist = !!playlists[newPlaylistName];
-    if (isDuplicatePlaylist) {
+    if (playlists[newPlaylistName]) {
       dispatch(newNotice({
         msg: `You already have a playlist named '${newPlaylistName}'.`
       }));

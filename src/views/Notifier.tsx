@@ -8,7 +8,7 @@ const Notifier = () => {
 
   return (
     <div id={styles.notifier}>
-      {notices.map((notice, idx) => (
+      {notices.slice(-5).map((notice, idx) => (
         <div key={idx}>
           {notice.msg}
         </div>
