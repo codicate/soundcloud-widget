@@ -40,31 +40,41 @@ export const createPlaylist = createAsyncThunk(
   }
 );
 
+export const addToPlaylist = createAsyncThunk(
+  'playlist/addToPlaylist',
+  ({
+    playlist,
+    track
+  }: {
+    playlist: Playlist;
+    track: SoundcloudTrack;
+  }, { getState, dispatch }) => {
+    const state = (getState() as RootState).playlist;
+
+    const playlistToAdd = state.playlists.find((playlist_) =>
+      playlist.name === playlist_.name
+    );
+    if (!playlistToAdd) return;
+
+    const isDuplicateTrack = playlistToAdd.tracks.some((track_) =>
+      track_.id === track.id
+    );
+    if (!playlistToAdd || isDuplicateTrack) {
+      dispatch(newNotice({
+        msg: `The song is already added to '${playlist.name}'.`
+      }));
+      return;
+    };
+
+    playlistToAdd.tracks.push(track);
+  }
+);
+
 
 const playlistSlice = createSlice({
   name: 'playlist',
   initialState,
-  reducers: {
-    addToPlaylist: (
-      state,
-      action: PayloadAction<{
-        playlist: Playlist,
-        track: SoundcloudTrack;
-      }>
-    ) => {
-      const { playlist, track } = action.payload;
-      const playlistToAdd = state.playlists.find((playlist_) =>
-        playlist.name === playlist_.name
-      );
-
-      const isDuplicateTrack = playlistToAdd?.tracks.some((track_) =>
-        track_.id === track.id
-      );
-      if (!playlistToAdd || isDuplicateTrack) return;
-
-      playlistToAdd.tracks.push(track);
-    }
-  },
+  reducers: {},
   extraReducers: (builder) =>
     builder.addCase(
       createPlaylist.fulfilled,
@@ -72,12 +82,14 @@ const playlistSlice = createSlice({
         if (action.payload)
           state.playlists.push(action.payload);
       }
+    ).addCase(
+      addToPlaylist.fulfilled,
+      (state, action) => {
+      }
     )
 });
 
-export const {
-  addToPlaylist
-} = playlistSlice.actions;
+// export const {} = playlistSlice.actions;
 export default playlistSlice.reducer;
 
 
